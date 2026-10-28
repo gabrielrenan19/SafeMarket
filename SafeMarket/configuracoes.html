@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Configurações do sistema SafeMarket">
+
+    <title>SafeMarket - Configurações</title>
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/configuracoes.js" defer></script>
+    <script src="../js/menu.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Menu lateral -->
+    <aside class="menu-lateral" id="menu-lateral">
+
+        <div class="menu-topo">
+            <h2 class="logo-menu">SafeMarket</h2>
+
+            <button
+                type="button"
+                class="botao-menu"
+                id="alternar-menu"
+                aria-label="Recolher menu"
+                aria-expanded="true"
+                aria-controls="menu-navegacao"
+                title="Recolher menu">
+
+                <i data-lucide="panel-left-close" aria-hidden="true"></i>
+
+            </button>
+        </div>
+
+        <nav id="menu-navegacao" aria-label="Menu principal">
+
+            <a href="dashboard.html" title="Dashboard">
+                <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="monitoramento.html" title="Monitoramento">
+                <i data-lucide="activity" aria-hidden="true"></i>
+                <span>Monitoramento</span>
+            </a>
+
+            <a href="auditoria.html" title="Auditoria">
+                <i data-lucide="clipboard-check" aria-hidden="true"></i>
+                <span>Auditoria</span>
+            </a>
+
+            <a href="alertas.html" title="Alertas">
+                <i data-lucide="shield-alert" aria-hidden="true"></i>
+                <span>Alertas</span>
+            </a>
+
+            <a href="usuarios.html" title="Usuários">
+                <i data-lucide="users" aria-hidden="true"></i>
+                <span>Usuários</span>
+            </a>
+
+            <a
+                href="configuracoes.html"
+                aria-current="page"
+                title="Configurações">
+
+                <i data-lucide="settings" aria-hidden="true"></i>
+                <span>Configurações</span>
+            </a>
+
+            <a href="pericia.html" title="Perícia Digital">
+                <i data-lucide="search" aria-hidden="true"></i>
+                <span>Perícia Digital</span>
+            </a>
+
+        </nav>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main class="conteudo">
+
+        <header>
+            <h1>Configurações</h1>
+
+            <p class="descricao-pagina">
+                Gerencie as preferências e opções de segurança do SafeMarket.
+            </p>
+        </header>
+
+        <section class="atividades" aria-labelledby="titulo-configuracoes">
+
+            <h2 id="titulo-configuracoes">Configurações do sistema</h2>
+
+            <form id="form-configuracoes">
+
+                <div class="atividade">
+                    <div>
+                        <p>Notificações</p>
+                        <span>
+                            Recebimento de notificações do sistema.
+                        </span>
+                    </div>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            id="notificacoes"
+                            name="notificacoes"
+                        >
+                        Ativar
+                    </label>
+                </div>
+
+                <div class="atividade">
+                    <div>
+                        <p>Segurança</p>
+                        <span>
+                            Preferência para notificações relacionadas à segurança.
+                        </span>
+                    </div>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            id="alertas-seguranca"
+                            name="alertasSeguranca"
+                        >
+                        Ativar alertas
+                    </label>
+                </div>
+
+                <div class="atividade">
+                    <div>
+                        <p>Proteção contra fraudes</p>
+                        <span>
+                            Preferência para receber avisos sobre possíveis fraudes.
+                        </span>
+                    </div>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            id="alertas-fraude"
+                            name="alertasFraude"
+                        >
+                        Ativar alertas
+                    </label>
+                </div>
+
+                <div class="atividade">
+                    <div>
+                        <p>Permissões de usuários</p>
+                        <span>
+                            Gerenciamento de acessos e permissões.
+                        </span>
+                    </div>
+
+                    <a href="usuarios.html">Acessar usuários</a>
+                </div>
+
+                <button type="submit" class="bnt-login">
+                    SALVAR PREFERÊNCIAS
+                </button>
+
+                <p
+                    id="mensagem-configuracoes"
+                    role="status"
+                    aria-live="polite">
+                </p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- Inicialização dos ícones -->
+    <script>
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    </script>
+
+</body>
+
+</html>

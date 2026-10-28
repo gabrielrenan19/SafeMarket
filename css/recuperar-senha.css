@@ -1,0 +1,149 @@
+
+/* Recuperação de senha — SafeMarket */
+
+.recuperacao-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.recuperacao-card {
+    width: 100%;
+    max-width: 430px;
+    padding: 36px;
+    box-sizing: border-box;
+}
+
+.voltar-login {
+    display: inline-block;
+    margin-bottom: 28px;
+    color: inherit;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.voltar-login:hover {
+    color: #f97316;
+}
+
+.recuperacao-icone {
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 22px;
+    border-radius: 18px;
+    color: #f97316;
+    background: rgba(249, 115, 22, 0.12);
+}
+
+.recuperacao-card h1 {
+    margin: 0 0 14px;
+    text-align: center;
+    font-size: 27px;
+}
+
+.recuperacao-descricao {
+    margin: 0 0 28px;
+    text-align: center;
+    line-height: 1.7;
+    opacity: 0.85;
+    font-size: 14px;
+}
+
+#form-recuperacao {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#form-recuperacao label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.input-recuperacao {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    border: 1px solid #6b7280;
+    border-radius: 8px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-recuperacao:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.16);
+}
+
+#btn-recuperacao {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#btn-recuperacao:hover {
+    opacity: 0.92;
+}
+
+#btn-recuperacao:active {
+    transform: scale(0.99);
+}
+
+#btn-recuperacao:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.mensagem-recuperacao {
+    margin: 8px 0 0;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.mensagem-recuperacao.erro {
+    color: #1b1a19;
+    background: rgba(220, 38, 38, 0.12);
+    border: 1px solid rgba(220, 38, 38, 0.35);
+}
+
+.mensagem-recuperacao.info {
+    color: #1b1a19;
+    background: rgba(249, 115, 22, 0.12);
+    border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.recuperacao-seguranca {
+    margin: 28px 0 0;
+    text-align: center;
+    font-size: 12px;
+    opacity: 0.75;
+}
+
+@media (max-width: 480px) {
+    .recuperacao-container {
+        padding: 16px;
+    }
+
+    .recuperacao-card {
+        padding: 26px 20px;
+    }
+
+    .recuperacao-card h1 {
+        font-size: 24px;
+    }
+}

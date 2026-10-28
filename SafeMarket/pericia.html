@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Consulta e análise de investigações de segurança do SafeMarket"
+    >
+
+    <title>SafeMarket - Perícia Digital</title>
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/pericia.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/pericia.js" defer></script>
+    <script src="../js/menu.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Menu lateral -->
+    <aside class="menu-lateral" id="menu-lateral">
+
+        <div class="menu-topo">
+            <h2 class="logo-menu">SafeMarket</h2>
+
+            <button
+                type="button"
+                class="botao-menu"
+                id="alternar-menu"
+                aria-label="Recolher menu"
+                aria-expanded="true"
+                aria-controls="menu-navegacao"
+                title="Recolher menu"
+            >
+                <i
+                    data-lucide="panel-left-close"
+                    aria-hidden="true"
+                ></i>
+            </button>
+        </div>
+
+        <nav id="menu-navegacao" aria-label="Menu principal">
+
+            <a href="dashboard.html" title="Dashboard">
+                <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="monitoramento.html" title="Monitoramento">
+                <i data-lucide="activity" aria-hidden="true"></i>
+                <span>Monitoramento</span>
+            </a>
+
+            <a href="auditoria.html" title="Auditoria">
+                <i data-lucide="clipboard-check" aria-hidden="true"></i>
+                <span>Auditoria</span>
+            </a>
+
+            <a href="alertas.html" title="Alertas">
+                <i data-lucide="shield-alert" aria-hidden="true"></i>
+                <span>Alertas</span>
+            </a>
+
+            <a href="usuarios.html" title="Usuários">
+                <i data-lucide="users" aria-hidden="true"></i>
+                <span>Usuários</span>
+            </a>
+
+            <a href="configuracoes.html" title="Configurações">
+                <i data-lucide="settings" aria-hidden="true"></i>
+                <span>Configurações</span>
+            </a>
+
+            <a
+                href="pericia.html"
+                aria-current="page"
+                title="Perícia Digital"
+            >
+                <i data-lucide="search" aria-hidden="true"></i>
+                <span>Perícia Digital</span>
+            </a>
+
+        </nav>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main class="conteudo pagina-pericia">
+
+        <header>
+            <h1>Perícia Digital</h1>
+
+            <p class="descricao-pagina">
+                Investigue incidentes e consulte os registros
+                relacionados à segurança da plataforma.
+            </p>
+        </header>
+
+        <!-- Indicadores -->
+        <section class="cartoes" aria-label="Indicadores de perícia">
+
+            <article class="cartao">
+                <h3>Investigações abertas</h3>
+                <p id="total-abertas">—</p>
+            </article>
+
+            <article class="cartao">
+                <h3>Em análise</h3>
+                <p id="total-analise">—</p>
+            </article>
+
+            <article class="cartao">
+                <h3>Concluídas</h3>
+                <p id="total-concluidas">—</p>
+            </article>
+
+            <article class="cartao">
+                <h3>Evidências registradas</h3>
+                <p id="total-evidencias">—</p>
+            </article>
+
+        </section>
+
+        <!-- Pesquisa e filtros -->
+        <section class="painel-pericia">
+
+            <h2>Investigações</h2>
+
+            <div class="filtros-pericia">
+
+                <label for="pesquisa-caso">
+                    Pesquisar investigação
+                </label>
+
+                <input
+                    type="search"
+                    id="pesquisa-caso"
+                    placeholder="Buscar por ID ou descrição"
+                    autocomplete="off"
+                >
+
+                <label for="filtro-status">
+                    Status
+                </label>
+
+                <select id="filtro-status">
+                    <option value="">Todos os status</option>
+                    <option value="aberta">Aberta</option>
+                    <option value="analise">Em análise</option>
+                    <option value="concluida">Concluída</option>
+                </select>
+
+            </div>
+
+            <div id="lista-investigacoes" aria-live="polite">
+                <p>Nenhuma investigação carregada.</p>
+            </div>
+
+            <p id="sem-resultados" hidden>
+                Nenhuma investigação encontrada para os filtros selecionados.
+            </p>
+
+        </section>
+
+        <!-- Detalhes da investigação -->
+        <section
+            class="painel-pericia"
+            id="detalhes-investigacao"
+            aria-labelledby="titulo-investigacao"
+            hidden
+        >
+
+            <h2 id="titulo-investigacao">
+                Detalhes da investigação
+            </h2>
+
+            <p id="descricao-investigacao"></p>
+
+            <p id="gravidade-investigacao"></p>
+
+            <h3>Linha do tempo</h3>
+
+            <div id="linha-tempo" class="linha-tempo">
+                <p>Nenhum evento carregado.</p>
+            </div>
+
+            <h3>Evidências registradas</h3>
+
+            <ul id="lista-evidencias">
+                <li>Nenhuma evidência carregada.</li>
+            </ul>
+
+        </section>
+
+        <p
+            id="mensagem-pericia"
+            role="status"
+            aria-live="polite"
+        ></p>
+
+    </main>
+
+    <!-- Inicialização dos ícones -->
+    <script>
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+
+/* ========================================
+   SAFEMARKET — ESTILOS DO LOGIN
+   Depende das variáveis definidas em style.css
+======================================== */
+
+
+/* ========================================
+   1. CAMPOS DE ENTRADA COM ÍCONES
+======================================== */
+
+.input-com-icone {
+    position: relative;
+    width: 100%;
+    margin: 14px auto;
+}
+
+/* Campo de entrada */
+
+.input-com-icone input {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 10px 10px 36px;
+
+    border: 1px solid rgba(86, 99, 107, 0.25);
+    border-radius: 9px;
+
+    background: rgba(248, 250, 251, 0.62);
+    color: var(--grafite);
+
+    font-family: inherit;
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Texto de orientação */
+
+.input-com-icone input::placeholder {
+    color: var(--texto-secundario);
+    opacity: 1;
+}
+
+/* Destaque ao selecionar o campo */
+
+.input-com-icone input:focus {
+    outline: none;
+    border-color: var(--laranja);
+    box-shadow: 0 0 0 3px rgba(217, 119, 54, 0.15);
+}
+
+
+/* ========================================
+   2. ÍCONES DOS CAMPOS
+======================================== */
+
+.input-com-icone .icone {
+    position: absolute;
+    top: 50%;
+    left: 9px;
+
+    width: 18px;
+    height: 18px;
+
+    transform: translateY(-50%);
+
+    color: var(--texto-secundario);
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   3. MENSAGEM DE LOGIN
+======================================== */
+
+#mensagem-login {
+    display: block;
+    margin-top: 12px;
+
+    color: #4e4a48 !important;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+
+    overflow-wrap: break-word;
+}
+
+
+
+/* ========================================
+   4. ACESSIBILIDADE
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .input-com-icone input {
+        transition: none;
+    }
+}

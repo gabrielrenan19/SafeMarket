@@ -1,0 +1,276 @@
+
+/* ========================================
+   1. CARTÃO PRINCIPAL
+======================================== */
+
+.cadastro-card {
+    width: 100%;
+    max-width: 430px;
+    margin: 0 auto;
+}
+
+
+/* ========================================
+   2. TÍTULO E SUBTÍTULO
+======================================== */
+
+.titulo-cadastro {
+    margin: 18px 0 8px;
+
+    color: var(--grafite);
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.subtitulo-cadastro {
+    margin: 0 0 18px;
+
+    color: var(--texto-secundario);
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+
+/* ========================================
+   3. CAMPOS DO FORMULÁRIO
+======================================== */
+
+.campo-cadastro {
+    width: 100%;
+    margin: 14px auto;
+}
+
+.campo-cadastro label {
+    display: block;
+    margin-bottom: 6px;
+
+    color: var(--grafite);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.campo-cadastro input {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 12px;
+
+    border: 1px solid rgba(86, 99, 107, 0.25);
+    border-radius: 9px;
+
+    background: rgba(248, 250, 251, 0.62);
+    color: var(--grafite);
+
+    font-family: inherit;
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.campo-cadastro input::placeholder {
+    color: var(--texto-secundario);
+    opacity: 1;
+}
+
+.campo-cadastro input:focus {
+    outline: none;
+    border-color: var(--laranja);
+    box-shadow: 0 0 0 3px rgba(217, 119, 54, 0.15);
+}
+
+
+/* ========================================
+   4. BOTÃO CRIAR CONTA
+======================================== */
+
+.cadastro-card .bnt-login {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+
+    cursor: pointer;
+}
+
+
+/* ========================================
+   5. MENSAGEM DE CADASTRO
+======================================== */
+
+#mensagem-cadastro {
+    display: block !important;
+    margin-top: 10px !important;
+
+    color: #3d3a38 !important;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+
+    overflow-wrap: break-word;
+}
+
+
+/* ========================================
+   6. SEPARADOR DE CADASTRO SOCIAL
+======================================== */
+
+.separador-cadastro {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin: 24px 0 18px;
+
+    color: var(--texto-secundario);
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.separador-cadastro::before,
+.separador-cadastro::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+
+    background: rgba(86, 99, 107, 0.22);
+}
+
+.separador-cadastro span {
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   7. BOTÕES GOOGLE E FACEBOOK
+======================================== */
+
+.botoes-sociais {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.botao-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    flex: 1;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px;
+
+    border: 1px solid rgba(86, 99, 107, 0.25);
+    border-radius: 9px;
+
+    background: rgba(248, 250, 251, 0.62);
+    color: var(--grafite);
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.botao-social:hover {
+    background: rgba(217, 119, 54, 0.08);
+    border-color: var(--laranja);
+}
+
+.botao-social:focus-visible {
+    outline: 2px solid var(--laranja);
+    outline-offset: 3px;
+}
+
+.botao-social:active {
+    transform: scale(0.98);
+}
+
+
+/* ÍCONE DO GOOGLE */
+
+.google-icone {
+    color: #4285F4;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+/* ÍCONE DO FACEBOOK */
+
+.facebook-icone {
+    color: #1877F2;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* ========================================
+   8. LINK PARA ENTRAR
+======================================== */
+
+.cadastro-card .links-recuperacao {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.cadastro-card .links-recuperacao a {
+    color: var(--laranja);
+    font-size: 13px;
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.cadastro-card .links-recuperacao a:hover {
+    color: var(--laranja-escuro);
+    text-decoration: underline;
+}
+
+
+/* ========================================
+   9. RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 480px) {
+    .cadastro-card {
+        max-width: 100%;
+    }
+
+    .titulo-cadastro {
+        font-size: 22px;
+    }
+
+    .botoes-sociais {
+        gap: 8px;
+    }
+
+    .botao-social {
+        padding: 9px 6px;
+        font-size: 12px;
+    }
+}
+
+
+/* ========================================
+   10. ACESSIBILIDADE
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .campo-cadastro input,
+    .botao-social,
+    .cadastro-card .links-recuperacao a {
+        transition: none;
+    }
+}

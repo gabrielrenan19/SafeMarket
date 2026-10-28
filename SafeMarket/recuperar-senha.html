@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Recupere o acesso à sua conta SafeMarket.">
+
+    <title>SafeMarket | Recuperar senha</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/recuperar-senha.css">
+
+    <script src="../js/recuperar-senha.js" defer></script>
+</head>
+
+<body>
+
+    <main class="recuperacao-container">
+
+        <section class="login-card recuperacao-card">
+
+            <a href="index.html" class="voltar-login">
+                &larr; Voltar para o login
+            </a>
+
+            <div class="recuperacao-icone" aria-hidden="true">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="38"
+                    height="38"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+
+                    <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+
+            <h1>Recuperar senha</h1>
+
+            <p class="recuperacao-descricao">
+                Esqueceu sua senha? Informe o e-mail cadastrado
+                para iniciar a recuperação do acesso à sua conta.
+            </p>
+
+            <form id="form-recuperacao">
+
+                <label for="email-recuperacao">
+                    E-mail cadastrado
+                </label>
+
+                <input
+                    class="input-recuperacao"
+                    type="email"
+                    id="email-recuperacao"
+                    name="email"
+                    placeholder="exemplo@email.com"
+                    autocomplete="email"
+                    required>
+
+                <button
+                    type="submit"
+                    class="bnt-login"
+                    id="btn-recuperacao">
+
+                    RECUPERAR ACESSO
+                </button>
+
+                <p
+                    id="mensagem-recuperacao"
+                    class="mensagem-recuperacao"
+                    role="status"
+                    aria-live="polite"
+                    hidden>
+                </p>
+
+            </form>
+
+            <p class="recuperacao-seguranca">
+                <span aria-hidden="true">&#128274;</span>
+                Sua segurança é prioridade no SafeMarket.
+            </p>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,284 @@
+
+:root {
+    --fundo: #C9D1D5;
+    --fundo-secundario: #D8DEE1;
+    --superficie: #E8ECEE;
+
+    --branco: #FFFFFF;
+    --grafite: #26343D;
+    --texto-secundario: #56636B;
+
+    --laranja: #D97736;
+    --laranja-escuro: #B95F27;
+
+    --borda: #B7C1C6;
+}
+
+/* ========================================
+   CONFIGURAÇÃO GERAL
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(255, 255, 255, 0.28),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(116, 139, 151, 0.12),
+            transparent 42%
+        ),
+        linear-gradient(
+            135deg,
+            var(--fundo),
+            var(--fundo-secundario)
+        );
+
+    color: var(--grafite);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ========================================
+   TÍTULOS E LABELS GERAIS
+======================================== */
+
+h1 {
+    color: var(--grafite);
+    font-size: 30px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    color: var(--grafite);
+}
+
+/* ========================================
+   CARTÕES COM EFEITO GLASSMORPHISM
+   Login, cadastro e recuperação de senha
+======================================== */
+
+.login-card,
+.cadastro-card,
+.recuperacao-card {
+    width: 360px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 30px;
+
+    background: rgba(242, 246, 248, 0.32);
+
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 20px;
+
+    box-shadow:
+        0 12px 35px rgba(38, 52, 61, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* ========================================
+   BOTÃO PRINCIPAL
+======================================== */
+
+.bnt-login {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    margin: 20px auto 0;
+    padding: 10px;
+
+    color: var(--branco);
+    background-color: var(--laranja);
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.bnt-login:hover {
+    background-color: var(--laranja-escuro);
+    box-shadow: 0 4px 12px rgba(185, 95, 39, 0.18);
+    transform: translateY(-1px);
+}
+
+.bnt-login:active {
+    transform: translateY(0);
+}
+
+.bnt-login:focus-visible {
+    outline: 2px solid var(--grafite);
+    outline-offset: 3px;
+}
+
+/* ========================================
+   LINKS COMPARTILHADOS
+======================================== */
+
+.links-recuperacao {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.links-recuperacao a {
+    color: var(--grafite);
+    font-size: 13px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.links-recuperacao a:hover {
+    color: var(--laranja-escuro);
+}
+
+/* ========================================
+   LOGO SIMPLES
+======================================== */
+
+.logo {
+    display: block;
+    width: 100px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 15px;
+
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(38, 52, 61, 0.10);
+}
+
+/* ========================================
+   LOGO COM EFEITO GLASSMORPHISM
+======================================== */
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    margin: 0 auto 20px;
+}
+
+.logo-glass {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 80px;
+    height: 80px;
+    padding: 12px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.logo-glass img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.logo-glass:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================
+   CAMPO DE RECUPERAÇÃO DE SENHA
+======================================== */
+
+.input-recuperacao {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px;
+
+    border: 1px solid rgba(86, 99, 107, 0.25);
+    border-radius: 9px;
+
+    background: rgba(248, 250, 251, 0.68);
+    color: var(--grafite);
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.input-recuperacao::placeholder {
+    color: var(--texto-secundario);
+    opacity: 1;
+}
+
+.input-recuperacao:focus {
+    outline: none;
+    border-color: var(--laranja);
+    box-shadow: 0 0 0 3px rgba(217, 119, 54, 0.15);
+}
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 400px) {
+    .login-card,
+    .cadastro-card,
+    .recuperacao-card {
+        padding: 22px;
+    }
+}
+
+@media (max-height: 600px) {
+    body {
+        align-items: flex-start;
+    }
+}
+
+/* ========================================
+   ACESSIBILIDADE: MOVIMENTO REDUZIDO
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

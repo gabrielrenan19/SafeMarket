@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Painel de segurança e monitoramento do SafeMarket">
+
+    <title>SafeMarket - Dashboard</title>
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/dashboard.js" defer></script>
+    <script src="../js/menu.js" defer></script>
+</head>
+
+<body>
+
+    <aside class="menu-lateral" id="menu-lateral">
+        <div class="menu-topo">
+            <h2 class="logo-menu">SafeMarket</h2>
+
+            <button
+                type="button"
+                class="botao-menu"
+                id="alternar-menu"
+                aria-label="Recolher menu"
+                aria-expanded="true"
+                aria-controls="menu-navegacao"
+                title="Recolher menu"
+            >
+                <i data-lucide="panel-left-close" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="menu-navegacao" aria-label="Menu principal">
+            <a href="dashboard.html" aria-current="page" title="Dashboard">
+                <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="monitoramento.html" title="Monitoramento">
+                <i data-lucide="activity" aria-hidden="true"></i>
+                <span>Monitoramento</span>
+            </a>
+
+            <a href="auditoria.html" title="Auditoria">
+                <i data-lucide="clipboard-check" aria-hidden="true"></i>
+                <span>Auditoria</span>
+            </a>
+
+            <a href="alertas.html" title="Alertas">
+                <i data-lucide="shield-alert" aria-hidden="true"></i>
+                <span>Alertas</span>
+            </a>
+
+            <a href="usuarios.html" title="Usuários">
+                <i data-lucide="users" aria-hidden="true"></i>
+                <span>Usuários</span>
+            </a>
+
+            <a href="configuracoes.html" title="Configurações">
+                <i data-lucide="settings" aria-hidden="true"></i>
+                <span>Configurações</span>
+            </a>
+
+            <a href="pericia.html" title="Perícia Digital">
+                <i data-lucide="search" aria-hidden="true"></i>
+                <span>Perícia Digital</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="conteudo">
+
+        <header class="cabecalho-dashboard">
+            <h1>Dashboard do SafeMarket</h1>
+            <p class="descricao-pagina">
+                Bem-vindo à central de segurança.
+            </p>
+        </header>
+
+        <section class="cartoes" aria-label="Indicadores de segurança">
+
+            <article class="cartao">
+                <i data-lucide="users" class="icone-cartao" aria-hidden="true"></i>
+                <h3>Usuários conectados</h3>
+                <p id="usuarios-conectados" aria-live="polite">—</p>
+            </article>
+
+            <article class="cartao">
+                <i data-lucide="shield-alert" class="icone-cartao" aria-hidden="true"></i>
+                <h3>Alertas</h3>
+                <p id="total-alertas" aria-live="polite">—</p>
+                <span id="estado-alertas" class="indicador-alerta">
+                    Aguardando dados
+                </span>
+            </article>
+
+            <article class="cartao">
+                <i data-lucide="shield-check" class="icone-cartao" aria-hidden="true"></i>
+                <h3>Nível de segurança</h3>
+                <p id="nivel-seguranca" aria-live="polite">—</p>
+                <span id="estado-seguranca" class="indicador-seguranca">
+                    Não verificado
+                </span>
+            </article>
+
+            <article class="cartao">
+                <i data-lucide="clipboard-check" class="icone-cartao" aria-hidden="true"></i>
+                <h3>Auditorias</h3>
+                <p id="total-auditorias" aria-live="polite">—</p>
+            </article>
+
+        </section>
+
+        <section class="atividades" aria-labelledby="titulo-atividades">
+            <h2 id="titulo-atividades">
+                <i data-lucide="activity" class="icone-titulo" aria-hidden="true"></i>
+                Atividade recente
+            </h2>
+
+            <div id="lista-atividades" aria-live="polite">
+                <p>Nenhuma atividade carregada.</p>
+            </div>
+        </section>
+
+        <section class="status-sistema" aria-labelledby="titulo-status">
+            <h2 id="titulo-status">
+                <i data-lucide="server" class="icone-titulo" aria-hidden="true"></i>
+                Status do sistema
+            </h2>
+
+            <p>
+                <i data-lucide="monitor" class="icone-status" aria-hidden="true"></i>
+                Sistema operacional —
+                <span id="status-sistema-operacional">Não verificado</span>
+            </p>
+
+            <p>
+                <i data-lucide="database" class="icone-status" aria-hidden="true"></i>
+                Banco de dados —
+                <span id="status-banco-dados">Não verificado</span>
+            </p>
+
+            <p>
+                <i data-lucide="activity" class="icone-status" aria-hidden="true"></i>
+                Monitoramento —
+                <span id="status-monitoramento">Não verificado</span>
+            </p>
+        </section>
+
+        <p id="mensagem-dashboard" role="status" aria-live="polite"></p>
+
+    </main>
+
+    <script>
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    </script>
+
+</body>
+</html>
