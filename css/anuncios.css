@@ -1,0 +1,1772 @@
+
+/* =========================================================
+   SAFEMARKET — GERENCIAMENTO ADMINISTRATIVO DE ANÚNCIOS
+   Arquivo: css/anuncios.css
+
+   Identidade visual:
+   Azul-marinho | Ciano | Branco | Cinza profissional
+========================================================= */
+
+
+/* =========================================================
+   1. ESTRUTURA PRINCIPAL
+========================================================= */
+
+.anuncios-pagina {
+    display: block;
+    min-width: 0;
+    min-height: 100vh;
+    padding: 34px;
+
+    background: var(--sm-fundo, #F3F6FA);
+    color: var(--sm-texto, #263548);
+}
+
+.anuncios-pagina *,
+.anuncios-pagina *::before,
+.anuncios-pagina *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   2. CABEÇALHO
+========================================================= */
+
+.anuncios-pagina .cabecalho-pagina {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+}
+
+.anuncios-pagina .titulo-pagina {
+    min-width: 0;
+}
+
+.anuncios-pagina .subtitulo-pagina {
+    display: block;
+    margin-bottom: 10px;
+
+    color: var(--sm-info, #007F99);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.anuncios-pagina .titulo-pagina h1 {
+    margin: 0 0 9px;
+
+    color: var(--sm-azul-marinho, #111B3A);
+    font-size: clamp(23px, 2.5vw, 29px);
+    font-weight: 750;
+    line-height: 1.3;
+    letter-spacing: -.5px;
+}
+
+.anuncios-pagina .titulo-pagina p {
+    max-width: 680px;
+    margin: 0;
+
+    color: var(--sm-secundario, #718096);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   3. INDICADORES
+========================================================= */
+
+.indicadores-anuncios {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+
+    margin-bottom: 27px;
+}
+
+.anuncios-pagina .card-indicador {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 17px;
+
+    min-width: 0;
+    min-height: 120px;
+    padding: 23px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--sm-borda, #DCE3EB);
+    border-radius: 14px;
+
+    background: var(--sm-superficie, #FFFFFF);
+    box-shadow: 0 2px 9px rgba(17, 27, 58, .035);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+.anuncios-pagina .card-indicador:hover {
+    transform: translateY(-3px);
+
+    border-color: #C8DCE7;
+    box-shadow: 0 8px 22px rgba(17, 27, 58, .07);
+}
+
+.anuncios-pagina .indicador-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 49px;
+    width: 49px;
+    height: 49px;
+
+    border-radius: 13px;
+}
+
+.anuncios-pagina .indicador-icone i {
+    width: 23px;
+    height: 23px;
+}
+
+.anuncios-pagina .indicador-icone.azul {
+    background: #E8F4FC;
+    color: #2476B8;
+}
+
+.anuncios-pagina .indicador-icone.verde {
+    background: #E7F6ED;
+    color: #16834C;
+}
+
+.anuncios-pagina .indicador-icone.laranja {
+    background: #FFF2E5;
+    color: #D97720;
+}
+
+.anuncios-pagina .indicador-icone.vermelho {
+    background: #FDEBEC;
+    color: #C53030;
+}
+
+.anuncios-pagina .indicador-conteudo {
+    min-width: 0;
+}
+
+.anuncios-pagina .card-indicador span,
+.anuncios-pagina .card-indicador strong,
+.anuncios-pagina .card-indicador small {
+    display: block;
+}
+
+.anuncios-pagina .card-indicador span {
+    margin-bottom: 6px;
+
+    color: #718096;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.anuncios-pagina .card-indicador strong {
+    margin-bottom: 4px;
+
+    color: var(--sm-azul-marinho, #111B3A);
+    font-size: 27px;
+    font-weight: 750;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+
+.anuncios-pagina .card-indicador small {
+    color: #94A0AE;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   4. SEÇÃO DE GERENCIAMENTO
+========================================================= */
+
+.secao-anuncios {
+    min-width: 0;
+    padding: 27px;
+
+    border: 1px solid var(--sm-borda, #DCE3EB);
+    border-radius: 15px;
+
+    background: var(--sm-superficie, #FFFFFF);
+    box-shadow: 0 3px 12px rgba(17, 27, 58, .035);
+}
+
+.secao-anuncios-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+.secao-anuncios-topo h2 {
+    margin: 0 0 7px;
+
+    color: var(--sm-azul-marinho, #111B3A);
+    font-size: 18px;
+    font-weight: 750;
+    letter-spacing: -.2px;
+}
+
+.secao-anuncios-topo p {
+    margin: 0;
+
+    color: var(--sm-secundario, #718096);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.indicador-anuncios {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 9px 13px;
+
+    border: 1px solid #C6EAF0;
+    border-radius: 30px;
+
+    background: #ECF9FB;
+    color: #087D91;
+
+    font-size: 11px;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.indicador-anuncios i {
+    width: 15px;
+    height: 15px;
+}
+
+
+/* =========================================================
+   5. ABAS DE ANÚNCIOS
+========================================================= */
+
+.abas-anuncios {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 23px;
+    padding-bottom: 12px;
+
+    border-bottom: 1px solid #E6EBF1;
+}
+
+.aba-anuncios {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 43px;
+    padding: 10px 17px;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    background: transparent;
+    color: #718096;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease;
+}
+
+.aba-anuncios:hover {
+    background: #F3F7FA;
+    color: #263548;
+}
+
+.aba-anuncios.ativa {
+    border-color: #CDEAF0;
+    background: #EAF8FA;
+    color: #087D91;
+}
+
+.aba-anuncios i {
+    width: 17px;
+    height: 17px;
+}
+
+.contador-aba {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 23px;
+    height: 22px;
+    padding: 0 6px;
+
+    border-radius: 20px;
+
+    background: #E9EEF3;
+    color: #65758A;
+
+    font-size: 10px;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+}
+
+.aba-anuncios.ativa .contador-aba {
+    background: #CFEFF3;
+    color: #087D91;
+}
+
+.aba-anuncios:focus-visible {
+    outline: 3px solid rgba(0, 184, 217, .2);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   6. PAINÉIS DAS ABAS
+========================================================= */
+
+.painel-aba-anuncios {
+    display: block;
+    min-width: 0;
+}
+
+.painel-aba-anuncios[hidden] {
+    display: none !important;
+}
+
+.painel-aba-anuncios.ativo {
+    display: block;
+}
+
+
+/* =========================================================
+   7. AVISO DE PRESERVAÇÃO DO HISTÓRICO
+========================================================= */
+
+.aviso-historico-anuncios {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+
+    margin-bottom: 22px;
+    padding: 17px 19px;
+
+    border: 1px solid #D8E8F0;
+    border-radius: 10px;
+
+    background: #F4F9FC;
+}
+
+.aviso-historico-anuncios > i {
+    flex: 0 0 21px;
+
+    width: 21px;
+    height: 21px;
+    margin-top: 2px;
+
+    color: #2476B8;
+}
+
+.aviso-historico-anuncios strong {
+    display: block;
+    margin-bottom: 5px;
+
+    color: #234B70;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.aviso-historico-anuncios p {
+    margin: 0;
+
+    color: #637B91;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   8. PESQUISA E FILTROS
+========================================================= */
+
+.filtros-anuncios {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    gap: 14px;
+
+    margin-bottom: 25px;
+}
+
+.filtros-anuncios .campo-busca,
+.filtros-anuncios .campo-filtro {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    min-width: 0;
+    height: 47px;
+    padding: 0 14px;
+
+    border: 1px solid #DCE3EB;
+    border-radius: 9px;
+
+    background: #FFFFFF;
+    color: #8290A0;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.filtros-anuncios .campo-busca:hover,
+.filtros-anuncios .campo-filtro:hover {
+    border-color: #B8C9D7;
+}
+
+.filtros-anuncios .campo-busca:focus-within,
+.filtros-anuncios .campo-filtro:focus-within {
+    border-color: var(--sm-azul-ciano, #00B8D9);
+    box-shadow: 0 0 0 3px rgba(0, 184, 217, .11);
+}
+
+.filtros-anuncios .campo-busca i,
+.filtros-anuncios .campo-filtro i {
+    flex: 0 0 17px;
+    width: 17px;
+    height: 17px;
+}
+
+.filtros-anuncios .campo-busca input,
+.filtros-anuncios .campo-filtro select {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+
+    padding: 0;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+    color: #263548;
+
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.filtros-anuncios .campo-busca input::placeholder {
+    color: #9AA6B4;
+}
+
+.filtros-anuncios .campo-filtro select {
+    cursor: pointer;
+}
+
+.filtros-excluidos {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+
+/* =========================================================
+   9. CONTAINER DA LISTAGEM
+========================================================= */
+
+.lista-anuncios-container {
+    min-width: 0;
+    overflow: hidden;
+
+    border: 1px solid #E0E6ED;
+    border-radius: 12px;
+
+    background: #FFFFFF;
+}
+
+.lista-anuncios-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    min-height: 69px;
+    padding: 15px 20px;
+
+    border-bottom: 1px solid #E8EDF3;
+    background: #F8FAFC;
+}
+
+.lista-anuncios-cabecalho h3 {
+    margin: 0 0 5px;
+
+    color: #263548;
+    font-size: 13px;
+    font-weight: 750;
+}
+
+.lista-anuncios-cabecalho p {
+    margin: 0;
+
+    color: #8491A1;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+#quantidade-anuncios,
+#quantidade-anuncios-excluidos {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 29px;
+    padding: 5px 11px;
+
+    border: 1px solid #DCE6EF;
+    border-radius: 20px;
+
+    background: #FFFFFF;
+    color: #53677B;
+
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.lista-anuncios {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 140px;
+}
+
+
+/* =========================================================
+   10. CARDS DOS ANÚNCIOS
+========================================================= */
+
+.anuncio-item {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr) auto;
+    align-items: stretch;
+    gap: 23px;
+
+    min-width: 0;
+    padding: 23px;
+
+    border-bottom: 1px solid #E9EEF3;
+    background: #FFFFFF;
+
+    transition: background .2s ease;
+}
+
+.anuncio-item:hover {
+    background: #FBFCFE;
+}
+
+.anuncio-item:last-child {
+    border-bottom: 0;
+}
+
+
+/* =========================================================
+   11. IMAGENS
+========================================================= */
+
+.anuncio-imagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 150px;
+    height: 150px;
+    min-width: 0;
+    overflow: hidden;
+
+    border: 1px solid #E0E6ED;
+    border-radius: 12px;
+
+    background: #F5F7FA;
+    color: #9AA8B6;
+}
+
+.anuncio-imagem img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    padding: 5px;
+
+    transition: transform .25s ease;
+}
+
+.anuncio-item:hover .anuncio-imagem img {
+    transform: scale(1.035);
+}
+
+.anuncio-imagem i {
+    width: 34px;
+    height: 34px;
+    stroke-width: 1.5;
+}
+
+
+/* =========================================================
+   12. INFORMAÇÕES DO ANÚNCIO
+========================================================= */
+
+.anuncio-informacoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-width: 0;
+}
+
+.anuncio-resumo {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+
+    min-width: 0;
+    margin-bottom: 11px;
+}
+
+.anuncio-resumo > div {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px 12px;
+
+    min-width: 0;
+}
+
+.anuncio-informacoes h4 {
+    min-width: 0;
+    margin: 0;
+
+    color: #172B4D;
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+    letter-spacing: -.2px;
+}
+
+.anuncio-preco {
+    flex: 0 0 auto;
+
+    color: #123D66;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.4;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.anuncio-descricao {
+    display: -webkit-box;
+    overflow: hidden;
+
+    max-width: 850px;
+    margin: 0 0 15px;
+
+    color: #69788A;
+    font-size: 12px;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+
+/* =========================================================
+   13. STATUS DOS ANÚNCIOS
+========================================================= */
+
+.status-anuncio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    flex: 0 0 auto;
+
+    min-height: 24px;
+    padding: 4px 9px;
+
+    border: 1px solid transparent;
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+.status-anuncio.ativo {
+    border-color: #C7EBD5;
+    background: #ECF8F0;
+    color: #16834C;
+}
+
+.status-anuncio.pendente {
+    border-color: #F4DFB6;
+    background: #FFF8E9;
+    color: #A66C14;
+}
+
+.status-anuncio.rejeitado {
+    border-color: #F1C9CC;
+    background: #FFF0F0;
+    color: #C53030;
+}
+
+.status-anuncio.excluido {
+    border-color: #F1C9CC;
+    background: #FDEBEC;
+    color: #B4232D;
+}
+
+.status-anuncio.desconhecido {
+    border-color: #E1E7ED;
+    background: #F4F6F8;
+    color: #68788A;
+}
+
+
+/* =========================================================
+   14. DETALHES DO PRODUTO
+========================================================= */
+
+.anuncio-detalhes {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px 17px;
+
+    margin-bottom: 13px;
+}
+
+.anuncio-detalhes span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    min-width: 0;
+
+    color: #65758A;
+    font-size: 11px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.anuncio-detalhes i {
+    flex: 0 0 14px;
+
+    width: 14px;
+    height: 14px;
+
+    color: #8292A5;
+}
+
+.anuncio-detalhes .anuncio-estoque {
+    padding: 5px 9px;
+
+    border: 1px solid #DCE8F0;
+    border-radius: 6px;
+
+    background: #F2F7FA;
+    color: #405D73;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   15. PUBLICADOR E DATA
+========================================================= */
+
+.anuncio-publicador {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px 18px;
+
+    padding-top: 11px;
+
+    border-top: 1px solid #EDF0F4;
+}
+
+.anuncio-publicador span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    min-width: 0;
+
+    color: #7A899A;
+    font-size: 10px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.anuncio-publicador i {
+    flex: 0 0 13px;
+
+    width: 13px;
+    height: 13px;
+
+    color: #8292A5;
+}
+
+
+/* =========================================================
+   16. AÇÕES ADMINISTRATIVAS
+========================================================= */
+
+.anuncio-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    min-width: 105px;
+}
+
+.botao-excluir-anuncio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 37px;
+    padding: 8px 12px;
+
+    border: 1px solid #F0C9CC;
+    border-radius: 8px;
+
+    background: #FFF6F6;
+    color: #BC343D;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+.botao-excluir-anuncio:hover:not(:disabled) {
+    transform: translateY(-1px);
+
+    border-color: #E8A9AE;
+    background: #FDEBEC;
+    color: #A91F2A;
+}
+
+.botao-excluir-anuncio:focus-visible {
+    outline: 3px solid rgba(197, 48, 48, .17);
+    outline-offset: 3px;
+}
+
+.botao-excluir-anuncio:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.botao-excluir-anuncio i {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* =========================================================
+   17. HISTÓRICO DOS ANÚNCIOS EXCLUÍDOS
+========================================================= */
+
+.lista-anuncios-excluidos {
+    background: #FFFFFF;
+}
+
+/* Card histórico */
+
+.anuncio-excluido-item {
+    display: grid;
+    grid-template-columns: 125px minmax(0, 1fr);
+    gap: 21px;
+
+    min-width: 0;
+    padding: 23px;
+
+    border-bottom: 1px solid #E9EEF3;
+    background: #FFFFFF;
+
+    transition: background .2s ease;
+}
+
+.anuncio-excluido-item:hover {
+    background: #FCFCFD;
+}
+
+.anuncio-excluido-item:last-child {
+    border-bottom: 0;
+}
+
+.anuncio-excluido-item .anuncio-imagem {
+    width: 125px;
+    height: 125px;
+}
+
+.anuncio-excluido-conteudo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-width: 0;
+}
+
+.anuncio-excluido-topo {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-bottom: 12px;
+}
+
+.anuncio-excluido-topo h4 {
+    margin: 0;
+
+    color: #263548;
+    font-size: 15px;
+    font-weight: 750;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.anuncio-excluido-preco {
+    color: #68788A;
+    font-size: 15px;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+
+/* Informações de exclusão */
+
+.dados-exclusao {
+    margin-top: 15px;
+    padding: 16px;
+
+    border: 1px solid #E7DCDD;
+    border-radius: 10px;
+
+    background: #FFFAFA;
+}
+
+.dados-exclusao-titulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 13px;
+
+    color: #A62F39;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+.dados-exclusao-titulo i {
+    width: 16px;
+    height: 16px;
+}
+
+.dados-exclusao-grade {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px 20px;
+}
+
+.dado-exclusao {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    min-width: 0;
+}
+
+.dado-exclusao .dado-label {
+    color: #8A7275;
+    font-size: 10px;
+    font-weight: 650;
+}
+
+.dado-exclusao .dado-valor {
+    color: #563E43;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+}
+
+.dado-exclusao .dado-valor.destaque {
+    color: #B4232D;
+}
+
+.dado-exclusao.largura-total {
+    grid-column: 1 / -1;
+}
+
+
+/* Identificação do responsável */
+
+.responsavel-exclusao {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    margin-top: 14px;
+    padding-top: 13px;
+
+    border-top: 1px solid #F0E3E4;
+}
+
+.responsavel-exclusao > i {
+    flex: 0 0 17px;
+
+    width: 17px;
+    height: 17px;
+
+    color: #9B5960;
+}
+
+.responsavel-exclusao-conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    min-width: 0;
+}
+
+.responsavel-exclusao-conteudo strong {
+    color: #563E43;
+    font-size: 11px;
+    font-weight: 750;
+}
+
+.responsavel-exclusao-conteudo span {
+    color: #866E72;
+    font-size: 10px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+
+/* Dados técnicos */
+
+.dados-tecnicos-exclusao {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+
+    margin-top: 13px;
+    padding-top: 12px;
+
+    border-top: 1px solid #F0E3E4;
+}
+
+.dados-tecnicos-exclusao span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    min-width: 0;
+
+    color: #806D72;
+    font-size: 10px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.dados-tecnicos-exclusao i {
+    flex: 0 0 13px;
+
+    width: 13px;
+    height: 13px;
+
+    color: #A17C82;
+}
+
+
+/* Histórico sem dados completos */
+
+.exclusao-sem-dados {
+    margin-top: 13px;
+    padding: 11px 13px;
+
+    border: 1px dashed #E5D8DA;
+    border-radius: 8px;
+
+    background: #FFFCFC;
+    color: #8B7075;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   18. ESTADOS VAZIOS E CARREGAMENTO
+========================================================= */
+
+.anuncios-pagina .estado-vazio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 13px;
+
+    min-height: 190px;
+    padding: 30px 20px;
+
+    color: #8491A1;
+    text-align: center;
+}
+
+.anuncios-pagina .estado-vazio i {
+    width: 30px;
+    height: 30px;
+
+    color: #9BAABA;
+    stroke-width: 1.5;
+}
+
+.anuncios-pagina .estado-vazio p {
+    max-width: 350px;
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   19. MENSAGENS DO SISTEMA
+========================================================= */
+
+.mensagem-anuncios {
+    min-height: 20px;
+    margin: 15px 0 0;
+
+    color: var(--sm-info, #007F99);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.mensagem-anuncios.erro {
+    color: #C53030;
+}
+
+.mensagem-anuncios.sucesso {
+    color: #16834C;
+}
+
+
+/* =========================================================
+   20. ACESSIBILIDADE
+========================================================= */
+
+.anuncios-pagina button:focus-visible,
+.anuncios-pagina input:focus-visible,
+.anuncios-pagina select:focus-visible {
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .anuncios-pagina *,
+    .anuncios-pagina *::before,
+    .anuncios-pagina *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+}
+
+
+/* =========================================================
+   21. RESPONSIVIDADE — NOTEBOOKS E TELAS MÉDIAS
+========================================================= */
+
+@media (max-width: 1250px) {
+
+    .indicadores-anuncios {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 1100px) {
+
+    .anuncios-pagina {
+        padding: 27px;
+    }
+
+    .anuncio-item {
+        grid-template-columns: 125px minmax(0, 1fr);
+        gap: 19px;
+    }
+
+    .anuncio-imagem {
+        width: 125px;
+        height: 125px;
+    }
+
+    .anuncio-acoes {
+        grid-column: 2;
+        justify-content: flex-end;
+        min-width: 0;
+    }
+
+    .anuncio-resumo {
+        flex-wrap: wrap;
+    }
+
+}
+
+@media (max-width: 850px) {
+
+    .filtros-anuncios {
+        grid-template-columns: minmax(0, 1fr) 210px;
+    }
+
+}
+
+
+/* =========================================================
+   22. RESPONSIVIDADE — TABLETS E CELULARES
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .anuncios-pagina {
+        padding: 22px 16px;
+    }
+
+    .anuncios-pagina .cabecalho-pagina {
+        margin-bottom: 23px;
+    }
+
+    .anuncios-pagina .titulo-pagina h1 {
+        font-size: 23px;
+    }
+
+    .indicadores-anuncios {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .anuncios-pagina .card-indicador {
+        min-height: 100px;
+        padding: 18px;
+    }
+
+    .secao-anuncios {
+        padding: 18px;
+    }
+
+    .secao-anuncios-topo {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 13px;
+    }
+
+    .abas-anuncios {
+        gap: 5px;
+    }
+
+    .aba-anuncios {
+        flex: 1;
+        gap: 6px;
+        padding: 9px 8px;
+
+        font-size: 11px;
+    }
+
+    .filtros-anuncios {
+        grid-template-columns: 1fr;
+    }
+
+    .lista-anuncios-cabecalho {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 9px;
+    }
+
+    .anuncio-item {
+        grid-template-columns: 100px minmax(0, 1fr);
+        gap: 15px;
+
+        padding: 18px;
+    }
+
+    .anuncio-imagem {
+        width: 100px;
+        height: 100px;
+    }
+
+    .anuncio-informacoes {
+        justify-content: flex-start;
+    }
+
+    .anuncio-resumo {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .anuncio-informacoes h4 {
+        font-size: 14px;
+    }
+
+    .anuncio-preco {
+        font-size: 17px;
+    }
+
+    .anuncio-acoes {
+        grid-column: 2;
+        justify-content: flex-start;
+    }
+
+    .botao-excluir-anuncio {
+        min-height: 36px;
+    }
+
+    .anuncio-detalhes {
+        gap: 8px 12px;
+    }
+
+    .anuncio-publicador {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 7px;
+    }
+
+    .anuncio-excluido-item {
+        grid-template-columns: 85px minmax(0, 1fr);
+        gap: 13px;
+
+        padding: 16px;
+    }
+
+    .anuncio-excluido-item .anuncio-imagem {
+        width: 85px;
+        height: 85px;
+    }
+
+    .dados-exclusao {
+        grid-column: 1 / -1;
+    }
+
+    .dados-exclusao-grade {
+        grid-template-columns: 1fr;
+        gap: 11px;
+    }
+
+    .dado-exclusao.largura-total {
+        grid-column: auto;
+    }
+
+}
+
+
+/* =========================================================
+   23. RESPONSIVIDADE — CELULARES PEQUENOS
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .anuncios-pagina {
+        padding: 18px 12px;
+    }
+
+    .anuncios-pagina .titulo-pagina h1 {
+        font-size: 20px;
+    }
+
+    .secao-anuncios {
+        padding: 14px;
+    }
+
+    .indicador-anuncios {
+        white-space: normal;
+    }
+
+    .aba-anuncios {
+        flex-wrap: wrap;
+        font-size: 10px;
+    }
+
+    .anuncio-item {
+        grid-template-columns: 76px minmax(0, 1fr);
+        gap: 12px;
+
+        padding: 15px 12px;
+    }
+
+    .anuncio-imagem {
+        width: 76px;
+        height: 76px;
+    }
+
+    .anuncio-informacoes h4 {
+        font-size: 13px;
+    }
+
+    .anuncio-preco {
+        font-size: 16px;
+    }
+
+    .anuncio-descricao {
+        font-size: 11px;
+    }
+
+    .anuncio-detalhes span {
+        font-size: 10px;
+    }
+
+    .lista-anuncios-cabecalho {
+        padding: 14px;
+    }
+
+    .botao-excluir-anuncio {
+        font-size: 10px;
+    }
+
+    .anuncio-excluido-item {
+        grid-template-columns: 1fr;
+    }
+
+    .anuncio-excluido-item .anuncio-imagem {
+        width: 100%;
+        height: 150px;
+    }
+
+    .anuncio-excluido-topo {
+        flex-direction: column;
+    }
+
+    .dados-exclusao {
+        padding: 13px;
+    }
+
+}
+
+/* =========================================================
+   24. REORGANIZAÇÃO DOS CARDS E HISTÓRICO DE EXCLUSÃO
+   Compatibilidade com anuncios-admin.js
+========================================================= */
+
+/* Evita que elementos sejam exibidos quando ocultos */
+.anuncios-pagina [hidden] {
+    display: none !important;
+}
+
+/* Card de anúncio excluído */
+.anuncios-pagina .anuncio-item.excluido {
+    background: #FFFEFE;
+    border-left: 3px solid #D45A62;
+}
+
+.anuncios-pagina .anuncio-item.excluido:hover {
+    background: #FFFAFA;
+}
+
+/* Organização das informações */
+.anuncios-pagina .anuncio-informacoes {
+    gap: 0;
+}
+
+.anuncios-pagina .anuncio-resumo {
+    align-items: flex-start;
+}
+
+.anuncios-pagina .anuncio-resumo > div {
+    flex: 1 1 auto;
+}
+
+.anuncios-pagina .anuncio-preco {
+    color: #123D66;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.anuncios-pagina .anuncio-item.excluido .anuncio-preco {
+    color: #596779;
+}
+
+/* Descrição */
+.anuncios-pagina .anuncio-descricao {
+    max-width: 100%;
+    margin: 0 0 17px;
+    line-height: 1.75;
+    white-space: pre-line;
+}
+
+/* Detalhes do anúncio */
+.anuncios-pagina .anuncio-detalhes {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.anuncios-pagina .anuncio-detalhes span {
+    padding: 7px 10px;
+    border: 1px solid #E5EAF0;
+    border-radius: 7px;
+    background: #F8FAFC;
+    color: #526276;
+    font-size: 11px;
+}
+
+.anuncios-pagina .anuncio-detalhes .anuncio-estoque {
+    border-color: #DCE8F0;
+    background: #F0F6FA;
+    color: #31566F;
+}
+
+/* Publicador */
+.anuncios-pagina .anuncio-publicador {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px 18px;
+    padding-top: 13px;
+    border-top: 1px solid #E9EDF2;
+}
+
+.anuncios-pagina .anuncio-publicador span {
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   25. PAINEL DE AUDITORIA
+========================================================= */
+
+.anuncios-pagina .anuncio-exclusao {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    width: 100%;
+    margin-top: 19px;
+    padding: 19px;
+
+    border: 1px solid #E8D9DB;
+    border-radius: 11px;
+
+    background: #FFFAFA;
+}
+
+/* Título do painel */
+.anuncios-pagina .anuncio-exclusao-titulo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding-bottom: 13px;
+    border-bottom: 1px solid #F0E3E4;
+
+    color: #9E3039;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.anuncios-pagina .anuncio-exclusao-titulo i {
+    width: 18px;
+    height: 18px;
+    color: #B83B45;
+}
+
+/* Grade de informações */
+.anuncios-pagina .anuncio-exclusao-detalhes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px 20px;
+}
+
+.anuncios-pagina .anuncio-exclusao-detalhes > span {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    min-width: 0;
+
+    color: #68565A;
+    font-size: 11px;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.anuncios-pagina .anuncio-exclusao-detalhes > span i {
+    flex: 0 0 14px;
+    width: 14px;
+    height: 14px;
+    margin-top: 2px;
+    color: #A77A80;
+}
+
+.anuncios-pagina .anuncio-exclusao-detalhes > span strong {
+    color: #60454A;
+    font-weight: 750;
+}
+
+/* Aviso de preservação */
+.anuncios-pagina .anuncio-exclusao-aviso {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    padding: 12px 13px;
+
+    border: 1px solid #D9E8E0;
+    border-radius: 8px;
+
+    background: #F3F9F5;
+    color: #426B53;
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.anuncios-pagina .anuncio-exclusao-aviso i {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    color: #328052;
+}
+
+/* Imagem dos anúncios excluídos */
+.anuncios-pagina .anuncio-item.excluido .anuncio-imagem {
+    border-color: #E7DCDD;
+    background: #FAF6F6;
+}
+
+/* =========================================================
+   26. ABAS E PAINÉIS
+========================================================= */
+
+.anuncios-pagina .abas-anuncios {
+    flex-wrap: wrap;
+}
+
+.anuncios-pagina .aba-anuncios {
+    transition: all .2s ease;
+}
+
+.anuncios-pagina .aba-anuncios[data-aba-anuncios="excluidos"].ativa {
+    border-color: #F0D0D2;
+    background: #FFF1F1;
+    color: #B4232D;
+}
+
+.anuncios-pagina .aba-anuncios[data-aba-anuncios="excluidos"].ativa
+.contador-aba {
+    background: #F8DCDD;
+    color: #A62933;
+}
+
+/* =========================================================
+   27. RESPONSIVIDADE DO PAINEL DE AUDITORIA
+========================================================= */
+
+@media (max-width: 850px) {
+    .anuncios-pagina .anuncio-exclusao {
+        padding: 16px;
+    }
+
+    .anuncios-pagina .anuncio-exclusao-detalhes {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 650px) {
+    .anuncios-pagina .anuncio-exclusao-detalhes {
+        grid-template-columns: 1fr;
+        gap: 11px;
+    }
+
+    .anuncios-pagina .anuncio-exclusao {
+        margin-top: 15px;
+        padding: 14px;
+    }
+
+    .anuncios-pagina .anuncio-exclusao-titulo {
+        font-size: 11px;
+    }
+
+    .anuncios-pagina .anuncio-exclusao-detalhes > span {
+        font-size: 11px;
+    }
+
+    .anuncios-pagina .anuncio-exclusao-aviso {
+        font-size: 10px;
+    }
+
+    .anuncios-pagina .anuncio-item.excluido {
+        border-left-width: 2px;
+    }
+}
+
+@media (max-width: 420px) {
+    .anuncios-pagina .anuncio-exclusao {
+        padding: 12px;
+    }
+
+    .anuncios-pagina .anuncio-exclusao-detalhes > span {
+        gap: 4px;
+    }
+
+    .anuncios-pagina .anuncio-exclusao-aviso {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,645 @@
+
+/* =========================================================
+   SAFEMARKET — DASHBOARD ADMINISTRATIVO
+   Arquivo: css/dashboard-pagina.css
+========================================================= */
+
+/* =========================================================
+   1. ESTRUTURA PRINCIPAL
+========================================================= */
+
+body {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =========================================================
+   2. MENU LATERAL
+========================================================= */
+
+.menu-lateral {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+
+    width: var(--sm-menu-largura);
+    height: 100vh;
+    padding: 22px 14px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    background: var(--sm-fundo-menu);
+    color: var(--sm-texto-menu);
+
+    box-shadow: var(--sm-sombra-menu);
+
+    transition: width var(--sm-transicao);
+}
+
+.menu-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 48px;
+    margin-bottom: 32px;
+    padding: 0 7px;
+}
+
+.logo-menu {
+    margin: 0;
+
+    color: #FFFFFF;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    white-space: nowrap;
+}
+
+.botao-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+
+    color: #FFFFFF;
+    background: transparent;
+
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: background var(--sm-transicao-rapida);
+}
+
+.botao-menu:hover {
+    background: var(--sm-fundo-menu-hover);
+}
+
+.botao-menu svg {
+    width: 19px;
+    height: 19px;
+}
+
+#menu-navegacao {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+#menu-navegacao a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    min-height: 46px;
+    padding: 0 13px;
+
+    color: var(--sm-texto-menu-secundario);
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+
+    border-radius: 8px;
+
+    transition:
+        background var(--sm-transicao-rapida),
+        color var(--sm-transicao-rapida);
+}
+
+#menu-navegacao a svg {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+}
+
+#menu-navegacao a:hover {
+    color: #FFFFFF;
+    background: var(--sm-fundo-menu-hover);
+}
+
+#menu-navegacao a[aria-current="page"] {
+    color: #FFFFFF;
+    background: rgba(0, 184, 217, 0.16);
+    box-shadow: inset 3px 0 var(--sm-azul-ciano);
+}
+
+/* MENU RECOLHIDO */
+
+body.menu-recolhido .menu-lateral {
+    width: var(--sm-menu-recolhido);
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+body.menu-recolhido .logo-menu,
+body.menu-recolhido #menu-navegacao a span {
+    display: none;
+}
+
+body.menu-recolhido .menu-topo {
+    justify-content: center;
+    padding: 0;
+}
+
+body.menu-recolhido #menu-navegacao a {
+    justify-content: center;
+    padding: 0;
+}
+
+/* =========================================================
+   3. CONTEÚDO PRINCIPAL
+========================================================= */
+
+.conteudo {
+    width: calc(100% - var(--sm-menu-largura));
+    min-width: 0;
+    min-height: 100vh;
+
+    margin-left: var(--sm-menu-largura);
+    padding: 34px 38px;
+
+    transition:
+        margin-left var(--sm-transicao),
+        width var(--sm-transicao);
+}
+
+body.menu-recolhido .conteudo {
+    width: calc(100% - var(--sm-menu-recolhido));
+    margin-left: var(--sm-menu-recolhido);
+}
+
+/* =========================================================
+   4. CABEÇALHO
+========================================================= */
+
+.cabecalho-dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 35px;
+}
+
+.identificacao-pagina {
+    display: block;
+    margin-bottom: 10px;
+
+    color: var(--sm-azul-botao);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.informacoes-cabecalho h1 {
+    margin: 0;
+
+    color: var(--sm-azul-marinho);
+    font-size: 29px;
+    font-weight: 750;
+    letter-spacing: -0.8px;
+}
+
+.descricao-pagina {
+    margin: 9px 0 0;
+
+    color: var(--sm-secundario);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   5. SEÇÕES
+========================================================= */
+
+.secao-indicadores,
+.atividades,
+.acessos-administrativos,
+.status-sistema {
+    margin-bottom: 30px;
+}
+
+.cabecalho-secao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    margin-bottom: 18px;
+}
+
+.cabecalho-secao h2 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin: 0;
+
+    color: var(--sm-azul-marinho);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.descricao-secao {
+    margin: 6px 0 0;
+
+    color: var(--sm-secundario);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.icone-titulo {
+    width: 19px;
+    height: 19px;
+    color: var(--sm-azul-botao);
+}
+
+/* =========================================================
+   6. INDICADORES
+========================================================= */
+
+.cartoes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.cartao {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 165px;
+    padding: 21px;
+
+    background: var(--sm-superficie);
+    border: 1px solid var(--sm-borda);
+    border-radius: var(--sm-raio-medio);
+
+    box-shadow: var(--sm-sombra-leve);
+
+    transition:
+        transform var(--sm-transicao-rapida),
+        box-shadow var(--sm-transicao-rapida),
+        border-color var(--sm-transicao-rapida);
+}
+
+.cartao:hover {
+    transform: translateY(-2px);
+    border-color: var(--sm-azul-borda);
+    box-shadow: var(--sm-sombra-card);
+}
+
+.cabecalho-cartao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 17px;
+}
+
+.icone-cartao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 43px;
+    height: 43px;
+
+    color: var(--sm-azul-botao);
+    background: var(--sm-azul-claro);
+    border-radius: 12px;
+}
+
+.icone-cartao svg {
+    width: 21px;
+    height: 21px;
+}
+
+.conteudo-cartao h3 {
+    margin: 0 0 8px;
+
+    color: var(--sm-secundario);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.conteudo-cartao > p {
+    margin: 0 0 7px;
+
+    color: var(--sm-azul-marinho);
+    font-size: 29px;
+    font-weight: 750;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+
+.descricao-indicador {
+    display: block;
+
+    color: var(--sm-texto-claro);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.indicador-alerta {
+    display: inline-block;
+    padding: 5px 9px;
+
+    color: var(--sm-info);
+    background: var(--sm-info-fundo);
+    border: 1px solid var(--sm-info-borda);
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+/* =========================================================
+   7. ATIVIDADES RECENTES
+========================================================= */
+
+.atividades {
+    padding: 24px;
+
+    background: var(--sm-superficie);
+    border: 1px solid var(--sm-borda);
+    border-radius: var(--sm-raio-medio);
+
+    box-shadow: var(--sm-sombra-leve);
+}
+
+.link-secao {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--sm-azul-botao);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: color var(--sm-transicao-rapida);
+}
+
+.link-secao:hover {
+    color: var(--sm-azul-hover);
+}
+
+.link-secao svg {
+    width: 15px;
+    height: 15px;
+}
+
+#lista-atividades {
+    min-height: 85px;
+    padding: 18px;
+
+    background: var(--sm-superficie-secundaria);
+    border: 1px solid var(--sm-divisor);
+    border-radius: var(--sm-raio);
+
+    color: var(--sm-secundario);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   8. ÁREAS ADMINISTRATIVAS
+========================================================= */
+
+.lista-acessos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.item-acesso {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    min-width: 0;
+    min-height: 95px;
+    padding: 19px;
+
+    color: inherit;
+    text-decoration: none;
+
+    background: var(--sm-superficie);
+    border: 1px solid var(--sm-borda);
+    border-radius: var(--sm-raio-medio);
+
+    transition:
+        border-color var(--sm-transicao-rapida),
+        box-shadow var(--sm-transicao-rapida),
+        transform var(--sm-transicao-rapida);
+}
+
+.item-acesso:hover {
+    transform: translateY(-2px);
+    border-color: var(--sm-azul-ciano);
+    box-shadow: var(--sm-sombra-destaque);
+}
+
+.item-acesso > svg:first-child {
+    width: 23px;
+    height: 23px;
+    flex-shrink: 0;
+
+    color: var(--sm-azul-botao);
+}
+
+.item-acesso > svg:last-child {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    margin-left: auto;
+
+    color: var(--sm-texto-claro);
+}
+
+.item-acesso h3 {
+    margin: 0 0 6px;
+
+    color: var(--sm-azul-marinho);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.item-acesso p {
+    margin: 0;
+
+    color: var(--sm-secundario);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   9. STATUS DO SISTEMA
+========================================================= */
+
+.status-sistema {
+    padding: 24px;
+
+    background: var(--sm-superficie);
+    border: 1px solid var(--sm-borda);
+    border-radius: var(--sm-raio-medio);
+
+    box-shadow: var(--sm-sombra-leve);
+}
+
+.item-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    min-height: 59px;
+    padding: 13px 5px;
+
+    border-bottom: 1px solid var(--sm-divisor);
+}
+
+.item-status:last-child {
+    border-bottom: none;
+}
+
+.informacao-status {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    color: var(--sm-texto);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.icone-status {
+    width: 19px;
+    height: 19px;
+    color: var(--sm-azul-botao);
+}
+
+.valor-status {
+    color: var(--sm-secundario);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* =========================================================
+   10. MENSAGENS
+========================================================= */
+
+.mensagem-dashboard {
+    margin: 15px 0;
+    font-size: 13px;
+}
+
+/* =========================================================
+   11. RODAPÉ
+========================================================= */
+
+.rodape-dashboard {
+    margin-top: 35px;
+    padding: 20px 0;
+
+    border-top: 1px solid var(--sm-borda);
+}
+
+.rodape-dashboard p {
+    margin: 0;
+
+    color: var(--sm-texto-claro);
+    font-size: 11px;
+    text-align: center;
+}
+
+/* =========================================================
+   12. ACESSIBILIDADE
+========================================================= */
+
+.pular-conteudo {
+    position: absolute;
+    top: -100px;
+    left: 10px;
+    z-index: 2000;
+
+    padding: 12px 16px;
+
+    color: #FFFFFF;
+    background: var(--sm-azul-marinho);
+    border-radius: 6px;
+}
+
+.pular-conteudo:focus {
+    top: 10px;
+}
+
+/* =========================================================
+   13. RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .conteudo {
+        padding: 30px 25px;
+    }
+
+    .cartoes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+
+    .conteudo {
+        padding: 24px 18px;
+    }
+
+    .lista-acessos {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .cartoes {
+        grid-template-columns: 1fr;
+    }
+
+    .conteudo {
+        padding: 20px 13px;
+    }
+
+    .informacoes-cabecalho h1 {
+        font-size: 24px;
+    }
+
+    .cabecalho-secao {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .atividades,
+    .status-sistema {
+        padding: 17px;
+    }
+
+    .item-status {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+    }
+}

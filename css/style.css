@@ -1,22 +1,69 @@
 
+/* =========================================================
+   SAFEMARKET — ESTILIZAÇÃO GLOBAL
+   Arquivo: css/style.css
+========================================================= */
+
+
+/* =========================================================
+   1. VARIÁVEIS GLOBAIS
+========================================================= */
+
 :root {
+    /* Identidade visual */
+    --sm-azul-marinho: #111B3A;
+    --sm-azul-ciano: #00B8D9;
+    --sm-azul-botao: #007F99;
+    --sm-azul-hover: #006D83;
+
+    /* Superfícies */
+    --sm-fundo: #F2F5F8;
+    --sm-superficie: #FFFFFF;
+    --sm-superficie-secundaria: #F5F7FA;
+
+    /* Textos */
+    --sm-texto: #263447;
+    --sm-texto-secundario: #64748B;
+    --sm-branco: #FFFFFF;
+
+    /* Bordas e sombras */
+    --sm-borda: #DCE3EA;
+    --sm-sombra-leve: 0 4px 15px rgba(17, 27, 58, 0.06);
+
+    /* Menu */
+    --sm-menu-largura: 250px;
+    --sm-menu-recolhido: 76px;
+    --sm-fundo-menu: #111B3A;
+    --sm-texto-menu: #FFFFFF;
+    --sm-texto-menu-secundario: #B8C5D9;
+    --sm-fundo-menu-hover: rgba(0, 184, 217, 0.14);
+    --sm-sombra-menu: 3px 0 18px rgba(17, 27, 58, 0.12);
+
+    /* Transições */
+    --sm-transicao: 0.25s ease;
+    --sm-transicao-rapida: 0.18s ease;
+
+    /* Bordas arredondadas */
+    --sm-raio: 10px;
+    --sm-raio-medio: 12px;
+    --sm-raio-grande: 18px;
+
+    /* Compatibilidade com estilos anteriores de autenticação */
     --fundo: #C9D1D5;
     --fundo-secundario: #D8DEE1;
     --superficie: #E8ECEE;
-
     --branco: #FFFFFF;
     --grafite: #26343D;
     --texto-secundario: #56636B;
-
     --laranja: #D97736;
     --laranja-escuro: #B95F27;
-
     --borda: #B7C1C6;
 }
 
-/* ========================================
-   CONFIGURAÇÃO GERAL
-======================================== */
+
+/* =========================================================
+   2. RESET
+========================================================= */
 
 * {
     margin: 0;
@@ -24,7 +71,44 @@
     box-sizing: border-box;
 }
 
+html {
+    min-height: 100%;
+}
+
 body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--sm-texto);
+    background: var(--sm-fundo);
+}
+
+
+/* =========================================================
+   3. ELEMENTOS GERAIS
+========================================================= */
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   4. PÁGINAS DE AUTENTICAÇÃO
+   Login, cadastro e recuperação de senha
+========================================================= */
+
+body.pagina-autenticacao {
     min-height: 100vh;
     padding: 20px;
 
@@ -50,29 +134,24 @@ body {
         );
 
     color: var(--grafite);
-    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ========================================
-   TÍTULOS E LABELS GERAIS
-======================================== */
-
-h1 {
+body.pagina-autenticacao h1 {
     color: var(--grafite);
     font-size: 30px;
     text-align: center;
 }
 
-label {
+body.pagina-autenticacao label {
     display: block;
     margin-top: 10px;
     color: var(--grafite);
 }
 
-/* ========================================
-   CARTÕES COM EFEITO GLASSMORPHISM
-   Login, cadastro e recuperação de senha
-======================================== */
+
+/* =========================================================
+   5. CARTÕES DE AUTENTICAÇÃO
+========================================================= */
 
 .login-card,
 .cadastro-card,
@@ -95,9 +174,10 @@ label {
         inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
-/* ========================================
-   BOTÃO PRINCIPAL
-======================================== */
+
+/* =========================================================
+   6. BOTÃO DE LOGIN
+========================================================= */
 
 .bnt-login {
     display: block;
@@ -114,7 +194,6 @@ label {
 
     font-size: 14px;
     font-weight: bold;
-    cursor: pointer;
 
     transition:
         background-color 0.2s ease,
@@ -137,9 +216,10 @@ label {
     outline-offset: 3px;
 }
 
-/* ========================================
-   LINKS COMPARTILHADOS
-======================================== */
+
+/* =========================================================
+   7. LINKS DE RECUPERAÇÃO
+========================================================= */
 
 .links-recuperacao {
     margin-top: 15px;
@@ -157,9 +237,10 @@ label {
     color: var(--laranja-escuro);
 }
 
-/* ========================================
-   LOGO SIMPLES
-======================================== */
+
+/* =========================================================
+   8. LOGOS
+========================================================= */
 
 .logo {
     display: block;
@@ -171,10 +252,6 @@ label {
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(38, 52, 61, 0.10);
 }
-
-/* ========================================
-   LOGO COM EFEITO GLASSMORPHISM
-======================================== */
 
 .logo-container {
     display: flex;
@@ -220,9 +297,10 @@ label {
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* ========================================
-   CAMPO DE RECUPERAÇÃO DE SENHA
-======================================== */
+
+/* =========================================================
+   9. CAMPO DE RECUPERAÇÃO
+========================================================= */
 
 .input-recuperacao {
     display: block;
@@ -235,7 +313,6 @@ label {
 
     background: rgba(248, 250, 251, 0.68);
     color: var(--grafite);
-    font-family: inherit;
     font-size: 14px;
 }
 
@@ -250,9 +327,10 @@ label {
     box-shadow: 0 0 0 3px rgba(217, 119, 54, 0.15);
 }
 
-/* ========================================
-   RESPONSIVIDADE
-======================================== */
+
+/* =========================================================
+   10. RESPONSIVIDADE
+========================================================= */
 
 @media (max-width: 400px) {
     .login-card,
@@ -263,14 +341,15 @@ label {
 }
 
 @media (max-height: 600px) {
-    body {
+    body.pagina-autenticacao {
         align-items: flex-start;
     }
 }
 
-/* ========================================
-   ACESSIBILIDADE: MOVIMENTO REDUZIDO
-======================================== */
+
+/* =========================================================
+   11. ACESSIBILIDADE
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
     *,

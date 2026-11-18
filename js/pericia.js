@@ -1,283 +1,1747 @@
 
+/* =====================================================
+   SAFEMARKET — PERÍCIA DIGITAL
+   Arquivo: js/pericia.js
+
+   Consulta, filtros e investigação de registros.
+   Apresentação estruturada dos dados de auditoria.
+===================================================== */
+
 "use strict";
 
-const listaInvestigacoes = document.getElementById("lista-investigacoes");
-const pesquisaCaso = document.getElementById("pesquisa-caso");
-const filtroStatus = document.getElementById("filtro-status");
-const semResultados = document.getElementById("sem-resultados");
-const mensagemPericia = document.getElementById("mensagem-pericia");
 
-const painelDetalhes = document.getElementById("detalhes-investigacao");
-const tituloInvestigacao = document.getElementById("titulo-investigacao");
-const descricaoInvestigacao = document.getElementById("descricao-investigacao");
-const gravidadeInvestigacao = document.getElementById("gravidade-investigacao");
-const linhaTempo = document.getElementById("linha-tempo");
-const listaEvidencias = document.getElementById("lista-evidencias");
+// =====================================================
+// 1. CONFIGURAÇÕES
+// =====================================================
 
-let investigacoes = [];
+const API_PERICIA = "/admin/pericia";
 
-const statusValidos = ["aberta", "analise", "concluida"];
+const LIMITE_REGISTROS = 200;
+
+const ACOES_DISPONIVEIS = [
+    "LOGIN",
+    "LOGIN_FALHA",
+    "LOGOUT",
+    "CADASTRAR",
+    "ATUALIZAR",
+    "EXCLUIR",
+    "CONSULTAR",
+    "MOVIMENTAR_ESTOQUE",
+    "DENUNCIAR"
+];
+
+const elementos = {};
+
+let registrosPericia = [];
+let registrosFiltrados = [];
+let registroSelecionado = null;
+let carregandoPericia = false;
+
+
+// =====================================================
+// 2. ELEMENTOS DA PÁGINA
+// =====================================================
+
+function obterElementos() {
+
+    const ids = [
+        "total-registros",
+        "total-usuarios",
+        "total-acoes",
+        "total-ips",
+
+        "pesquisa-caso",
+        "filtro-usuario",
+        "filtro-acao",
+        "filtro-ip",
+        "data-inicio",
+        "data-fim",
+
+        "btn-filtrar",
+        "btn-limpar-filtros",
+
+        "mensagem-pericia",
+        "lista-investigacoes",
+        "sem-resultados",
+
+        "detalhes-investigacao",
+        "fechar-detalhes",
+
+        "detalhe-id",
+        "detalhe-usuario",
+        "detalhe-email",
+        "detalhe-acao",
+        "detalhe-entidade",
+        "detalhe-entidade-id",
+        "detalhe-ip",
+        "detalhe-data",
+        "detalhe-descricao"
+    ];
+
+    ids.forEach(id => {
+        elementos[id] = document.getElementById(id);
+    });
+
+}
+
+
+// =====================================================
+// 3. FUNÇÕES AUXILIARES
+// =====================================================
+
+function obterValor(valor, alternativa = "Não informado") {
+
+    if (
+        valor === null ||
+        valor === undefined ||
+        String(valor).trim() === ""
+    ) {
+        return alternativa;
+    }
+
+    return String(valor);
+
+}
+
+
+function obterCampo(objeto, ...nomes) {
+
+    if (!objeto || typeof objeto !== "object") {
+        return undefined;
+    }
+
+    for (const nome of nomes) {
+
+        const valor = objeto[nome];
+
+        if (
+            valor !== undefined &&
+            valor !== null &&
+            String(valor).trim() !== ""
+        ) {
+            return valor;
+        }
+
+    }
+
+    return undefined;
+
+}
+
 
 function normalizarTexto(valor) {
-    return String(valor ?? "").trim().toLocaleLowerCase("pt-BR");
+
+    return String(valor ?? "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim();
+
 }
 
-function exibirMensagem(mensagem) {
-    mensagemPericia.textContent = mensagem || "";
-}
 
-function atualizarIndicadores(indicadores) {
-    if (!indicadores || typeof indicadores !== "object") {
-        throw new Error("Os indicadores de perícia são inválidos.");
+function criarElemento(tag, classe, texto) {
+
+    const elemento = document.createElement(tag);
+
+    if (classe) {
+        elemento.className = classe;
     }
 
-    const campos = {
-        "total-abertas": indicadores.abertas,
-        "total-analise": indicadores.emAnalise,
-        "total-concluidas": indicadores.concluidas,
-        "total-evidencias": indicadores.evidencias
+    if (texto !== undefined && texto !== null) {
+        elemento.textContent = String(texto);
+    }
+
+    return elemento;
+
+}
+
+
+function formatarRotulo(valor) {
+
+    const rotulos = {
+
+        evento: "Evento",
+        formato: "Formato",
+        imagem_nova: "Nova imagem",
+        imagem_anterior: "Imagem anterior",
+        tamanho_bytes: "Tamanho do arquivo",
+        tipo_operacao: "Tipo de operação",
+        nome_arquivo_novo: "Nome do arquivo",
+
+        produto_id: "ID do produto",
+        nome_produto_snapshot: "Nome do anúncio",
+
+        id: "ID",
+        nome: "Nome",
+        email: "E-mail",
+        perfil: "Perfil",
+
+        mensagem: "Descrição",
+        descricao: "Descrição",
+
+        metodo_http: "Método HTTP",
+        endpoint: "Endpoint",
+        user_agent: "User-Agent",
+        ip_origem: "IP de origem",
+        origem: "Origem",
+        resultado: "Resultado",
+
+        valoresAnteriores: "Valores anteriores",
+        valoresNovos: "Valores novos"
+
     };
 
-    for (const [id, valor] of Object.entries(campos)) {
-        if (!Number.isSafeInteger(valor) || valor < 0) {
-            throw new Error(`Indicador inválido: ${id}.`);
-        }
+    if (rotulos[valor]) {
+        return rotulos[valor];
     }
 
-    for (const [id, valor] of Object.entries(campos)) {
-        document.getElementById(id).textContent = String(valor);
-    }
+    return String(valor)
+        .replace(/([a-z])([A-Z])/g, "$1 $2")
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, letra => letra.toUpperCase());
+
 }
 
-function validarInvestigacoes(dados) {
-    if (!Array.isArray(dados)) {
-        throw new Error("A lista de investigações é inválida.");
+
+function formatarTamanho(bytes) {
+
+    const numero = Number(bytes);
+
+    if (!Number.isFinite(numero) || numero < 0) {
+        return obterValor(bytes);
     }
 
-    const ids = new Set();
-
-    for (const caso of dados) {
-        if (
-            !caso ||
-            typeof caso.id !== "string" ||
-            !caso.id.trim() ||
-            typeof caso.descricao !== "string" ||
-            !statusValidos.includes(caso.status)
-        ) {
-            throw new Error("Foi recebida uma investigação com dados inválidos.");
-        }
-
-        if (ids.has(caso.id)) {
-            throw new Error("Existem investigações com IDs duplicados.");
-        }
-
-        ids.add(caso.id);
-
-        if (
-            caso.evidencias !== undefined &&
-            !Array.isArray(caso.evidencias)
-        ) {
-            throw new Error("A lista de evidências é inválida.");
-        }
-
-        if (
-            caso.linhaTempo !== undefined &&
-            !Array.isArray(caso.linhaTempo)
-        ) {
-            throw new Error("A linha do tempo é inválida.");
-        }
+    if (numero < 1024) {
+        return `${numero} bytes`;
     }
+
+    if (numero < 1024 * 1024) {
+        return `${(numero / 1024).toFixed(2)} KB`;
+    }
+
+    return `${(numero / (1024 * 1024)).toFixed(2)} MB`;
+
 }
 
-function criarTexto(tag, texto) {
-    const elemento = document.createElement(tag);
-    elemento.textContent = texto;
-    return elemento;
+
+function formatarValorCampo(chave, valor) {
+
+    if (
+        chave === "tamanho_bytes" ||
+        chave === "tamanhoBytes"
+    ) {
+        return formatarTamanho(valor);
+    }
+
+    if (typeof valor === "boolean") {
+        return valor ? "Sim" : "Não";
+    }
+
+    if (valor === null || valor === undefined) {
+        return "Não informado";
+    }
+
+    if (Array.isArray(valor)) {
+        return valor.length
+            ? valor.map(item => String(item)).join(", ")
+            : "Nenhum registro";
+    }
+
+    if (typeof valor === "object") {
+        return JSON.stringify(valor, null, 2);
+    }
+
+    return String(valor);
+
 }
 
-function renderizarInvestigacoes() {
-    const termo = normalizarTexto(pesquisaCaso.value);
-    const statusSelecionado = filtroStatus.value;
 
-    const filtradas = investigacoes.filter((caso) => {
-        const correspondeTexto =
-            normalizarTexto(caso.id).includes(termo) ||
-            normalizarTexto(caso.descricao).includes(termo);
+// =====================================================
+// 4. FORMATAÇÃO DE DATA E HORÁRIO
+// =====================================================
 
-        const correspondeStatus =
-            !statusSelecionado || caso.status === statusSelecionado;
+function formatarData(valor) {
 
-        return correspondeTexto && correspondeStatus;
+    if (!valor) {
+        return "Data não informada";
+    }
+
+    let data;
+
+    if (Array.isArray(valor)) {
+
+        const [
+            ano,
+            mes,
+            dia,
+            hora = 0,
+            minuto = 0,
+            segundo = 0,
+            nanos = 0
+        ] = valor;
+
+        data = new Date(
+            ano,
+            mes - 1,
+            dia,
+            hora,
+            minuto,
+            segundo,
+            Math.floor(nanos / 1000000)
+        );
+
+    } else {
+
+        data = new Date(valor);
+
+    }
+
+    if (Number.isNaN(data.getTime())) {
+        return String(valor);
+    }
+
+    return new Intl.DateTimeFormat("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+    }).format(data);
+
+}
+
+
+// =====================================================
+// 5. INTERPRETAR DETALHES DO REGISTRO
+// =====================================================
+
+function interpretarDetalhes(detalhes) {
+
+    if (!detalhes) {
+        return {};
+    }
+
+    if (typeof detalhes === "object") {
+        return detalhes;
+    }
+
+    if (typeof detalhes === "string") {
+
+        try {
+            return JSON.parse(detalhes);
+        } catch {
+            return {
+                mensagem: detalhes
+            };
+        }
+
+    }
+
+    return {
+        mensagem: String(detalhes)
+    };
+
+}
+
+
+// =====================================================
+// 6. IDENTIFICAÇÃO DO RESPONSÁVEL
+// =====================================================
+
+function obterNomeUsuario(registro) {
+
+    const detalhes = interpretarDetalhes(registro.detalhes);
+
+    return obterValor(
+        obterCampo(registro,
+            "usuarioNomeSnapshot",
+            "usuario_nome_snapshot",
+            "usuarioNome",
+            "usuario_nome"
+        ) ??
+        obterCampo(detalhes.responsavel, "nome")
+    );
+
+}
+
+
+function obterEmailUsuario(registro) {
+
+    const detalhes = interpretarDetalhes(registro.detalhes);
+
+    return obterValor(
+        obterCampo(registro,
+            "usuarioEmailSnapshot",
+            "usuario_email_snapshot",
+            "usuarioEmail",
+            "usuario_email"
+        ) ??
+        obterCampo(detalhes.responsavel, "email")
+    );
+
+}
+
+
+function obterPerfilUsuario(registro) {
+
+    const detalhes = interpretarDetalhes(registro.detalhes);
+
+    return obterValor(
+        obterCampo(registro,
+            "usuarioPerfilSnapshot",
+            "usuario_perfil_snapshot",
+            "usuarioPerfil",
+            "usuario_perfil"
+        ) ??
+        obterCampo(detalhes.responsavel, "perfil")
+    );
+
+}
+
+
+function obterIdUsuario(registro) {
+
+    const detalhes = interpretarDetalhes(registro.detalhes);
+
+    return obterValor(
+        obterCampo(registro,
+            "usuarioId",
+            "usuario_id"
+        ) ??
+        obterCampo(detalhes.responsavel, "id")
+    );
+
+}
+
+
+function obterAcao(registro) {
+
+    const detalhes = interpretarDetalhes(registro.detalhes);
+
+    return obterValor(
+        obterCampo(registro, "acao") ??
+        obterCampo(detalhes, "evento")
+    );
+
+}
+
+
+function obterDataRegistro(registro) {
+
+    return obterCampo(
+        registro,
+        "data",
+        "criadoEm",
+        "criado_em",
+        "dataCriacao",
+        "data_criacao"
+    );
+
+}
+
+
+function obterIpRegistro(registro) {
+
+    return obterValor(
+        obterCampo(
+            registro,
+            "ipOrigem",
+            "ip_origem",
+            "ip"
+        )
+    );
+
+}
+
+
+// =====================================================
+// 7. MENSAGENS DA INTERFACE
+// =====================================================
+
+function mostrarMensagem(texto, tipo = "info") {
+
+    const mensagem = elementos["mensagem-pericia"];
+
+    if (!mensagem) return;
+
+    mensagem.textContent = texto;
+
+    mensagem.className = "mensagem-pericia";
+
+    mensagem.classList.add(`mensagem-${tipo}`);
+
+}
+
+
+function limparMensagem() {
+
+    const mensagem = elementos["mensagem-pericia"];
+
+    if (!mensagem) return;
+
+    mensagem.textContent = "";
+
+    mensagem.className = "mensagem-pericia";
+
+}
+
+
+// =====================================================
+// 8. CARREGAR REGISTROS DA API
+// =====================================================
+
+async function carregarPericia() {
+
+    if (carregandoPericia) return;
+
+    carregandoPericia = true;
+
+    limparMensagem();
+
+    elementos["btn-filtrar"].disabled = true;
+
+    elementos["btn-filtrar"].textContent = "Consultando...";
+
+    mostrarMensagem(
+        "Consultando os registros de auditoria...",
+        "info"
+    );
+
+    try {
+
+        const parametros = new URLSearchParams();
+
+        const usuarioId =
+            elementos["filtro-usuario"].value.trim();
+
+        const acao =
+            elementos["filtro-acao"].value.trim();
+
+        const ip =
+            elementos["filtro-ip"].value.trim();
+
+        const dataInicio =
+            elementos["data-inicio"].value;
+
+        const dataFim =
+            elementos["data-fim"].value;
+
+
+        if (usuarioId) {
+
+            const id = Number(usuarioId);
+
+            if (!Number.isInteger(id) || id <= 0) {
+                throw new Error("Informe um ID de usuário válido.");
+            }
+
+            parametros.set("usuarioId", id);
+
+        }
+
+        if (acao) parametros.set("acao", acao);
+
+        if (ip) parametros.set("ip", ip);
+
+        if (dataInicio) parametros.set("dataInicio", dataInicio);
+
+        if (dataFim) parametros.set("dataFim", dataFim);
+
+
+        const query = parametros.toString();
+
+        const endpoint = query
+            ? `${API_PERICIA}?${query}`
+            : API_PERICIA;
+
+
+        const resposta = await requisicaoAPI(endpoint, {
+            method: "GET"
+        });
+
+
+        if (!Array.isArray(resposta)) {
+            throw new Error(
+                "O servidor retornou um formato inesperado de registros."
+            );
+        }
+
+
+        registrosPericia = resposta.slice(0, LIMITE_REGISTROS);
+
+        registrosFiltrados = [...registrosPericia];
+
+        aplicarPesquisaLocal();
+
+        mostrarMensagem(
+            `${resposta.length} registro(s) recebido(s) do servidor.`,
+            "sucesso"
+        );
+
+
+    } catch (erro) {
+
+        console.error(
+            "SafeMarket: erro ao carregar perícia digital:",
+            erro
+        );
+
+        registrosPericia = [];
+
+        registrosFiltrados = [];
+
+        atualizarIndicadores();
+
+        renderizarRegistros();
+
+
+        if (erro.status === 401) {
+
+            mostrarMensagem(
+                "Sua sessão expirou. Faça login novamente para consultar a perícia.",
+                "erro"
+            );
+
+        } else if (erro.status === 403) {
+
+            mostrarMensagem(
+                "Acesso negado. Somente administradores podem consultar a perícia digital.",
+                "erro"
+            );
+
+        } else {
+
+            mostrarMensagem(
+                erro.message ||
+                "Não foi possível carregar os registros de perícia.",
+                "erro"
+            );
+
+        }
+
+    } finally {
+
+        carregandoPericia = false;
+
+        elementos["btn-filtrar"].disabled = false;
+
+        elementos["btn-filtrar"].textContent = "Aplicar filtros";
+
+    }
+
+}
+
+
+// =====================================================
+// 9. ATUALIZAR INDICADORES
+// =====================================================
+
+function atualizarIndicadores() {
+
+    const usuarios = new Set();
+    const acoes = new Set();
+    const ips = new Set();
+
+
+    registrosFiltrados.forEach(registro => {
+
+        const usuarioId = obterIdUsuario(registro);
+
+        const acao = obterAcao(registro);
+
+        const ip = obterIpRegistro(registro);
+
+        if (usuarioId !== "Não informado") {
+            usuarios.add(usuarioId);
+        }
+
+        if (acao !== "Não informado") {
+            acoes.add(acao);
+        }
+
+        if (ip !== "Não informado") {
+            ips.add(ip);
+        }
+
     });
+
+
+    elementos["total-registros"].textContent =
+        registrosFiltrados.length;
+
+    elementos["total-usuarios"].textContent =
+        usuarios.size;
+
+    elementos["total-acoes"].textContent =
+        acoes.size;
+
+    elementos["total-ips"].textContent =
+        ips.size;
+
+}
+
+
+// =====================================================
+// 10. PESQUISA LOCAL
+// =====================================================
+
+function aplicarPesquisaLocal() {
+
+    const pesquisa = normalizarTexto(
+        elementos["pesquisa-caso"].value
+    );
+
+
+    if (!pesquisa) {
+
+        registrosFiltrados = [...registrosPericia];
+
+    } else {
+
+        registrosFiltrados = registrosPericia.filter(registro => {
+
+            const detalhes = interpretarDetalhes(
+                registro.detalhes
+            );
+
+            const conteudo = [
+
+                registro.id,
+                obterIdUsuario(registro),
+                obterNomeUsuario(registro),
+                obterEmailUsuario(registro),
+                obterPerfilUsuario(registro),
+
+                obterAcao(registro),
+
+                registro.entidade,
+                registro.entidadeId,
+                registro.entidade_id,
+
+                obterIpRegistro(registro),
+
+                registro.metodoHttp,
+                registro.metodo_http,
+
+                registro.endpoint,
+                registro.userAgent,
+                registro.user_agent,
+
+                registro.origem,
+                registro.resultado,
+
+                JSON.stringify(detalhes)
+
+            ].join(" ");
+
+            return normalizarTexto(conteudo).includes(pesquisa);
+
+        });
+
+    }
+
+
+    atualizarIndicadores();
+
+    renderizarRegistros();
+
+}
+
+
+// =====================================================
+// 11. CRIAR CARTÃO DE REGISTRO
+// =====================================================
+
+function criarCartaoRegistro(registro) {
+
+    const detalhes = interpretarDetalhes(registro.detalhes);
+
+    const cartao = criarElemento(
+        "article",
+        "registro-pericia"
+    );
+
+
+    const cabecalho = criarElemento(
+        "div",
+        "cabecalho-registro"
+    );
+
+
+    const identificacao = criarElemento(
+        "div",
+        "identificacao-registro"
+    );
+
+
+    identificacao.appendChild(
+        criarElemento(
+            "strong",
+            "",
+            `Registro #${obterValor(registro.id)}`
+        )
+    );
+
+
+    identificacao.appendChild(
+        criarElemento(
+            "span",
+            "registro-acao",
+            obterAcao(registro)
+        )
+    );
+
+
+    cabecalho.appendChild(identificacao);
+
+
+    cabecalho.appendChild(
+        criarElemento(
+            "span",
+            "data-registro",
+            formatarData(obterDataRegistro(registro))
+        )
+    );
+
+
+    const corpo = criarElemento(
+        "div",
+        "corpo-registro"
+    );
+
+
+    const nomeProduto = obterCampo(
+        detalhes,
+        "nome_produto_snapshot",
+        "nomeProdutoSnapshot"
+    );
+
+    const produtoId = obterCampo(
+        detalhes,
+        "produto_id",
+        "produtoId"
+    );
+
+
+    const informacoes = [
+
+        ["Responsável", obterNomeUsuario(registro)],
+
+        ["E-mail", obterEmailUsuario(registro)],
+
+        ["ID do usuário", obterIdUsuario(registro)],
+
+        ["Perfil", obterPerfilUsuario(registro)],
+
+        [
+            "Anúncio",
+            nomeProduto
+                ? nomeProduto
+                : obterValor(registro.entidade)
+        ],
+
+        [
+            "ID do anúncio",
+            produtoId ?? registro.entidadeId ?? registro.entidade_id
+        ],
+
+        ["IP de origem", obterIpRegistro(registro)],
+
+        [
+            "Resultado",
+            obterValor(registro.resultado)
+        ]
+
+    ];
+
+
+    informacoes.forEach(([rotulo, valor]) => {
+
+        const campo = criarElemento("p", "campo-registro");
+
+        const titulo = criarElemento(
+            "strong",
+            "",
+            `${rotulo}: `
+        );
+
+        const conteudo = criarElemento(
+            "span",
+            "",
+            obterValor(valor)
+        );
+
+        campo.append(titulo, conteudo);
+
+        corpo.appendChild(campo);
+
+    });
+
+
+    const botao = criarElemento(
+        "button",
+        "botao-detalhes",
+        "Investigar registro"
+    );
+
+    botao.type = "button";
+
+    botao.addEventListener("click", () => {
+        abrirDetalhes(registro);
+    });
+
+
+    cartao.append(
+        cabecalho,
+        corpo,
+        botao
+    );
+
+
+    return cartao;
+
+}
+
+
+// =====================================================
+// 12. RENDERIZAR REGISTROS
+// =====================================================
+
+function renderizarRegistros() {
+
+    const lista = elementos["lista-investigacoes"];
+
+    const vazio = elementos["sem-resultados"];
+
+    lista.querySelectorAll(".registro-pericia").forEach(item => {
+        item.remove();
+    });
+
+
+    if (registrosFiltrados.length === 0) {
+
+        vazio.hidden = false;
+
+        return;
+
+    }
+
+
+    vazio.hidden = true;
 
     const fragmento = document.createDocumentFragment();
 
-    filtradas.forEach((caso) => {
-        const artigo = document.createElement("article");
-        artigo.className = "caso-pericia";
-        artigo.dataset.status = caso.status;
 
-        const cabecalho = document.createElement("div");
-        cabecalho.className = "caso-cabecalho";
+    registrosFiltrados.forEach(registro => {
 
-        cabecalho.appendChild(criarTexto("h3", caso.id));
-
-        const status = criarTexto(
-            "span",
-            caso.status === "analise"
-                ? "Em análise"
-                : caso.status === "concluida"
-                    ? "Concluída"
-                    : "Aberta"
+        fragmento.appendChild(
+            criarCartaoRegistro(registro)
         );
 
-        status.className = `status-caso ${
-            caso.status === "analise"
-                ? "em-analise"
-                : caso.status
-        }`;
-
-        cabecalho.appendChild(status);
-        artigo.appendChild(cabecalho);
-
-        artigo.appendChild(criarTexto("p", caso.descricao));
-
-        if (typeof caso.gravidade === "string" && caso.gravidade.trim()) {
-            const gravidade = criarTexto(
-                "span",
-                `Gravidade: ${caso.gravidade}`
-            );
-
-            gravidade.className = "detalhe-caso";
-            artigo.appendChild(gravidade);
-        }
-
-        const botao = criarTexto("button", "Consultar investigação");
-        botao.type = "button";
-        botao.className = "botao-detalhes";
-        botao.dataset.caso = caso.id;
-
-        artigo.appendChild(botao);
-        fragmento.appendChild(artigo);
     });
 
-    listaInvestigacoes.replaceChildren(fragmento);
-    semResultados.hidden = filtradas.length > 0;
+
+    lista.appendChild(fragmento);
+
 }
 
-function mostrarDetalhes(id) {
-    const caso = investigacoes.find((item) => item.id === id);
 
-    if (!caso) {
-        exibirMensagem("A investigação selecionada não foi encontrada.");
+// =====================================================
+// 13. PREENCHER CAMPOS DO PAINEL
+// =====================================================
+
+function preencherDetalhe(id, valor) {
+
+    const campo = elementos[id];
+
+    if (!campo) return;
+
+    campo.textContent = obterValor(valor);
+
+}
+
+
+// =====================================================
+// 14. CONSTRUIR SEÇÕES DA INVESTIGAÇÃO
+// =====================================================
+
+function criarSecaoDetalhe(titulo, subtitulo = "") {
+
+    const secao = criarElemento(
+        "section",
+        "pericia-secao-detalhe"
+    );
+
+    const cabecalho = criarElemento(
+        "div",
+        "pericia-secao-cabecalho"
+    );
+
+    cabecalho.appendChild(
+        criarElemento("h3", "", titulo)
+    );
+
+    if (subtitulo) {
+        cabecalho.appendChild(
+            criarElemento("p", "", subtitulo)
+        );
+    }
+
+    secao.appendChild(cabecalho);
+
+    const grade = criarElemento(
+        "div",
+        "pericia-grade-detalhes"
+    );
+
+    secao.appendChild(grade);
+
+    return {
+        secao,
+        grade
+    };
+
+}
+
+
+function adicionarCampoDetalhe(grade, rotulo, valor, classe = "") {
+
+    const campo = criarElemento(
+        "div",
+        `pericia-campo-detalhe ${classe}`.trim()
+    );
+
+    campo.appendChild(
+        criarElemento("span", "pericia-campo-rotulo", rotulo)
+    );
+
+    campo.appendChild(
+        criarElemento(
+            "strong",
+            "pericia-campo-valor",
+            obterValor(valor)
+        )
+    );
+
+    grade.appendChild(campo);
+
+}
+
+
+function adicionarTextoDetalhe(grade, rotulo, valor) {
+
+    const campo = criarElemento(
+        "div",
+        "pericia-campo-detalhe pericia-campo-completo"
+    );
+
+    campo.appendChild(
+        criarElemento("span", "pericia-campo-rotulo", rotulo)
+    );
+
+    campo.appendChild(
+        criarElemento(
+            "p",
+            "pericia-campo-texto",
+            obterValor(valor)
+        )
+    );
+
+    grade.appendChild(campo);
+
+}
+
+
+// =====================================================
+// 15. RENDERIZAR OBJETOS ESTRUTURADOS
+// =====================================================
+
+function renderizarObjetoDetalhes(objeto, titulo, destino) {
+
+    if (
+        !objeto ||
+        typeof objeto !== "object" ||
+        Array.isArray(objeto)
+    ) {
         return;
     }
 
-    tituloInvestigacao.textContent = `Investigação ${caso.id}`;
-    descricaoInvestigacao.textContent = caso.descricao;
 
-    gravidadeInvestigacao.textContent =
-        typeof caso.gravidade === "string" && caso.gravidade.trim()
-            ? `Gravidade: ${caso.gravidade}`
-            : "Gravidade não informada.";
+    const { secao, grade } = criarSecaoDetalhe(titulo);
 
-    const eventos = Array.isArray(caso.linhaTempo)
-        ? caso.linhaTempo
-        : [];
 
-    if (eventos.length === 0) {
-        linhaTempo.replaceChildren(
-            criarTexto("p", "Nenhum evento registrado.")
-        );
-    } else {
-        const fragmentoTempo = document.createDocumentFragment();
+    Object.entries(objeto).forEach(([chave, valor]) => {
 
-        eventos.forEach((evento) => {
-            const item = document.createElement("div");
-            item.className = "evento-tempo";
+        if (valor === undefined) return;
 
-            item.appendChild(
-                criarTexto(
-                    "p",
-                    typeof evento.descricao === "string"
-                        ? evento.descricao
-                        : "Evento sem descrição"
-                )
+        const rotulo = formatarRotulo(chave);
+
+        if (
+            valor !== null &&
+            typeof valor === "object" &&
+            !Array.isArray(valor)
+        ) {
+
+            const bloco = criarElemento(
+                "div",
+                "pericia-subgrupo"
             );
 
-            if (evento.data) {
-                item.appendChild(criarTexto("span", String(evento.data)));
-            }
-
-            fragmentoTempo.appendChild(item);
-        });
-
-        linhaTempo.replaceChildren(fragmentoTempo);
-    }
-
-    const evidencias = Array.isArray(caso.evidencias)
-        ? caso.evidencias
-        : [];
-
-    if (evidencias.length === 0) {
-        listaEvidencias.replaceChildren(
-            criarTexto("li", "Nenhuma evidência registrada.")
-        );
-    } else {
-        const fragmentoEvidencias = document.createDocumentFragment();
-
-        evidencias.forEach((evidencia) => {
-            const descricao = typeof evidencia === "string"
-                ? evidencia
-                : evidencia.descricao;
-
-            fragmentoEvidencias.appendChild(
-                criarTexto(
-                    "li",
-                    typeof descricao === "string"
-                        ? descricao
-                        : "Evidência sem descrição"
-                )
+            bloco.appendChild(
+                criarElemento("h4", "", rotulo)
             );
-        });
 
-        listaEvidencias.replaceChildren(fragmentoEvidencias);
+            const subgrade = criarElemento(
+                "div",
+                "pericia-grade-detalhes"
+            );
+
+            Object.entries(valor).forEach(([subChave, subValor]) => {
+
+                adicionarCampoDetalhe(
+                    subgrade,
+                    formatarRotulo(subChave),
+                    formatarValorCampo(subChave, subValor)
+                );
+
+            });
+
+            bloco.appendChild(subgrade);
+
+            grade.appendChild(bloco);
+
+        } else {
+
+            adicionarCampoDetalhe(
+                grade,
+                rotulo,
+                formatarValorCampo(chave, valor)
+            );
+
+        }
+
+    });
+
+
+    if (grade.children.length > 0) {
+        destino.appendChild(secao);
     }
 
-    painelDetalhes.hidden = false;
-    exibirMensagem("");
+}
 
-    painelDetalhes.scrollIntoView({
+
+// =====================================================
+// 16. RENDERIZAR INFORMAÇÕES DA REQUISIÇÃO
+// =====================================================
+
+function renderizarRequisicao(registro, destino) {
+
+    const { secao, grade } = criarSecaoDetalhe(
+        "Informações da requisição",
+        "Dados técnicos da operação registrada no sistema."
+    );
+
+
+    const campos = [
+
+        [
+            "Método HTTP",
+            obterCampo(registro, "metodoHttp", "metodo_http")
+        ],
+
+        [
+            "Endpoint",
+            obterCampo(registro, "endpoint")
+        ],
+
+        [
+            "IP de origem",
+            obterCampo(registro, "ipOrigem", "ip_origem")
+        ],
+
+        [
+            "Origem",
+            obterCampo(registro, "origem")
+        ],
+
+        [
+            "Resultado",
+            obterCampo(registro, "resultado")
+        ],
+
+        [
+            "Data e horário",
+            formatarData(obterDataRegistro(registro))
+        ],
+
+        [
+            "User-Agent",
+            obterCampo(registro, "userAgent", "user_agent")
+        ]
+
+    ];
+
+
+    campos.forEach(([rotulo, valor]) => {
+
+        if (rotulo === "User-Agent") {
+
+            adicionarTextoDetalhe(
+                grade,
+                rotulo,
+                valor
+            );
+
+        } else {
+
+            adicionarCampoDetalhe(
+                grade,
+                rotulo,
+                valor
+            );
+
+        }
+
+    });
+
+
+    destino.appendChild(secao);
+
+}
+
+
+// =====================================================
+// 17. ABRIR DETALHES DO REGISTRO
+// =====================================================
+
+function abrirDetalhes(registro) {
+
+    registroSelecionado = registro;
+
+    const detalhes = interpretarDetalhes(
+        registro.detalhes
+    );
+
+
+    preencherDetalhe("detalhe-id", registro.id);
+
+    preencherDetalhe(
+        "detalhe-usuario",
+        `${obterNomeUsuario(registro)} (ID: ${obterIdUsuario(registro)})`
+    );
+
+    preencherDetalhe(
+        "detalhe-email",
+        obterEmailUsuario(registro)
+    );
+
+    preencherDetalhe(
+        "detalhe-acao",
+        obterAcao(registro)
+    );
+
+    preencherDetalhe(
+        "detalhe-entidade",
+        obterCampo(registro, "entidade")
+    );
+
+    preencherDetalhe(
+        "detalhe-entidade-id",
+        obterCampo(registro, "entidadeId", "entidade_id")
+    );
+
+    preencherDetalhe(
+        "detalhe-ip",
+        obterIpRegistro(registro)
+    );
+
+    preencherDetalhe(
+        "detalhe-data",
+        formatarData(obterDataRegistro(registro))
+    );
+
+
+    const descricao = elementos["detalhe-descricao"];
+
+    descricao.replaceChildren();
+
+    descricao.classList.add("detalhes-visuais");
+
+
+    // -------------------------------------------------
+    // RESUMO DO EVENTO
+    // -------------------------------------------------
+
+    const resumo = criarSecaoDetalhe(
+        "Identificação do evento",
+        "Informações principais do registro investigado."
+    );
+
+
+    adicionarCampoDetalhe(
+        resumo.grade,
+        "Evento",
+        obterCampo(detalhes, "evento") ?? obterAcao(registro)
+    );
+
+    adicionarCampoDetalhe(
+        resumo.grade,
+        "Registro",
+        `#${obterValor(registro.id)}`
+    );
+
+    adicionarCampoDetalhe(
+        resumo.grade,
+        "Perfil",
+        obterPerfilUsuario(registro)
+    );
+
+    adicionarCampoDetalhe(
+        resumo.grade,
+        "Data e horário",
+        formatarData(obterDataRegistro(registro))
+    );
+
+
+    const nomeProduto = obterCampo(
+        detalhes,
+        "nome_produto_snapshot",
+        "nomeProdutoSnapshot"
+    );
+
+    const produtoId = obterCampo(
+        detalhes,
+        "produto_id",
+        "produtoId"
+    );
+
+
+    if (nomeProduto || produtoId) {
+
+        adicionarCampoDetalhe(
+            resumo.grade,
+            "Anúncio",
+            nomeProduto
+        );
+
+        adicionarCampoDetalhe(
+            resumo.grade,
+            "ID do anúncio",
+            produtoId
+        );
+
+    }
+
+
+    descricao.appendChild(resumo.secao);
+
+
+    // -------------------------------------------------
+    // RESPONSÁVEL
+    // -------------------------------------------------
+
+    const responsavel = detalhes.responsavel || {};
+
+    const secaoResponsavel = criarSecaoDetalhe(
+        "Responsável pela operação",
+        "Identificação de quem realizou a ação."
+    );
+
+
+    adicionarCampoDetalhe(
+        secaoResponsavel.grade,
+        "Nome",
+        obterCampo(responsavel, "nome") ??
+        obterNomeUsuario(registro)
+    );
+
+    adicionarCampoDetalhe(
+        secaoResponsavel.grade,
+        "E-mail",
+        obterCampo(responsavel, "email") ??
+        obterEmailUsuario(registro)
+    );
+
+    adicionarCampoDetalhe(
+        secaoResponsavel.grade,
+        "ID do usuário",
+        obterCampo(responsavel, "id") ??
+        obterIdUsuario(registro)
+    );
+
+    adicionarCampoDetalhe(
+        secaoResponsavel.grade,
+        "Perfil",
+        obterCampo(responsavel, "perfil") ??
+        obterPerfilUsuario(registro)
+    );
+
+
+    descricao.appendChild(secaoResponsavel.secao);
+
+
+    // -------------------------------------------------
+    // DADOS ESTRUTURADOS
+    // -------------------------------------------------
+
+    if (
+        detalhes.dados &&
+        typeof detalhes.dados === "object"
+    ) {
+
+        renderizarObjetoDetalhes(
+            detalhes.dados,
+            "Dados da operação",
+            descricao
+        );
+
+    }
+
+
+    // -------------------------------------------------
+    // VALORES ANTERIORES E NOVOS
+    // -------------------------------------------------
+
+    const valoresAnteriores = obterCampo(
+        detalhes,
+        "valoresAnteriores",
+        "valores_anteriores"
+    );
+
+    const valoresNovos = obterCampo(
+        detalhes,
+        "valoresNovos",
+        "valores_novos"
+    );
+
+
+    if (valoresAnteriores) {
+
+        renderizarObjetoDetalhes(
+            valoresAnteriores,
+            "Valores anteriores",
+            descricao
+        );
+
+    }
+
+
+    if (valoresNovos) {
+
+        renderizarObjetoDetalhes(
+            valoresNovos,
+            "Valores novos",
+            descricao
+        );
+
+    }
+
+
+    // -------------------------------------------------
+    // DESCRIÇÃO TEXTUAL
+    // -------------------------------------------------
+
+    const mensagem = obterCampo(
+        detalhes,
+        "mensagem",
+        "descricao",
+        "detalhes"
+    );
+
+
+    if (
+        mensagem &&
+        typeof mensagem !== "object"
+    ) {
+
+        const secaoDescricao = criarSecaoDetalhe(
+            "Descrição da ocorrência"
+        );
+
+        adicionarTextoDetalhe(
+            secaoDescricao.grade,
+            "Descrição",
+            mensagem
+        );
+
+        descricao.appendChild(secaoDescricao.secao);
+
+    }
+
+
+    // -------------------------------------------------
+    // INFORMAÇÕES TÉCNICAS DA REQUISIÇÃO
+    // -------------------------------------------------
+
+    renderizarRequisicao(
+        registro,
+        descricao
+    );
+
+
+    // -------------------------------------------------
+    // EXIBIR PAINEL
+    // -------------------------------------------------
+
+    elementos["detalhes-investigacao"].hidden = false;
+
+    elementos["detalhes-investigacao"].scrollIntoView({
         behavior: "smooth",
         block: "start"
     });
+
 }
 
-pesquisaCaso.addEventListener("input", renderizarInvestigacoes);
-filtroStatus.addEventListener("change", renderizarInvestigacoes);
 
-listaInvestigacoes.addEventListener("click", (evento) => {
-    const botao = evento.target.closest("button[data-caso]");
+// =====================================================
+// 18. FECHAR DETALHES
+// =====================================================
 
-    if (!botao || !listaInvestigacoes.contains(botao)) return;
+function fecharDetalhes() {
 
-    mostrarDetalhes(botao.dataset.caso);
-});
+    elementos["detalhes-investigacao"].hidden = true;
 
-window.periciaSafeMarket = {
-    atualizarIndicadores,
-    atualizarInvestigacoes(dados) {
-        validarInvestigacoes(dados);
+    registroSelecionado = null;
 
-        investigacoes = dados;
-        renderizarInvestigacoes();
-        painelDetalhes.hidden = true;
-        exibirMensagem("");
-    },
-    mostrarDetalhes,
-    exibirErro(mensagem) {
-        exibirMensagem(
-            mensagem || "Não foi possível carregar os dados da perícia."
+}
+
+
+// =====================================================
+// 19. LIMPAR FILTROS
+// =====================================================
+
+function limparFiltros() {
+
+    elementos["pesquisa-caso"].value = "";
+
+    elementos["filtro-usuario"].value = "";
+
+    elementos["filtro-acao"].value = "";
+
+    elementos["filtro-ip"].value = "";
+
+    elementos["data-inicio"].value = "";
+
+    elementos["data-fim"].value = "";
+
+    fecharDetalhes();
+
+    carregarPericia();
+
+}
+
+
+// =====================================================
+// 20. CONFIGURAR OPÇÕES DE AÇÃO
+// =====================================================
+
+function configurarAcoes() {
+
+    const select = elementos["filtro-acao"];
+
+    const existentes = new Set(
+        Array.from(select.options).map(opcao => opcao.value)
+    );
+
+
+    ACOES_DISPONIVEIS.forEach(acao => {
+
+        if (existentes.has(acao)) return;
+
+        const opcao = document.createElement("option");
+
+        opcao.value = acao;
+
+        opcao.textContent = acao;
+
+        select.appendChild(opcao);
+
+    });
+
+}
+
+
+// =====================================================
+// 21. VALIDAR PERÍODO
+// =====================================================
+
+function validarPeriodo() {
+
+    const inicio = elementos["data-inicio"].value;
+
+    const fim = elementos["data-fim"].value;
+
+
+    if (inicio && fim && inicio > fim) {
+
+        mostrarMensagem(
+            "A data inicial não pode ser posterior à data final.",
+            "erro"
         );
+
+        return false;
+
     }
-};
+
+    limparMensagem();
+
+    return true;
+
+}
+
+
+// =====================================================
+// 22. EVENTOS DA INTERFACE
+// =====================================================
+
+function configurarEventos() {
+
+    elementos["btn-filtrar"].addEventListener(
+        "click",
+        () => {
+
+            if (!validarPeriodo()) return;
+
+            fecharDetalhes();
+
+            carregarPericia();
+
+        }
+    );
+
+
+    elementos["btn-limpar-filtros"].addEventListener(
+        "click",
+        limparFiltros
+    );
+
+
+    elementos["pesquisa-caso"].addEventListener(
+        "input",
+        aplicarPesquisaLocal
+    );
+
+
+    elementos["fechar-detalhes"].addEventListener(
+        "click",
+        fecharDetalhes
+    );
+
+
+    [
+        elementos["filtro-usuario"],
+        elementos["filtro-ip"]
+    ].forEach(campo => {
+
+        campo.addEventListener("keydown", evento => {
+
+            if (evento.key === "Enter") {
+
+                evento.preventDefault();
+
+                elementos["btn-filtrar"].click();
+
+            }
+
+        });
+
+    });
+
+
+    elementos["data-inicio"].addEventListener(
+        "change",
+        validarPeriodo
+    );
+
+    elementos["data-fim"].addEventListener(
+        "change",
+        validarPeriodo
+    );
+
+}
+
+
+// =====================================================
+// 23. INICIALIZAÇÃO
+// =====================================================
+
+function iniciarPericia() {
+
+    obterElementos();
+
+
+    const elementosObrigatorios = [
+        "total-registros",
+        "total-usuarios",
+        "total-acoes",
+        "total-ips",
+
+        "pesquisa-caso",
+        "filtro-usuario",
+        "filtro-acao",
+        "filtro-ip",
+        "data-inicio",
+        "data-fim",
+
+        "btn-filtrar",
+        "btn-limpar-filtros",
+
+        "mensagem-pericia",
+        "lista-investigacoes",
+        "sem-resultados",
+
+        "detalhes-investigacao",
+        "fechar-detalhes"
+    ];
+
+
+    const ausentes = elementosObrigatorios.filter(id => {
+        return !elementos[id];
+    });
+
+
+    if (ausentes.length > 0) {
+
+        console.error(
+            "SafeMarket: elementos obrigatórios ausentes no HTML:",
+            ausentes
+        );
+
+        return;
+
+    }
+
+
+    if (typeof window.requisicaoAPI !== "function") {
+
+        mostrarMensagem(
+            "O módulo de comunicação com a API não foi carregado.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    configurarAcoes();
+
+    configurarEventos();
+
+    carregarPericia();
+
+
+    console.log(
+        "SafeMarket: módulo de perícia digital inicializado."
+    );
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    iniciarPericia
+);

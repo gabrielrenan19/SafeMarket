@@ -1,25 +1,53 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Painel de segurança e monitoramento do SafeMarket">
 
-    <title>SafeMarket - Dashboard</title>
+    <meta name="description"
+        content="SafeMarket Administração: gerenciamento de usuários, anúncios, auditoria, monitoramento e segurança da plataforma.">
 
+    <meta name="theme-color" content="#111B3A">
+
+    <title>SafeMarket | Administração</title>
+
+    <!-- IDENTIDADE VISUAL DO DASHBOARD -->
     <link rel="stylesheet" href="../css/dashboard.css">
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- LAYOUT EXCLUSIVO DO DASHBOARD -->
+    <link rel="stylesheet" href="../css/dashboard-pagina.css">
+
+    <!-- BIBLIOTECA DE ÍCONES -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <!-- COMUNICAÇÃO COM A API -->
     <script src="../js/api.js" defer></script>
+
+    <!-- FUNCIONALIDADES DO DASHBOARD -->
     <script src="../js/dashboard.js" defer></script>
+
+    <!-- MENU ADMINISTRATIVO -->
     <script src="../js/menu.js" defer></script>
+
 </head>
 
 <body>
 
+    <!-- ACESSIBILIDADE -->
+    <a href="#conteudo-principal" class="pular-conteudo">
+        Pular para o conteúdo principal
+    </a>
+
+    <!-- =========================================
+         MENU LATERAL ADMINISTRATIVO
+    ========================================== -->
+
     <aside class="menu-lateral" id="menu-lateral">
+
         <div class="menu-topo">
+
             <h2 class="logo-menu">SafeMarket</h2>
 
             <button
@@ -29,138 +57,659 @@
                 aria-label="Recolher menu"
                 aria-expanded="true"
                 aria-controls="menu-navegacao"
-                title="Recolher menu"
-            >
+                title="Recolher menu">
+
                 <i data-lucide="panel-left-close" aria-hidden="true"></i>
+
             </button>
+
         </div>
 
-        <nav id="menu-navegacao" aria-label="Menu principal">
-            <a href="dashboard.html" aria-current="page" title="Dashboard">
+        <nav id="menu-navegacao" aria-label="Administração">
+
+            <!-- 1. DASHBOARD -->
+            <a href="dashboard.html"
+               aria-current="page"
+               title="Dashboard">
+
                 <i data-lucide="layout-dashboard" aria-hidden="true"></i>
                 <span>Dashboard</span>
+
             </a>
 
-            <a href="monitoramento.html" title="Monitoramento">
-                <i data-lucide="activity" aria-hidden="true"></i>
-                <span>Monitoramento</span>
-            </a>
-
-            <a href="auditoria.html" title="Auditoria">
-                <i data-lucide="clipboard-check" aria-hidden="true"></i>
-                <span>Auditoria</span>
-            </a>
-
-            <a href="alertas.html" title="Alertas">
-                <i data-lucide="shield-alert" aria-hidden="true"></i>
-                <span>Alertas</span>
-            </a>
-
+            <!-- 2. USUÁRIOS -->
             <a href="usuarios.html" title="Usuários">
+
                 <i data-lucide="users" aria-hidden="true"></i>
                 <span>Usuários</span>
+
             </a>
 
-            <a href="configuracoes.html" title="Configurações">
-                <i data-lucide="settings" aria-hidden="true"></i>
-                <span>Configurações</span>
+            <!-- 3. GERENCIAMENTO DE ANÚNCIOS -->
+            <a href="anuncios.html" title="Gerenciamento de anúncios">
+
+                <i data-lucide="package" aria-hidden="true"></i>
+                <span>Gerenciamento de anúncios</span>
+
             </a>
 
+            <!-- 4. AUDITORIA -->
+            <a href="auditoria.html" title="Auditoria e Logs">
+
+                <i data-lucide="clipboard-list" aria-hidden="true"></i>
+                <span>Auditoria e Logs</span>
+
+            </a>
+
+            <!-- 5. MONITORAMENTO -->
+            <a href="monitoramento.html" title="Monitoramento">
+
+                <i data-lucide="activity" aria-hidden="true"></i>
+                <span>Monitoramento</span>
+
+            </a>
+
+            <!-- 6. ALERTAS -->
+            <a href="alertas.html" title="Alertas">
+
+                <i data-lucide="shield-alert" aria-hidden="true"></i>
+                <span>Alertas</span>
+
+            </a>
+
+            <!-- 7. PERÍCIA DIGITAL -->
             <a href="pericia.html" title="Perícia Digital">
+
                 <i data-lucide="search" aria-hidden="true"></i>
                 <span>Perícia Digital</span>
+
             </a>
+
+            <!-- 8. CONFIGURAÇÕES -->
+            <a href="configuracoes.html" title="Configurações">
+
+                <i data-lucide="settings" aria-hidden="true"></i>
+                <span>Configurações</span>
+
+            </a>
+
         </nav>
+
     </aside>
 
-    <main class="conteudo">
+    <!-- =========================================
+         CONTEÚDO PRINCIPAL
+    ========================================== -->
 
+    <main class="conteudo" id="conteudo-principal">
+
+        <!-- CABEÇALHO -->
         <header class="cabecalho-dashboard">
-            <h1>Dashboard do SafeMarket</h1>
-            <p class="descricao-pagina">
-                Bem-vindo à central de segurança.
-            </p>
+
+            <div class="informacoes-cabecalho">
+
+                <span class="identificacao-pagina">
+                    SAFEMARKET / ADMINISTRAÇÃO
+                </span>
+
+                <h1>Visão geral</h1>
+
+                <p class="descricao-pagina">
+                    Central de gerenciamento, monitoramento e segurança da plataforma.
+                </p>
+
+            </div>
+
         </header>
 
-        <section class="cartoes" aria-label="Indicadores de segurança">
+        <!-- =========================================
+             INDICADORES GERAIS
+        ========================================== -->
 
-            <article class="cartao">
-                <i data-lucide="users" class="icone-cartao" aria-hidden="true"></i>
-                <h3>Usuários conectados</h3>
-                <p id="usuarios-conectados" aria-live="polite">—</p>
-            </article>
+        <section
+            class="secao-indicadores"
+            aria-labelledby="titulo-indicadores">
 
-            <article class="cartao">
-                <i data-lucide="shield-alert" class="icone-cartao" aria-hidden="true"></i>
-                <h3>Alertas</h3>
-                <p id="total-alertas" aria-live="polite">—</p>
-                <span id="estado-alertas" class="indicador-alerta">
-                    Aguardando dados
-                </span>
-            </article>
+            <div class="cabecalho-secao">
 
-            <article class="cartao">
-                <i data-lucide="shield-check" class="icone-cartao" aria-hidden="true"></i>
-                <h3>Nível de segurança</h3>
-                <p id="nivel-seguranca" aria-live="polite">—</p>
-                <span id="estado-seguranca" class="indicador-seguranca">
-                    Não verificado
-                </span>
-            </article>
+                <div>
 
-            <article class="cartao">
-                <i data-lucide="clipboard-check" class="icone-cartao" aria-hidden="true"></i>
-                <h3>Auditorias</h3>
-                <p id="total-auditorias" aria-live="polite">—</p>
-            </article>
+                    <h2 id="titulo-indicadores">
+                        Indicadores gerais
+                    </h2>
+
+                    <p class="descricao-secao">
+                        Acompanhamento dos principais dados da plataforma.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="cartoes">
+
+                <!-- TOTAL DE USUÁRIOS -->
+                <article class="cartao">
+
+                    <div class="cabecalho-cartao">
+
+                        <div class="icone-cartao">
+                            <i data-lucide="users" aria-hidden="true"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="conteudo-cartao">
+
+                        <h3>Total de usuários</h3>
+
+                        <p id="total-usuarios" aria-live="polite">—</p>
+
+                        <span class="descricao-indicador">
+                            Contas cadastradas
+                        </span>
+
+                    </div>
+
+                </article>
+
+                <!-- TOTAL DE ANÚNCIOS -->
+                <article class="cartao">
+
+                    <div class="cabecalho-cartao">
+
+                        <div class="icone-cartao">
+                            <i data-lucide="package" aria-hidden="true"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="conteudo-cartao">
+
+                        <h3>Anúncios publicados</h3>
+
+                        <p id="total-anuncios" aria-live="polite">—</p>
+
+                        <span class="descricao-indicador">
+                            Anúncios registrados
+                        </span>
+
+                    </div>
+
+                </article>
+
+                <!-- USUÁRIOS ATIVOS -->
+                <article class="cartao">
+
+                    <div class="cabecalho-cartao">
+
+                        <div class="icone-cartao">
+                            <i data-lucide="user-check" aria-hidden="true"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="conteudo-cartao">
+
+                        <h3>Usuários ativos</h3>
+
+                        <p id="usuarios-conectados" aria-live="polite">—</p>
+
+                        <span class="descricao-indicador">
+                            Usuários ativos na plataforma
+                        </span>
+
+                    </div>
+
+                </article>
+
+                <!-- LOGINS FALHOS -->
+                <article class="cartao">
+
+                    <div class="cabecalho-cartao">
+
+                        <div class="icone-cartao">
+                            <i data-lucide="lock-keyhole" aria-hidden="true"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="conteudo-cartao">
+
+                        <h3>Logins malsucedidos</h3>
+
+                        <p id="total-logins-falhos" aria-live="polite">—</p>
+
+                        <span class="descricao-indicador">
+                            Tentativas de acesso recusadas
+                        </span>
+
+                    </div>
+
+                </article>
+
+                <!-- ALERTAS DE SEGURANÇA -->
+                <article class="cartao">
+
+                    <div class="cabecalho-cartao">
+
+                        <div class="icone-cartao">
+                            <i data-lucide="shield-alert" aria-hidden="true"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="conteudo-cartao">
+
+                        <h3>Alertas de segurança</h3>
+
+                        <p id="total-alertas" aria-live="polite">—</p>
+
+                        <span
+                            id="estado-alertas"
+                            class="indicador-alerta">
+
+                            Aguardando dados
+
+                        </span>
+
+                    </div>
+
+                </article>
+
+                <!-- REGISTROS DE AUDITORIA -->
+                <article class="cartao">
+
+                    <div class="cabecalho-cartao">
+
+                        <div class="icone-cartao">
+                            <i data-lucide="clipboard-check" aria-hidden="true"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="conteudo-cartao">
+
+                        <h3>Registros de auditoria</h3>
+
+                        <p id="total-auditorias" aria-live="polite">—</p>
+
+                        <span class="descricao-indicador">
+                            Operações registradas
+                        </span>
+
+                    </div>
+
+                </article>
+
+            </div>
 
         </section>
 
-        <section class="atividades" aria-labelledby="titulo-atividades">
-            <h2 id="titulo-atividades">
-                <i data-lucide="activity" class="icone-titulo" aria-hidden="true"></i>
-                Atividade recente
-            </h2>
+        <!-- =========================================
+             ATIVIDADES RECENTES
+        ========================================== -->
+
+        <section
+            class="atividades"
+            aria-labelledby="titulo-atividades">
+
+            <div class="cabecalho-secao">
+
+                <div>
+
+                    <h2 id="titulo-atividades">
+
+                        <i
+                            data-lucide="activity"
+                            class="icone-titulo"
+                            aria-hidden="true">
+                        </i>
+
+                        Atividades recentes
+
+                    </h2>
+
+                    <p class="descricao-secao">
+                        Últimos eventos registrados na plataforma.
+                    </p>
+
+                </div>
+
+                <a href="auditoria.html" class="link-secao">
+
+                    Consultar auditoria
+
+                    <i
+                        data-lucide="arrow-up-right"
+                        aria-hidden="true">
+                    </i>
+
+                </a>
+
+            </div>
 
             <div id="lista-atividades" aria-live="polite">
+
                 <p>Nenhuma atividade carregada.</p>
+
             </div>
+
         </section>
 
-        <section class="status-sistema" aria-labelledby="titulo-status">
-            <h2 id="titulo-status">
-                <i data-lucide="server" class="icone-titulo" aria-hidden="true"></i>
-                Status do sistema
-            </h2>
+        <!-- =========================================
+             ÁREAS ADMINISTRATIVAS
+        ========================================== -->
 
-            <p>
-                <i data-lucide="monitor" class="icone-status" aria-hidden="true"></i>
-                Sistema operacional —
-                <span id="status-sistema-operacional">Não verificado</span>
-            </p>
+        <section
+            class="acessos-administrativos"
+            aria-labelledby="titulo-acessos">
 
-            <p>
-                <i data-lucide="database" class="icone-status" aria-hidden="true"></i>
-                Banco de dados —
-                <span id="status-banco-dados">Não verificado</span>
-            </p>
+            <div class="cabecalho-secao">
 
-            <p>
-                <i data-lucide="activity" class="icone-status" aria-hidden="true"></i>
-                Monitoramento —
-                <span id="status-monitoramento">Não verificado</span>
-            </p>
+                <div>
+
+                    <h2 id="titulo-acessos">
+                        Áreas administrativas
+                    </h2>
+
+                    <p class="descricao-secao">
+                        Acesse os módulos de gerenciamento e segurança.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="lista-acessos">
+
+                <!-- USUÁRIOS -->
+                <a href="usuarios.html" class="item-acesso">
+
+                    <i data-lucide="users" aria-hidden="true"></i>
+
+                    <div>
+
+                        <h3>Gerenciamento de usuários</h3>
+
+                        <p>
+                            Consultar contas, permissões e situações cadastrais.
+                        </p>
+
+                    </div>
+
+                    <i data-lucide="chevron-right" aria-hidden="true"></i>
+
+                </a>
+
+                <!-- GERENCIAMENTO DE ANÚNCIOS -->
+                <a href="anuncios.html" class="item-acesso">
+
+                    <i data-lucide="package" aria-hidden="true"></i>
+
+                    <div>
+
+                        <h3>Gerenciamento de anúncios</h3>
+
+                        <p>
+                            Consultar anúncios publicados e gerenciar sua remoção.
+                        </p>
+
+                    </div>
+
+                    <i data-lucide="chevron-right" aria-hidden="true"></i>
+
+                </a>
+
+                <!-- AUDITORIA -->
+                <a href="auditoria.html" class="item-acesso">
+
+                    <i data-lucide="clipboard-list" aria-hidden="true"></i>
+
+                    <div>
+
+                        <h3>Auditoria e Logs</h3>
+
+                        <p>
+                            Consultar acessos, alterações, IPs e responsáveis.
+                        </p>
+
+                    </div>
+
+                    <i data-lucide="chevron-right" aria-hidden="true"></i>
+
+                </a>
+
+                <!-- MONITORAMENTO -->
+                <a href="monitoramento.html" class="item-acesso">
+
+                    <i data-lucide="activity" aria-hidden="true"></i>
+
+                    <div>
+
+                        <h3>Monitoramento de segurança</h3>
+
+                        <p>
+                            Identificar atividades suspeitas e eventos de segurança.
+                        </p>
+
+                    </div>
+
+                    <i data-lucide="chevron-right" aria-hidden="true"></i>
+
+                </a>
+
+                <!-- ALERTAS -->
+                <a href="alertas.html" class="item-acesso">
+
+                    <i data-lucide="shield-alert" aria-hidden="true"></i>
+
+                    <div>
+
+                        <h3>Alertas de segurança</h3>
+
+                        <p>
+                            Acompanhar ocorrências e possíveis fraudes.
+                        </p>
+
+                    </div>
+
+                    <i data-lucide="chevron-right" aria-hidden="true"></i>
+
+                </a>
+
+                <!-- PERÍCIA DIGITAL -->
+                <a href="pericia.html" class="item-acesso">
+
+                    <i data-lucide="search" aria-hidden="true"></i>
+
+                    <div>
+
+                        <h3>Perícia Digital</h3>
+
+                        <p>
+                            Consultar evidências e investigar incidentes.
+                        </p>
+
+                    </div>
+
+                    <i data-lucide="chevron-right" aria-hidden="true"></i>
+
+                </a>
+
+                <!-- CONFIGURAÇÕES -->
+                <a href="configuracoes.html" class="item-acesso">
+
+                    <i data-lucide="settings" aria-hidden="true"></i>
+
+                    <div>
+
+                        <h3>Configurações administrativas</h3>
+
+                        <p>
+                            Gerenciar níveis de acesso e configurações de segurança.
+                        </p>
+
+                    </div>
+
+                    <i data-lucide="chevron-right" aria-hidden="true"></i>
+
+                </a>
+
+            </div>
+
         </section>
 
-        <p id="mensagem-dashboard" role="status" aria-live="polite"></p>
+        <!-- =========================================
+             STATUS DO SISTEMA
+        ========================================== -->
+
+        <section
+            class="status-sistema"
+            aria-labelledby="titulo-status">
+
+            <div class="cabecalho-secao">
+
+                <div>
+
+                    <h2 id="titulo-status">
+
+                        <i
+                            data-lucide="server"
+                            class="icone-titulo"
+                            aria-hidden="true">
+                        </i>
+
+                        Status do sistema
+
+                    </h2>
+
+                    <p class="descricao-secao">
+                        Acompanhamento dos serviços da plataforma.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- SERVIDOR -->
+            <div class="item-status">
+
+                <div class="informacao-status">
+
+                    <i
+                        data-lucide="monitor"
+                        class="icone-status"
+                        aria-hidden="true">
+                    </i>
+
+                    <span>Servidor / Aplicação</span>
+
+                </div>
+
+                <span
+                    id="status-sistema-operacional"
+                    class="valor-status">
+
+                    Não verificado
+
+                </span>
+
+            </div>
+
+            <!-- BANCO DE DADOS -->
+            <div class="item-status">
+
+                <div class="informacao-status">
+
+                    <i
+                        data-lucide="database"
+                        class="icone-status"
+                        aria-hidden="true">
+                    </i>
+
+                    <span>Banco de dados</span>
+
+                </div>
+
+                <span
+                    id="status-banco-dados"
+                    class="valor-status">
+
+                    Não verificado
+
+                </span>
+
+            </div>
+
+            <!-- MONITORAMENTO -->
+            <div class="item-status">
+
+                <div class="informacao-status">
+
+                    <i
+                        data-lucide="activity"
+                        class="icone-status"
+                        aria-hidden="true">
+                    </i>
+
+                    <span>Monitoramento</span>
+
+                </div>
+
+                <span
+                    id="status-monitoramento"
+                    class="valor-status">
+
+                    Não verificado
+
+                </span>
+
+            </div>
+
+        </section>
+
+        <!-- =========================================
+             MENSAGENS DO DASHBOARD
+        ========================================== -->
+
+        <div
+            id="mensagem-dashboard"
+            class="mensagem-dashboard"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true">
+        </div>
+
+        <!-- =========================================
+             RODAPÉ
+        ========================================== -->
+
+        <footer class="rodape-dashboard">
+
+            <p>
+                SafeMarket &copy; 2026.
+                Painel administrativo de segurança.
+            </p>
+
+        </footer>
 
     </main>
 
+    <!-- =========================================
+         INICIALIZAÇÃO DOS ÍCONES
+    ========================================== -->
+
     <script>
-        if (window.lucide) {
-            window.lucide.createIcons();
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+
+        });
     </script>
 
 </body>
+
 </html>

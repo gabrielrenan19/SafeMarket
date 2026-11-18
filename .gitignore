@@ -1,0 +1,31 @@
+﻿# Java / Maven
+**/target/
+
+# Arquivos enviados pelos usuários
+**/uploads/
+
+# Variáveis de ambiente e segredos
+.env
+.env.*
+!.env.example
+**/*.pem
+**/*.key
+**/*.p12
+**/*.jks
+
+# Logs
+*.log
+logs/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Sistema operacional
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Logs e erros locais do servidor
+backend/safe-market/erro-servidor.txt

@@ -5,21 +5,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Gerenciamento de usuários do SafeMarket">
 
-    <title>SafeMarket - Usuários</title>
+    <meta name="description"
+        content="Gerenciamento e acompanhamento dos usuários da plataforma SafeMarket.">
 
+    <meta name="theme-color" content="#111B3A">
+
+    <title>SafeMarket | Gerenciamento de Usuários</title>
+
+    <!-- ESTILIZAÇÃO -->
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/usuarios.css">
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ÍCONES -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <!-- JAVASCRIPT -->
     <script src="../js/api.js" defer></script>
-    <script src="../js/usuarios.js" defer></script>
     <script src="../js/menu.js" defer></script>
+    <script src="../js/usuarios.js" defer></script>
 </head>
 
 <body>
 
-    <!-- Menu lateral -->
+    <!-- MENU LATERAL -->
     <aside class="menu-lateral" id="menu-lateral">
 
         <div class="menu-topo">
@@ -31,85 +41,217 @@
                 id="alternar-menu"
                 aria-label="Recolher menu"
                 aria-expanded="true"
-                aria-controls="menu-navegacao"
-                title="Recolher menu">
+                aria-controls="menu-navegacao">
 
-                <i data-lucide="panel-left-close" aria-hidden="true"></i>
-
+                <i data-lucide="panel-left-close"></i>
             </button>
         </div>
 
         <nav id="menu-navegacao" aria-label="Menu principal">
 
-            <a href="dashboard.html" title="Dashboard">
-                <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+            <a href="dashboard.html">
+                <i data-lucide="layout-dashboard"></i>
                 <span>Dashboard</span>
             </a>
 
-            <a href="monitoramento.html" title="Monitoramento">
-                <i data-lucide="activity" aria-hidden="true"></i>
-                <span>Monitoramento</span>
-            </a>
-
-            <a href="auditoria.html" title="Auditoria">
-                <i data-lucide="clipboard-check" aria-hidden="true"></i>
-                <span>Auditoria</span>
-            </a>
-
-            <a href="alertas.html" title="Alertas">
-                <i data-lucide="shield-alert" aria-hidden="true"></i>
-                <span>Alertas</span>
-            </a>
-
-            <a href="usuarios.html" aria-current="page" title="Usuários">
-                <i data-lucide="users" aria-hidden="true"></i>
+            <a href="usuarios.html" class="ativo" aria-current="page">
+                <i data-lucide="users"></i>
                 <span>Usuários</span>
             </a>
 
-            <a href="configuracoes.html" title="Configurações">
-                <i data-lucide="settings" aria-hidden="true"></i>
-                <span>Configurações</span>
+            <a href="auditoria.html">
+                <i data-lucide="clipboard-list"></i>
+                <span>Auditoria e Logs</span>
             </a>
 
-            <a href="pericia.html" title="Perícia Digital">
-                <i data-lucide="search" aria-hidden="true"></i>
+            <a href="monitoramento.html">
+                <i data-lucide="activity"></i>
+                <span>Monitoramento</span>
+            </a>
+
+            <a href="alertas.html">
+                <i data-lucide="shield-alert"></i>
+                <span>Alertas</span>
+            </a>
+
+            <a href="pericia.html">
+                <i data-lucide="search"></i>
                 <span>Perícia Digital</span>
+            </a>
+
+            <a href="configuracoes.html">
+                <i data-lucide="settings"></i>
+                <span>Configurações</span>
             </a>
 
         </nav>
     </aside>
 
-    <!-- Conteúdo principal -->
-    <main class="conteudo">
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="conteudo usuarios-pagina">
 
-        <header>
-            <h1>Usuários</h1>
+        <!-- CABEÇALHO -->
+        <header class="cabecalho-pagina">
 
-            <p class="descricao-pagina">
-                Gerencie e acompanhe os usuários da plataforma.
-            </p>
+            <div class="titulo-pagina">
+
+                <span class="subtitulo-pagina">
+                    ADMINISTRAÇÃO / USUÁRIOS
+                </span>
+
+                <h1>Gerenciamento de usuários</h1>
+
+                <p>
+                    Consulte os cadastros e acompanhe a situação
+                    das contas registradas no SafeMarket.
+                </p>
+
+            </div>
+
         </header>
 
-        <section class="atividades" aria-labelledby="titulo-usuarios">
+        <!-- INDICADORES -->
+        <section
+            class="indicadores-usuarios"
+            aria-label="Resumo dos usuários">
 
-            <h2 id="titulo-usuarios">Usuários cadastrados</h2>
+            <article class="card-indicador">
 
-            <div id="lista-usuarios" aria-live="polite">
-                <p>Nenhum usuário carregado.</p>
+                <div class="indicador-icone azul">
+                    <i data-lucide="users"></i>
+                </div>
+
+                <div class="indicador-conteudo">
+                    <span>Total de usuários</span>
+                    <strong id="total-usuarios">—</strong>
+                    <small>Cadastros registrados</small>
+                </div>
+
+            </article>
+
+            <article class="card-indicador">
+
+                <div class="indicador-icone verde">
+                    <i data-lucide="user-check"></i>
+                </div>
+
+                <div class="indicador-conteudo">
+                    <span>Usuários ativos</span>
+                    <strong id="total-ativos">—</strong>
+                    <small>Contas ativas</small>
+                </div>
+
+            </article>
+
+            <article class="card-indicador">
+
+                <div class="indicador-icone laranja">
+                    <i data-lucide="user-x"></i>
+                </div>
+
+                <div class="indicador-conteudo">
+                    <span>Usuários inativos</span>
+                    <strong id="total-inativos">—</strong>
+                    <small>Contas inativas</small>
+                </div>
+
+            </article>
+
+        </section>
+
+        <!-- GERENCIAMENTO -->
+        <section
+            class="secao-usuarios"
+            aria-labelledby="titulo-lista-usuarios">
+
+            <!-- TÍTULO DA SEÇÃO -->
+            <div class="secao-usuarios-topo">
+
+                <div>
+                    <h2 id="titulo-lista-usuarios">
+                        Usuários cadastrados
+                    </h2>
+
+                    <p>
+                        Pesquise e consulte os registros da plataforma.
+                    </p>
+                </div>
+
+                <span class="indicador-usuarios">
+                    <i data-lucide="shield-check"></i>
+                    Controle administrativo
+                </span>
+
+            </div>
+
+            <!-- PESQUISA E FILTROS -->
+            <div class="filtros-usuarios">
+
+                <div class="campo-busca">
+                    <i data-lucide="search"></i>
+
+                    <input
+                        type="search"
+                        id="buscar-usuario"
+                        placeholder="Buscar por nome ou e-mail..."
+                        aria-label="Buscar usuário por nome ou e-mail"
+                        autocomplete="off">
+                </div>
+
+                <div class="campo-filtro">
+                    <i data-lucide="filter"></i>
+
+                    <select
+                        id="filtro-status"
+                        aria-label="Filtrar usuários por status">
+
+                        <option value="todos">Todos os usuários</option>
+                        <option value="ativo">Ativos</option>
+                        <option value="inativo">Inativos</option>
+
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- LISTAGEM -->
+            <div class="lista-usuarios-container">
+
+                <div class="lista-usuarios-cabecalho">
+
+                    <div>
+                        <h3>Lista de usuários</h3>
+                        <p>Registros disponíveis para consulta</p>
+                    </div>
+
+                </div>
+
+                <div
+                    id="lista-usuarios"
+                    class="lista-usuarios"
+                    aria-live="polite"
+                    aria-busy="true">
+
+                    <div class="estado-vazio">
+                        <i data-lucide="loader-circle"></i>
+                        <p>Carregando usuários...</p>
+                    </div>
+
+                </div>
+
             </div>
 
         </section>
 
-        <p id="mensagem-usuarios" role="status" aria-live="polite"></p>
+        <!-- MENSAGENS -->
+        <p
+            id="mensagem-usuarios"
+            class="mensagem-usuarios"
+            role="status"
+            aria-live="polite">
+        </p>
 
     </main>
 
-    <script>
-        if (window.lucide) {
-            window.lucide.createIcons();
-        }
-    </script>
-
 </body>
-
 </html>

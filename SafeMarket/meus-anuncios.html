@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Gerencie seus anúncios, preços e quantidades disponíveis no SafeMarket.">
+
+    <meta name="theme-color" content="#111B3A">
+
+    <title>SafeMarket | Meus Anúncios</title>
+
+    <link rel="stylesheet" href="../css/meus-anuncios.css">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <div class="cabecalho-conteudo">
+
+            <a href="marketplace.html" class="logo">
+                SafeMarket
+            </a>
+
+            <nav class="navegacao">
+                <a href="marketplace.html">Marketplace</a>
+                <a href="publicar.html">Publicar anúncio</a>
+                <a href="meus-anuncios.html" class="ativo">Meus anúncios</a>
+            </nav>
+
+            <div class="usuario-area">
+                <span id="nome-usuario">Minha conta</span>
+
+                <button type="button" id="btn-sair" class="btn-sair">
+                    Sair
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="conteudo-principal">
+
+        <section class="titulo-pagina">
+
+            <div>
+                <span class="subtitulo">ÁREA DO VENDEDOR</span>
+
+                <h1>Meus anúncios</h1>
+
+                <p>
+                    Gerencie seus produtos, acompanhe os preços e controle
+                    a quantidade disponível em estoque.
+                </p>
+            </div>
+
+            <a href="publicar.html" class="btn-publicar">
+                + Publicar anúncio
+            </a>
+
+        </section>
+
+        <section class="resumo-anuncios">
+
+            <article class="card-resumo">
+                <span>Total de anúncios</span>
+                <strong id="total-anuncios">0</strong>
+            </article>
+
+            <article class="card-resumo">
+                <span>Anúncios ativos</span>
+                <strong id="anuncios-ativos">0</strong>
+            </article>
+
+            <article class="card-resumo">
+                <span>Pendentes</span>
+                <strong id="anuncios-pendentes">0</strong>
+            </article>
+
+            <article class="card-resumo">
+                <span>Produtos sem estoque</span>
+                <strong id="anuncios-sem-estoque">0</strong>
+            </article>
+
+        </section>
+
+        <section class="secao-anuncios">
+
+            <div class="cabecalho-secao">
+
+                <div>
+                    <h2>Seus produtos</h2>
+                    <p>Consulte e gerencie todos os seus anúncios.</p>
+                </div>
+
+                <div class="filtros-anuncios">
+
+                    <input
+                        type="search"
+                        id="pesquisa-anuncios"
+                        placeholder="Pesquisar produto..."
+                        aria-label="Pesquisar anúncios">
+
+                    <select
+                        id="filtro-status"
+                        aria-label="Filtrar por status">
+
+                        <option value="">Todos os status</option>
+                        <option value="ATIVO">Ativos</option>
+                        <option value="PENDENTE">Pendentes</option>
+                        <option value="REJEITADO">Rejeitados</option>
+                        <option value="INATIVO">Inativos</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div
+                id="mensagem-anuncios"
+                class="mensagem-anuncios"
+                role="status"
+                aria-live="polite"
+                hidden>
+            </div>
+
+            <div id="carregamento-anuncios" class="carregamento">
+                Carregando seus anúncios...
+            </div>
+
+            <div id="lista-anuncios" class="lista-anuncios">
+                <!-- Anúncios carregados pela API. -->
+            </div>
+
+            <div id="anuncios-vazios" class="anuncios-vazios" hidden>
+
+                <h3>Nenhum anúncio encontrado</h3>
+
+                <p>
+                    Você ainda não possui anúncios cadastrados ou
+                    nenhum produto corresponde à sua pesquisa.
+                </p>
+
+                <a href="publicar.html" class="btn-publicar">
+                    Publicar meu primeiro anúncio
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- MODAL DE EDIÇÃO -->
+    <div id="modal-edicao" class="modal" hidden>
+
+        <div class="modal-conteudo">
+
+            <div class="modal-cabecalho">
+
+                <div>
+                    <h2>Editar anúncio</h2>
+                    <p>Atualize as informações do seu produto.</p>
+                </div>
+
+                <button
+                    type="button"
+                    id="fechar-modal-edicao"
+                    class="btn-fechar"
+                    aria-label="Fechar">
+
+                    &times;
+
+                </button>
+
+            </div>
+
+            <form id="form-edicao-anuncio">
+
+                <input type="hidden" id="edicao-produto-id">
+
+                <div class="campo-formulario">
+
+                    <label for="edicao-nome">
+                        Nome do produto
+                    </label>
+
+                    <input
+                        type="text"
+                        id="edicao-nome"
+                        required
+                        maxlength="120">
+
+                </div>
+
+                <div class="campo-formulario">
+
+                    <label for="edicao-descricao">
+                        Descrição
+                    </label>
+
+                    <textarea
+                        id="edicao-descricao"
+                        rows="4"
+                        maxlength="1000"></textarea>
+
+                </div>
+
+                <div class="campo-formulario">
+
+                    <label for="edicao-categoria">
+                        Categoria
+                    </label>
+
+                    <input
+                        type="text"
+                        id="edicao-categoria"
+                        maxlength="80">
+
+                </div>
+
+                <div class="campo-formulario">
+
+                    <label for="edicao-localizacao">
+                        Localização
+                    </label>
+
+                    <input
+                        type="text"
+                        id="edicao-localizacao"
+                        maxlength="160">
+
+                </div>
+
+                <div class="campo-formulario">
+
+                    <label for="edicao-preco">
+                        Preço (R$)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="edicao-preco"
+                        min="0.01"
+                        step="0.01"
+                        required>
+
+                </div>
+
+                <div class="campo-formulario">
+
+                    <label for="edicao-estoque">
+                        Quantidade disponível
+                    </label>
+
+                    <input
+                        type="number"
+                        id="edicao-estoque"
+                        min="0"
+                        step="1"
+                        required>
+
+                </div>
+
+                <div class="acoes-modal">
+
+                    <button
+                        type="button"
+                        id="cancelar-edicao"
+                        class="btn-cancelar">
+
+                        Cancelar
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn-salvar">
+
+                        Salvar alterações
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL DE EXCLUSÃO -->
+    <div id="modal-exclusao" class="modal" hidden>
+
+        <div class="modal-conteudo modal-confirmacao">
+
+            <h2>Excluir anúncio?</h2>
+
+            <p id="texto-confirmacao-exclusao">
+                Deseja realmente excluir este anúncio?
+            </p>
+
+            <input type="hidden" id="exclusao-produto-id">
+
+            <div class="acoes-modal">
+
+                <button
+                    type="button"
+                    id="cancelar-exclusao"
+                    class="btn-cancelar">
+
+                    Cancelar
+
+                </button>
+
+                <button
+                    type="button"
+                    id="confirmar-exclusao"
+                    class="btn-excluir">
+
+                    Confirmar exclusão
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- API PRIMEIRO -->
+    <script src="../js/api.js"></script>
+
+    <!-- FUNCIONALIDADES DA PÁGINA -->
+    <script src="../js/meus-anuncios.js"></script>
+
+</body>
+
+</html>

@@ -1,35 +1,140 @@
 
 "use strict";
 
-const formularioConfiguracoes = document.getElementById("form-configuracoes");
-const mensagemConfiguracoes = document.getElementById("mensagem-configuracoes");
-const botaoSalvar = formularioConfiguracoes.querySelector('button[type="submit"]');
+/* =========================================================
+   SAFEMARKET — CONFIGURAÇÕES
+   Arquivo: js/configuracoes.js
 
-let salvando = false;
+   RESPONSABILIDADES:
+   - Carregar preferências da API
+   - Atualizar os interruptores
+   - Salvar alterações no backend
+   - Exibir mensagens de retorno
+========================================================= */
 
-formularioConfiguracoes.addEventListener("submit", async function (evento) {
+
+const formularioConfiguracoes = document.getElementById(
+    "form-configuracoes"
+);
+
+const mensagemConfiguracoes = document.getElementById(
+    "mensagem-configuracoes"
+);
+
+
+/* =========================================================
+   1. MENSAGENS DE RETORNO
+========================================================= */
+
+function exibirMensagemConfiguracoes(mensagem) {
+
+    mensagemConfiguracoes.textContent = mensagem;
+
+    mensagemConfiguracoes.hidden = false;
+
+}
+
+
+/* =========================================================
+   2. CARREGAR PREFERÊNCIAS
+========================================================= */
+
+async function carregarConfiguracoes() {
+
+    try {
+
+        const dados = await requisicaoAPI("/configuracoes");
+
+        document.getElementById("notificacoes").checked =
+            !!dados.notificacoes;
+
+        document.getElementById("alertas-seguranca").checked =
+            !!dados.alertasSeguranca;
+
+        document.getElementById("alertas-fraude").checked =
+            !!dados.alertasFraude;
+
+    } catch (erro) {
+
+        exibirMensagemConfiguracoes(
+            erro.message || "Não foi possível carregar as configurações."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   3. SALVAR PREFERÊNCIAS
+========================================================= */
+
+async function salvarConfiguracoes(evento) {
+
     evento.preventDefault();
 
-    if (salvando) return;
+    const botao = document.getElementById(
+        "botao-salvar-configuracoes"
+    );
 
-    mensagemConfiguracoes.textContent = "";
+    botao.disabled = true;
 
-    const preferencias = {
-        notificacoes: document.getElementById("notificacoes").checked,
-        alertasSeguranca: document.getElementById("alertas-seguranca").checked,
-        alertasFraude: document.getElementById("alertas-fraude").checked
-    };
+    try {
 
-    // A integração será feita quando a API de configurações for definida.
-    // Não informar sucesso enquanto as preferências não forem salvas.
-    salvando = true;
-    botaoSalvar.disabled = true;
+        const preferencias = {
 
-    mensagemConfiguracoes.textContent =
-        "Preferências selecionadas. O salvamento no servidor ainda não foi conectado.";
+            notificacoes: document.getElementById(
+                "notificacoes"
+            ).checked,
 
-    console.log("Preferências selecionadas:", preferencias);
+            alertasSeguranca: document.getElementById(
+                "alertas-seguranca"
+            ).checked,
 
-    salvando = false;
-    botaoSalvar.disabled = false;
-});
+            alertasFraude: document.getElementById(
+                "alertas-fraude"
+            ).checked
+
+        };
+
+        await requisicaoAPI("/configuracoes", {
+
+            method: "PUT",
+
+            body: JSON.stringify(preferencias)
+
+        });
+
+        exibirMensagemConfiguracoes(
+            "Preferências salvas com sucesso."
+        );
+
+    } catch (erro) {
+
+        exibirMensagemConfiguracoes(
+            erro.message || "Não foi possível salvar as preferências."
+        );
+
+    } finally {
+
+        botao.disabled = false;
+
+    }
+
+}
+
+
+/* =========================================================
+   4. INICIALIZAÇÃO
+========================================================= */
+
+if (formularioConfiguracoes && mensagemConfiguracoes) {
+
+    carregarConfiguracoes();
+
+    formularioConfiguracoes.addEventListener(
+        "submit",
+        salvarConfiguracoes
+    );
+
+}

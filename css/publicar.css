@@ -1,0 +1,1033 @@
+
+/* =====================================================
+   SAFEMARKET — PUBLICAR ANÚNCIO
+   Arquivo: css/publicar.css
+
+   Responsabilidade:
+   Estilização exclusiva da página de publicação.
+===================================================== */
+
+
+/* =====================================================
+   1. VARIÁVEIS
+===================================================== */
+
+:root {
+    --publicar-azul-escuro: #111B3A;
+    --publicar-azul-secundario: #1A2B4D;
+    --publicar-azul: #007F99;
+    --publicar-ciano: #00B8D9;
+
+    --publicar-fundo: #F4F6FA;
+    --publicar-branco: #FFFFFF;
+
+    --publicar-texto: #263746;
+    --publicar-texto-secundario: #718096;
+
+    --publicar-borda: #DCE4EC;
+    --publicar-sucesso: #16865B;
+    --publicar-erro: #D64545;
+
+    --publicar-sombra: 0 8px 30px rgba(17, 27, 58, 0.07);
+}
+
+
+/* =====================================================
+   2. CONFIGURAÇÕES GERAIS
+===================================================== */
+
+.pagina-publicar,
+.pagina-publicar *,
+body > header.cabecalho-marketplace,
+body > header.cabecalho-marketplace * {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+
+    background: var(--publicar-fundo);
+    color: var(--publicar-texto);
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.pagina-publicar {
+    width: min(100% - 40px, 850px);
+
+    margin: 0 auto;
+    padding: 35px 0 65px;
+}
+
+
+/* =====================================================
+   3. CABEÇALHO PRINCIPAL
+===================================================== */
+
+body > header.cabecalho-marketplace {
+    position: relative;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    width: 100%;
+    min-height: 76px;
+
+    margin: 0;
+    padding: 12px 5%;
+
+    background: var(--publicar-azul-escuro);
+
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+
+
+/* LOGO */
+
+body > header.cabecalho-marketplace > .marca-marketplace {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+
+    flex-shrink: 0;
+
+    margin: 0;
+    padding: 0;
+
+    color: #FFFFFF;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+body > header.cabecalho-marketplace > .marca-marketplace img {
+    display: block;
+
+    width: 43px;
+    height: 43px;
+
+    margin: 0;
+    padding: 0;
+
+    object-fit: contain;
+}
+
+body > header.cabecalho-marketplace > .marca-marketplace:hover {
+    color: var(--publicar-ciano);
+}
+
+
+/* NAVEGAÇÃO */
+
+body > header.cabecalho-marketplace > .navegacao-marketplace {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+}
+
+body > header.cabecalho-marketplace > .navegacao-marketplace a {
+    position: relative;
+
+    display: inline-block;
+
+    margin: 0;
+    padding: 8px 0;
+
+    background: transparent;
+    color: #DCE6F5;
+
+    border: none;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+body > header.cabecalho-marketplace > .navegacao-marketplace a:hover {
+    color: var(--publicar-ciano);
+}
+
+
+/* BOTÃO PUBLICAR DO CABEÇALHO */
+
+body > header.cabecalho-marketplace > .botao-publicar-cabecalho {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    min-height: 42px;
+    margin: 0;
+    padding: 0 19px;
+
+    background: var(--publicar-ciano);
+    color: var(--publicar-azul-escuro);
+
+    border: 1px solid var(--publicar-ciano);
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+body > header.cabecalho-marketplace > .botao-publicar-cabecalho:hover {
+    background: #35CBE5;
+    border-color: #35CBE5;
+    color: var(--publicar-azul-escuro);
+
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   4. CABEÇALHO DA PUBLICAÇÃO
+===================================================== */
+
+.pagina-publicar .cabecalho-publicar {
+    margin-bottom: 27px;
+}
+
+.pagina-publicar .voltar-marketplace {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 25px;
+
+    color: var(--publicar-azul);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.pagina-publicar .voltar-marketplace:hover {
+    color: var(--publicar-ciano);
+}
+
+.pagina-publicar .voltar-marketplace span {
+    font-size: 21px;
+}
+
+.pagina-publicar .titulo-publicar {
+    text-align: left;
+}
+
+.pagina-publicar .identificador-publicar {
+    display: inline-block;
+
+    margin-bottom: 9px;
+
+    color: var(--publicar-azul);
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.pagina-publicar .titulo-publicar h1 {
+    margin: 0 0 9px;
+
+    color: var(--publicar-azul-escuro);
+
+    font-size: clamp(26px, 4vw, 34px);
+    font-weight: 700;
+
+    text-align: left;
+}
+
+.pagina-publicar .titulo-publicar p {
+    margin: 0;
+
+    color: var(--publicar-texto-secundario);
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   5. FORMULÁRIO
+===================================================== */
+
+.pagina-publicar .formulario-publicar {
+    width: 100%;
+    padding: 34px;
+
+    background: var(--publicar-branco);
+
+    border: 1px solid var(--publicar-borda);
+    border-radius: 15px;
+
+    box-shadow: var(--publicar-sombra);
+}
+
+
+/* CABEÇALHO DO FORMULÁRIO */
+
+.pagina-publicar .cabecalho-formulario {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-bottom: 30px;
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid var(--publicar-borda);
+}
+
+.pagina-publicar .cabecalho-formulario h2 {
+    margin: 0 0 7px;
+
+    color: var(--publicar-azul-escuro);
+
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.pagina-publicar .cabecalho-formulario p {
+    margin: 0;
+
+    color: var(--publicar-texto-secundario);
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.pagina-publicar .campo-obrigatorio {
+    color: var(--publicar-erro);
+
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   6. CAMPOS DO FORMULÁRIO
+===================================================== */
+
+.pagina-publicar .campo-formulario {
+    min-width: 0;
+    margin-bottom: 24px;
+}
+
+.pagina-publicar .campo-formulario label {
+    display: block;
+
+    margin: 0 0 9px;
+
+    color: var(--publicar-texto);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.pagina-publicar .campo-formulario label span {
+    color: var(--publicar-erro);
+}
+
+
+/* INPUT, TEXTAREA E SELECT */
+
+.pagina-publicar .campo-formulario input:not([type="file"]),
+.pagina-publicar .campo-formulario textarea,
+.pagina-publicar .campo-formulario select {
+    display: block;
+
+    width: 100%;
+    min-height: 47px;
+    padding: 12px 14px;
+
+    background: #FFFFFF;
+    color: var(--publicar-texto);
+
+    border: 1px solid var(--publicar-borda);
+    border-radius: 8px;
+
+    outline: none;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.pagina-publicar .campo-formulario textarea {
+    min-height: 145px;
+
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.pagina-publicar .campo-formulario input::placeholder,
+.pagina-publicar .campo-formulario textarea::placeholder {
+    color: #9AA8B5;
+    opacity: 1;
+}
+
+.pagina-publicar .campo-formulario select {
+    cursor: pointer;
+}
+
+
+/* FOCO */
+
+.pagina-publicar .campo-formulario input:focus,
+.pagina-publicar .campo-formulario textarea:focus,
+.pagina-publicar .campo-formulario select:focus {
+    border-color: var(--publicar-ciano);
+
+    box-shadow: 0 0 0 3px rgba(0, 184, 217, 0.12);
+}
+
+
+/* CAMPOS INVÁLIDOS */
+
+.pagina-publicar .campo-formulario input[aria-invalid="true"],
+.pagina-publicar .campo-formulario textarea[aria-invalid="true"],
+.pagina-publicar .campo-formulario select[aria-invalid="true"],
+.pagina-publicar .campo-formulario .campo-invalido {
+    border-color: var(--publicar-erro);
+
+    box-shadow: 0 0 0 3px rgba(214, 69, 69, 0.08);
+}
+
+
+/* INFORMAÇÕES DOS CAMPOS */
+
+.pagina-publicar .campo-formulario > small {
+    display: block;
+
+    margin-top: 7px;
+
+    color: var(--publicar-texto-secundario);
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.pagina-publicar .informacao-campo {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    margin-top: 7px;
+}
+
+.pagina-publicar .informacao-campo small {
+    color: var(--publicar-texto-secundario);
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   7. CAMPO DE PREÇO
+===================================================== */
+
+.pagina-publicar .campo-preco {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-height: 47px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--publicar-borda);
+    border-radius: 8px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.pagina-publicar .campo-preco:focus-within {
+    border-color: var(--publicar-ciano);
+
+    box-shadow: 0 0 0 3px rgba(0, 184, 217, 0.12);
+}
+
+.pagina-publicar .campo-preco > span {
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    height: 47px;
+    padding: 0 15px;
+
+    background: #F1F5F9;
+
+    border-right: 1px solid var(--publicar-borda);
+
+    color: var(--publicar-texto-secundario);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.pagina-publicar .campo-preco input {
+    flex: 1;
+
+    width: 100%;
+    min-width: 0;
+    height: 47px;
+
+    margin: 0;
+    padding: 0 13px;
+
+    background: #FFFFFF;
+    color: var(--publicar-texto);
+
+    border: none;
+    border-radius: 0;
+
+    box-shadow: none;
+    outline: none;
+
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.pagina-publicar .campo-preco input:focus {
+    border: none;
+    box-shadow: none;
+}
+
+.pagina-publicar .campo-preco:has(input[aria-invalid="true"]) {
+    border-color: var(--publicar-erro);
+}
+
+
+/* =====================================================
+   8. ÁREA DE IMAGEM
+===================================================== */
+
+.pagina-publicar .area-imagem {
+    padding: 25px;
+
+    background: #F8FAFC;
+
+    border: 1px dashed #B8C9D8;
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+.pagina-publicar .informacao-imagem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagina-publicar .icone-imagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 65px;
+    height: 65px;
+
+    background: #EAF4FB;
+    color: var(--publicar-azul);
+
+    border-radius: 15px;
+}
+
+.pagina-publicar .informacao-imagem strong {
+    color: var(--publicar-azul-escuro);
+    font-size: 14px;
+}
+
+.pagina-publicar .informacao-imagem small {
+    color: var(--publicar-texto-secundario);
+    font-size: 12px;
+}
+
+
+/* BOTÃO DE SELEÇÃO */
+
+.pagina-publicar .botao-selecionar-imagem {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+    margin-top: 7px !important;
+    padding: 0 19px;
+
+    background: #EAF4FB;
+    color: var(--publicar-azul);
+
+    border: 1px solid #C9E1F2;
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.pagina-publicar .botao-selecionar-imagem:hover {
+    background: #DCEFFA;
+}
+
+
+/* PRÉ-VISUALIZAÇÃO */
+
+.pagina-publicar .preview-imagem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+
+    margin-top: 20px;
+}
+
+.pagina-publicar .preview-imagem[hidden] {
+    display: none !important;
+}
+
+.pagina-publicar .preview-imagem img {
+    display: block;
+
+    width: 100%;
+    max-width: 300px;
+    max-height: 240px;
+
+    object-fit: contain;
+
+    background: #FFFFFF;
+
+    border: 1px solid var(--publicar-borda);
+    border-radius: 9px;
+}
+
+
+/* REMOVER IMAGEM */
+
+.pagina-publicar .remover-imagem {
+    padding: 8px 14px;
+
+    background: #FFF1F1;
+    color: var(--publicar-erro);
+
+    border: 1px solid #F3D0D0;
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.pagina-publicar .remover-imagem:hover {
+    background: #FCE2E2;
+}
+
+
+/* =====================================================
+   9. MENSAGENS DO SISTEMA
+===================================================== */
+
+.pagina-publicar .mensagem-publicacao {
+    margin-bottom: 20px;
+    padding: 13px 15px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.pagina-publicar .mensagem-publicacao[hidden] {
+    display: none !important;
+}
+
+
+/* SUCESSO */
+
+.pagina-publicar .mensagem-publicacao.sucesso {
+    background: #EAF7F0;
+    color: var(--publicar-sucesso);
+    border-color: #C6E9D6;
+}
+
+
+/* ERRO */
+
+.pagina-publicar .mensagem-publicacao.erro {
+    background: #FFF0F0;
+    color: var(--publicar-erro);
+    border-color: #F3D0D0;
+}
+
+
+/* AVISO */
+
+.pagina-publicar .mensagem-publicacao.aviso {
+    background: #FFF8E8;
+    color: #926500;
+    border-color: #F1E0B5;
+}
+
+
+/* =====================================================
+   10. AVISO DE SEGURANÇA
+===================================================== */
+
+.pagina-publicar .aviso-seguranca {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+
+    margin: 28px 0;
+    padding: 17px;
+
+    background: #EFF7FC;
+
+    border: 1px solid #D4E9F6;
+    border-radius: 9px;
+}
+
+.pagina-publicar .aviso-seguranca > span {
+    flex-shrink: 0;
+    font-size: 21px;
+}
+
+.pagina-publicar .aviso-seguranca strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--publicar-azul-escuro);
+
+    font-size: 13px;
+}
+
+.pagina-publicar .aviso-seguranca p {
+    margin: 0;
+
+    color: var(--publicar-texto-secundario);
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   11. BOTÕES DE AÇÃO
+===================================================== */
+
+.pagina-publicar .acoes-publicacao {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 28px;
+}
+
+
+/* CANCELAR */
+
+.pagina-publicar .botao-cancelar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 45px;
+    padding: 0 22px;
+
+    background: #FFFFFF;
+    color: var(--publicar-texto);
+
+    border: 1px solid var(--publicar-borda);
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.pagina-publicar .botao-cancelar:hover {
+    background: #F1F5F9;
+    border-color: #C5D0DC;
+}
+
+
+/* PUBLICAR */
+
+.pagina-publicar #botao-publicar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 45px;
+    padding: 0 25px;
+
+    background: var(--publicar-azul);
+    color: #FFFFFF;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.pagina-publicar #botao-publicar:hover {
+    background: #00677D;
+    transform: translateY(-1px);
+}
+
+.pagina-publicar #botao-publicar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* =====================================================
+   12. RODAPÉ DO FORMULÁRIO
+===================================================== */
+
+.pagina-publicar .rodape-formulario {
+    margin-top: 19px;
+
+    color: var(--publicar-texto-secundario);
+
+    font-size: 11px;
+    line-height: 1.6;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   13. ACESSIBILIDADE
+===================================================== */
+
+body > header.cabecalho-marketplace a:focus-visible,
+.pagina-publicar a:focus-visible,
+.pagina-publicar button:focus-visible,
+.pagina-publicar label:focus-visible {
+    outline: 3px solid var(--publicar-ciano);
+    outline-offset: 3px;
+}
+
+
+/* =====================================================
+   14. TABLETS
+===================================================== */
+
+@media (max-width: 850px) {
+
+    body > header.cabecalho-marketplace {
+        padding-right: 3%;
+        padding-left: 3%;
+    }
+
+    body > header.cabecalho-marketplace > .navegacao-marketplace {
+        gap: 17px;
+    }
+
+    body > header.cabecalho-marketplace > .navegacao-marketplace a {
+        font-size: 12px;
+    }
+
+    body > header.cabecalho-marketplace > .marca-marketplace {
+        font-size: 18px;
+    }
+}
+
+
+/* =====================================================
+   15. CELULARES
+===================================================== */
+
+@media (max-width: 600px) {
+
+    body > header.cabecalho-marketplace {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 13px;
+
+        padding: 13px 18px;
+    }
+
+    body > header.cabecalho-marketplace > .marca-marketplace {
+        font-size: 18px;
+    }
+
+    body > header.cabecalho-marketplace > .marca-marketplace img {
+        width: 36px;
+        height: 36px;
+    }
+
+    body > header.cabecalho-marketplace > .botao-publicar-cabecalho {
+        min-height: 38px;
+        padding: 0 12px;
+
+        font-size: 11px;
+    }
+
+    body > header.cabecalho-marketplace > .navegacao-marketplace {
+        order: 3;
+
+        width: 100%;
+
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        padding-top: 8px;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    body > header.cabecalho-marketplace > .navegacao-marketplace a {
+        font-size: 11px;
+    }
+
+    .pagina-publicar {
+        width: calc(100% - 28px);
+        padding: 25px 0 40px;
+    }
+
+    .pagina-publicar .cabecalho-publicar {
+        margin-bottom: 22px;
+    }
+
+    .pagina-publicar .formulario-publicar {
+        padding: 22px 17px;
+        border-radius: 11px;
+    }
+
+    .pagina-publicar .cabecalho-formulario {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .pagina-publicar .acoes-publicacao {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .pagina-publicar .botao-cancelar,
+    .pagina-publicar #botao-publicar {
+        width: 100%;
+    }
+
+    .pagina-publicar .area-imagem {
+        padding: 20px 12px;
+    }
+
+    .pagina-publicar .informacao-campo {
+        flex-wrap: wrap;
+    }
+
+    .pagina-publicar .aviso-seguranca {
+        padding: 14px;
+    }
+}
+
+
+/* =====================================================
+   16. TELAS MUITO PEQUENAS
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .pagina-publicar {
+        width: calc(100% - 20px);
+    }
+
+    .pagina-publicar .formulario-publicar {
+        padding: 19px 13px;
+    }
+
+    body > header.cabecalho-marketplace > .navegacao-marketplace {
+        gap: 7px;
+    }
+
+    body > header.cabecalho-marketplace > .navegacao-marketplace a {
+        font-size: 10px;
+    }
+}
+
+
+/* =====================================================
+   17. MOVIMENTO REDUZIDO
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    body > header.cabecalho-marketplace *,
+    .pagina-publicar * {
+        scroll-behavior: auto;
+        transition: none !important;
+        animation: none !important;
+    }
+
+}

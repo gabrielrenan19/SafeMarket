@@ -5,21 +5,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Consulta aos registros de auditoria do SafeMarket">
 
-    <title>SafeMarket - Auditoria</title>
+    <meta
+        name="description"
+        content="Painel de auditoria, segurança e rastreabilidade das atividades realizadas na plataforma SafeMarket."
+    >
 
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <meta name="theme-color" content="#111B3A">
 
+    <title>SafeMarket | Auditoria e Logs</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/auditoria.css">
+
+    <!-- Ícones -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Scripts -->
     <script src="../js/api.js" defer></script>
-    <script src="../js/auditoria.js" defer></script>
     <script src="../js/menu.js" defer></script>
+    <script src="../js/auditoria.js" defer></script>
 </head>
 
 <body>
 
-    <!-- Menu lateral -->
+    <!-- MENU LATERAL -->
     <aside class="menu-lateral" id="menu-lateral">
 
         <div class="menu-topo">
@@ -32,83 +44,348 @@
                 aria-label="Recolher menu"
                 aria-expanded="true"
                 aria-controls="menu-navegacao"
-                title="Recolher menu">
-
-                <i data-lucide="panel-left-close" aria-hidden="true"></i>
-
+                title="Recolher menu"
+            >
+                <i data-lucide="panel-left-close"></i>
             </button>
         </div>
 
         <nav id="menu-navegacao" aria-label="Menu principal">
 
             <a href="dashboard.html" title="Dashboard">
-                <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+                <i data-lucide="layout-dashboard"></i>
                 <span>Dashboard</span>
             </a>
 
-            <a href="monitoramento.html" title="Monitoramento">
-                <i data-lucide="activity" aria-hidden="true"></i>
-                <span>Monitoramento</span>
-            </a>
-
-            <a href="auditoria.html" aria-current="page" title="Auditoria">
-                <i data-lucide="clipboard-check" aria-hidden="true"></i>
-                <span>Auditoria</span>
-            </a>
-
-            <a href="alertas.html" title="Alertas">
-                <i data-lucide="shield-alert" aria-hidden="true"></i>
-                <span>Alertas</span>
-            </a>
-
             <a href="usuarios.html" title="Usuários">
-                <i data-lucide="users" aria-hidden="true"></i>
+                <i data-lucide="users"></i>
                 <span>Usuários</span>
             </a>
 
-            <a href="configuracoes.html" title="Configurações">
-                <i data-lucide="settings" aria-hidden="true"></i>
-                <span>Configurações</span>
+            <a
+                href="auditoria.html"
+                aria-current="page"
+                title="Auditoria e Logs"
+            >
+                <i data-lucide="clipboard-list"></i>
+                <span>Auditoria e Logs</span>
+            </a>
+
+            <a href="monitoramento.html" title="Monitoramento">
+                <i data-lucide="activity"></i>
+                <span>Monitoramento</span>
+            </a>
+
+            <a href="alertas.html" title="Alertas">
+                <i data-lucide="shield-alert"></i>
+                <span>Alertas</span>
             </a>
 
             <a href="pericia.html" title="Perícia Digital">
-                <i data-lucide="search" aria-hidden="true"></i>
+                <i data-lucide="search"></i>
                 <span>Perícia Digital</span>
+            </a>
+
+            <a href="configuracoes.html" title="Configurações">
+                <i data-lucide="settings"></i>
+                <span>Configurações</span>
             </a>
 
         </nav>
     </aside>
 
-    <!-- Conteúdo principal -->
-    <main class="conteudo">
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="conteudo auditoria-pagina">
 
-        <header>
-            <h1>Auditoria</h1>
+        <!-- CABEÇALHO -->
+        <header class="cabecalho-auditoria">
 
-            <p class="descricao-pagina">
-                Consulte os registros e as ações realizadas no sistema.
-            </p>
+            <div class="identificacao-cabecalho">
+                <span class="identificacao-pagina">
+                    SEGURANÇA E RASTREABILIDADE
+                </span>
+
+                <h1>Auditoria e Logs</h1>
+
+                <p class="descricao-pagina">
+                    Acompanhe as atividades realizadas na plataforma,
+                    identifique os responsáveis e consulte o histórico
+                    de alterações e operações.
+                </p>
+            </div>
+
+            <div class="acoes-cabecalho">
+                <span class="indicador-seguranca">
+                    <i data-lucide="shield-check"></i>
+                    Registro de atividades
+                </span>
+            </div>
+
         </header>
 
-        <!-- Registros de auditoria -->
-        <section class="atividades" aria-labelledby="titulo-registros">
+        <!-- INDICADORES -->
+        <section class="secao-indicadores" aria-labelledby="titulo-visao-geral">
 
-            <h2 id="titulo-registros">Registros recentes</h2>
+            <div class="cabecalho-secao">
+                <div>
+                    <h2 id="titulo-visao-geral">Visão geral</h2>
+                    <p class="descricao-secao">
+                        Resumo das atividades registradas pelo sistema.
+                    </p>
+                </div>
+            </div>
 
-            <div id="lista-auditoria" aria-live="polite">
-                <p>Nenhum registro carregado.</p>
+            <div class="indicadores-auditoria">
+
+                <article class="cartao-auditoria">
+                    <div class="icone-auditoria">
+                        <i data-lucide="clipboard-list"></i>
+                    </div>
+
+                    <div class="informacao-indicador">
+                        <h3>Total de registros</h3>
+                        <p id="total-registros">--</p>
+                        <span>Atividades registradas</span>
+                    </div>
+                </article>
+
+                <article class="cartao-auditoria">
+                    <div class="icone-auditoria">
+                        <i data-lucide="log-in"></i>
+                    </div>
+
+                    <div class="informacao-indicador">
+                        <h3>Acessos registrados</h3>
+                        <p id="total-acessos">--</p>
+                        <span>Eventos de autenticação</span>
+                    </div>
+                </article>
+
+                <article class="cartao-auditoria">
+                    <div class="icone-auditoria">
+                        <i data-lucide="file-pen-line"></i>
+                    </div>
+
+                    <div class="informacao-indicador">
+                        <h3>Alterações realizadas</h3>
+                        <p id="total-alteracoes">--</p>
+                        <span>Cadastros, edições e exclusões</span>
+                    </div>
+                </article>
+
+                <article class="cartao-auditoria">
+                    <div class="icone-auditoria">
+                        <i data-lucide="package-search"></i>
+                    </div>
+
+                    <div class="informacao-indicador">
+                        <h3>Consultas e estoque</h3>
+                        <p id="total-operacoes">--</p>
+                        <span>Consultas e movimentações</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- FILTROS -->
+        <section class="filtros-auditoria" aria-labelledby="titulo-filtros">
+
+            <div class="cabecalho-secao">
+                <div>
+                    <h2 id="titulo-filtros">Consultar registros</h2>
+                    <p class="descricao-secao">
+                        Localize atividades por usuário, ação, resultado ou data.
+                    </p>
+                </div>
+            </div>
+
+            <div class="campos-filtro">
+
+                <div class="campo-filtro">
+                    <label for="pesquisa-auditoria">Pesquisa geral</label>
+
+                    <div class="campo-com-icone">
+                        <i data-lucide="search"></i>
+                        <input
+                            type="search"
+                            id="pesquisa-auditoria"
+                            placeholder="Nome, e-mail, produto, ID ou descrição..."
+                            autocomplete="off"
+                        >
+                    </div>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="filtro-responsavel">Responsável</label>
+
+                    <input
+                        type="search"
+                        id="filtro-responsavel"
+                        placeholder="Nome ou e-mail do usuário"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="filtro-tipo">Tipo de atividade</label>
+
+                    <select id="filtro-tipo">
+                        <option value="">Todas as atividades</option>
+                        <option value="LOGIN">Login</option>
+                        <option value="LOGOUT">Logout</option>
+                        <option value="CADASTRAR">Cadastro</option>
+                        <option value="ATUALIZAR">Atualização</option>
+                        <option value="EXCLUIR">Exclusão</option>
+                        <option value="CONSULTAR">Consulta</option>
+                        <option value="MOVIMENTAR_ESTOQUE">Movimentação de estoque</option>
+                    </select>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="filtro-status">Grupo da atividade</label>
+
+                    <select id="filtro-status">
+                        <option value="">Todos os grupos</option>
+                        <option value="ACESSO">Autenticação</option>
+                        <option value="ALTERACAO">Alterações</option>
+                        <option value="OPERACAO">Consultas e estoque</option>
+                    </select>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="filtro-resultado">Resultado</label>
+
+                    <select id="filtro-resultado">
+                        <option value="">Todos os resultados</option>
+                        <option value="SUCESSO">Sucesso</option>
+                        <option value="FALHA">Falha</option>
+                    </select>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="filtro-data">Data da atividade</label>
+
+                    <input
+                        type="date"
+                        id="filtro-data"
+                    >
+                </div>
+
+            </div>
+
+            <div class="acoes-filtro">
+
+                <button
+                    type="button"
+                    id="limpar-filtros"
+                    class="botao-secundario"
+                >
+                    <i data-lucide="eraser"></i>
+                    Limpar filtros
+                </button>
+
+                <button
+                    type="button"
+                    id="atualizar-auditoria"
+                    class="botao-primario"
+                >
+                    <i data-lucide="refresh-cw"></i>
+                    Atualizar registros
+                </button>
+
+            </div>
+        </section>
+
+        <!-- HISTÓRICO -->
+        <section class="tabela-auditoria" aria-labelledby="titulo-historico">
+
+            <div class="cabecalho-tabela">
+
+                <div>
+                    <h2 id="titulo-historico">Histórico de atividades</h2>
+
+                    <p class="descricao-secao">
+                        Consulte quem realizou cada operação e os dados
+                        técnicos associados ao registro.
+                    </p>
+                </div>
+
+                <span
+                    id="quantidade-registros"
+                    aria-live="polite"
+                >
+                    Carregando registros...
+                </span>
+
+            </div>
+
+            <!-- LEGENDA -->
+            <div class="legenda-auditoria">
+                <span>
+                    <i data-lucide="user-round"></i>
+                    Responsável
+                </span>
+
+                <span>
+                    <i data-lucide="clock"></i>
+                    Data e horário
+                </span>
+
+                <span>
+                    <i data-lucide="globe"></i>
+                    IP de origem
+                </span>
+
+                <span>
+                    <i data-lucide="file-edit"></i>
+                    Alterações realizadas
+                </span>
+            </div>
+
+            <!-- REGISTROS DINÂMICOS -->
+            <div
+                id="lista-auditoria"
+                aria-live="polite"
+                aria-busy="true"
+            >
+                <div class="estado-carregamento">
+                    <i data-lucide="loader-circle"></i>
+
+                    <p>Carregando registros de auditoria...</p>
+
+                    <span>
+                        Aguarde enquanto buscamos as atividades registradas.
+                    </span>
+                </div>
             </div>
 
         </section>
 
-        <p id="mensagem-auditoria" role="status" aria-live="polite"></p>
+        <!-- MENSAGENS -->
+        <div
+            id="mensagem-auditoria"
+            class="mensagem-auditoria"
+            role="status"
+            aria-live="polite"
+        ></div>
+
+        <!-- RODAPÉ -->
+        <footer class="rodape-auditoria">
+            <p>
+                SafeMarket — Sistema de Auditoria e Rastreabilidade.
+            </p>
+        </footer>
 
     </main>
 
+    <!-- INICIALIZAÇÃO DOS ÍCONES -->
     <script>
-        if (window.lucide) {
-            window.lucide.createIcons();
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        });
     </script>
 
 </body>

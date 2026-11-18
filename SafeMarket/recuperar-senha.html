@@ -6,92 +6,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Recupere o acesso à sua conta SafeMarket.">
+    <meta name="description"
+        content="Recupere o acesso à sua conta SafeMarket de forma segura.">
 
-    <title>SafeMarket | Recuperar senha</title>
+    <meta name="theme-color" content="#111B3A">
 
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Recuperar senha | SafeMarket</title>
+
+    <!-- Estilização -->
     <link rel="stylesheet" href="../css/recuperar-senha.css">
 
+    <!-- Ícones -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <!-- Integração e funcionalidades -->
+    <script src="../js/api.js" defer></script>
     <script src="../js/recuperar-senha.js" defer></script>
 </head>
 
 <body>
 
-    <main class="recuperacao-container">
+    <main class="pagina-recuperacao">
 
-        <section class="login-card recuperacao-card">
+        <section class="cartao-recuperacao"
+            aria-labelledby="titulo-recuperacao">
 
-            <a href="index.html" class="voltar-login">
-                &larr; Voltar para o login
-            </a>
+            <header class="cabecalho-recuperacao">
 
-            <div class="recuperacao-icone" aria-hidden="true">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="38"
-                    height="38"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round">
+                <a href="index.html"
+                    class="marca-safemarket"
+                    aria-label="SafeMarket - Voltar para o login">
 
-                    <rect x="3" y="11" width="18" height="11" rx="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                </svg>
-            </div>
+                    <i data-lucide="shield-check"
+                        aria-hidden="true"></i>
 
-            <h1>Recuperar senha</h1>
+                    <span>SafeMarket</span>
 
-            <p class="recuperacao-descricao">
-                Esqueceu sua senha? Informe o e-mail cadastrado
-                para iniciar a recuperação do acesso à sua conta.
-            </p>
+                </a>
 
-            <form id="form-recuperacao">
+                <div class="icone-recuperacao"
+                    aria-hidden="true">
 
-                <label for="email-recuperacao">
-                    E-mail cadastrado
-                </label>
+                    <i data-lucide="lock-keyhole"></i>
 
-                <input
-                    class="input-recuperacao"
-                    type="email"
-                    id="email-recuperacao"
-                    name="email"
-                    placeholder="exemplo@email.com"
-                    autocomplete="email"
-                    required>
+                </div>
 
-                <button
-                    type="submit"
-                    class="bnt-login"
-                    id="btn-recuperacao">
+                <h1 id="titulo-recuperacao">
+                    Esqueceu sua senha?
+                </h1>
 
-                    RECUPERAR ACESSO
-                </button>
+                <p>
+                    Não se preocupe! Informe o e-mail cadastrado
+                    e enviaremos as instruções para recuperar
+                    seu acesso.
+                </p>
 
-                <p
+            </header>
+
+            <form id="form-recuperacao" novalidate>
+
+                <div class="grupo-campo">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail cadastrado"
+                        autocomplete="email"
+                        required
+                        aria-describedby="erro-email"
+                    >
+
+                    <small
+                        id="erro-email"
+                        class="mensagem-campo"
+                        aria-live="polite">
+                    </small>
+
+                </div>
+
+                <div
                     id="mensagem-recuperacao"
                     class="mensagem-recuperacao"
                     role="status"
-                    aria-live="polite"
-                    hidden>
-                </p>
+                    aria-live="polite">
+                </div>
+
+                <button
+                    type="submit"
+                    id="btn-enviar-instrucoes"
+                    disabled>
+
+                    <span class="texto-botao">
+                        Enviar instruções
+                    </span>
+
+                </button>
 
             </form>
 
-            <p class="recuperacao-seguranca">
-                <span aria-hidden="true">&#128274;</span>
-                Sua segurança é prioridade no SafeMarket.
-            </p>
+            <footer class="rodape-recuperacao">
+
+                <a href="index.html">
+
+                    <i data-lucide="arrow-left"
+                        aria-hidden="true"></i>
+
+                    <span>Voltar para o login</span>
+
+                </a>
+
+            </footer>
 
         </section>
 
     </main>
 
-</body>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        });
+    </script>
 
+</body>
 </html>

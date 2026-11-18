@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#111B3A">
+
+    <title>Meu carrinho | SafeMarket</title>
+
+    <!-- Estilos globais -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- Estilos exclusivos do carrinho -->
+    <link rel="stylesheet" href="../css/carrinho.css">
+</head>
+
+<body class="pagina-carrinho">
+
+    <div class="carrinho-layout">
+
+        <!-- =================================================
+             CABEÇALHO
+        ================================================== -->
+
+        <header class="carrinho-header">
+
+            <a href="marketplace.html" class="carrinho-logo">
+                <img src="../imagem/logo.png" alt="SafeMarket">
+                <span>SafeMarket</span>
+            </a>
+
+            <a href="marketplace.html" class="botao-voltar">
+                <span aria-hidden="true">←</span>
+                Voltar ao marketplace
+            </a>
+
+        </header>
+
+
+        <!-- =================================================
+             CONTEÚDO PRINCIPAL
+        ================================================== -->
+
+        <main class="carrinho-main">
+
+            <!-- TÍTULO -->
+
+            <section class="carrinho-introducao">
+
+                <div>
+                    <span class="carrinho-etiqueta">
+                        ÁREA DO COMPRADOR
+                    </span>
+
+                    <h1>Meu carrinho</h1>
+
+                    <p>
+                        Revise seus produtos e finalize sua compra
+                        com segurança.
+                    </p>
+                </div>
+
+                <div class="carrinho-selo">
+                    <span class="selo-icone">✓</span>
+
+                    <div>
+                        <strong>Compra protegida</strong>
+                        <span>Ambiente SafeMarket</span>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CARRINHO E RESUMO
+            ================================================== -->
+
+            <section class="carrinho-grid">
+
+                <!-- LISTA DE PRODUTOS -->
+
+                <section class="carrinho-produtos">
+
+                    <div class="secao-cabecalho">
+
+                        <div>
+                            <h2>Produtos selecionados</h2>
+
+                            <p>
+                                Confira os itens adicionados ao carrinho.
+                            </p>
+                        </div>
+
+                        <span class="secao-icone">🛍</span>
+
+                    </div>
+
+                    <!-- O JavaScript carrega os produtos aqui -->
+
+                    <div id="itens" class="lista-itens">
+
+                    </div>
+
+                </section>
+
+
+                <!-- RESUMO DA COMPRA -->
+
+                <aside class="resumo-compra">
+
+                    <div class="resumo-header">
+                        <span>RESUMO DO PEDIDO</span>
+
+                        <div class="resumo-icone">🛒</div>
+                    </div>
+
+                    <div class="resumo-informacao">
+
+                        <p>Valor total da compra</p>
+
+                        <h2 id="total">R$ 0,00</h2>
+
+                    </div>
+
+                    <div class="resumo-separador"></div>
+
+                    <div class="seguranca-compra">
+
+                        <span>🔒</span>
+
+                        <p>
+                            Seus dados são tratados com segurança.
+                            O pagamento deste projeto é simulado.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="finalizar"
+                        class="botao-finalizar"
+                    >
+                        <span>CONFIRMAR COMPRA</span>
+                        <span class="botao-seta">→</span>
+                    </button>
+
+                    <p
+                        id="mensagem"
+                        class="mensagem-carrinho"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+
+                    <a href="marketplace.html" class="continuar-comprando">
+                        Continuar comprando
+                    </a>
+
+                </aside>
+
+            </section>
+
+
+            <!-- =================================================
+                 HISTÓRICO DE PEDIDOS
+            ================================================== -->
+
+            <section class="historico-pedidos">
+
+                <div class="secao-cabecalho">
+
+                    <div>
+                        <span class="carrinho-etiqueta">
+                            ACOMPANHAMENTO
+                        </span>
+
+                        <h2>Meus pedidos</h2>
+
+                        <p>
+                            Consulte suas compras realizadas no SafeMarket.
+                        </p>
+                    </div>
+
+                    <div class="historico-icone">
+                        📦
+                    </div>
+
+                </div>
+
+                <!-- O JavaScript carrega os pedidos aqui -->
+
+                <div id="pedidos" class="lista-pedidos">
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- =================================================
+             RODAPÉ
+        ================================================== -->
+
+        <footer class="carrinho-footer">
+
+            <div class="footer-marca">
+                <img src="../imagem/logo.png" alt="">
+
+                <strong>SafeMarket</strong>
+            </div>
+
+            <p>
+                Negocie com confiança.
+            </p>
+
+            <span>
+                © 2026 SafeMarket. Todos os direitos reservados.
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <!-- SCRIPTS -->
+
+    <script src="../js/api.js"></script>
+    <script src="../js/carrinho.js"></script>
+
+</body>
+</html>

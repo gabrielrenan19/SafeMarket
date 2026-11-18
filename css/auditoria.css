@@ -1,0 +1,1559 @@
+
+/* ==========================================================
+   SAFEMARKET — AUDITORIA E LOGS
+   Interface administrativa | Segurança e rastreabilidade
+========================================================== */
+
+/* ==========================================================
+   1. IDENTIDADE VISUAL
+========================================================== */
+
+:root {
+    --aud-navy: #111B3A;
+    --aud-navy-light: #1D2B49;
+
+    --aud-primary: #246B9A;
+    --aud-primary-hover: #19577F;
+    --aud-primary-soft: #EAF3F9;
+
+    --aud-background: #F3F5F8;
+    --aud-white: #FFFFFF;
+    --aud-surface: #F8FAFC;
+
+    --aud-text: #263449;
+    --aud-secondary: #718096;
+    --aud-muted: #98A4B3;
+
+    --aud-border: #E4E9F0;
+    --aud-border-strong: #D5DEE8;
+
+    --aud-success: #16834C;
+    --aud-success-bg: #EAF6EF;
+
+    --aud-warning: #A96B13;
+    --aud-warning-bg: #FFF5E5;
+
+    --aud-danger: #C43D46;
+    --aud-danger-bg: #FCEEEF;
+
+    --aud-info: #2877A8;
+    --aud-info-bg: #EAF3F9;
+
+    --aud-purple: #6654B5;
+    --aud-purple-bg: #F0EDFA;
+
+    --aud-radius: 12px;
+    --aud-radius-lg: 16px;
+
+    --aud-shadow:
+        0 2px 8px rgba(17, 27, 58, 0.035),
+        0 1px 2px rgba(17, 27, 58, 0.025);
+
+    --aud-shadow-hover:
+        0 8px 24px rgba(17, 27, 58, 0.075);
+}
+
+/* ==========================================================
+   2. BASE
+========================================================== */
+
+body {
+    background: var(--aud-background);
+    color: var(--aud-text);
+}
+
+.auditoria-pagina {
+    min-width: 0;
+    min-height: 100vh;
+    padding: 34px 36px;
+    box-sizing: border-box;
+}
+
+.auditoria-pagina *,
+.auditoria-pagina *::before,
+.auditoria-pagina *::after {
+    box-sizing: border-box;
+}
+
+.auditoria-pagina button,
+.auditoria-pagina input,
+.auditoria-pagina select {
+    font-family: inherit;
+}
+
+/* ==========================================================
+   3. CABEÇALHO
+========================================================== */
+
+.cabecalho-auditoria {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    margin-bottom: 32px;
+    padding-bottom: 26px;
+
+    border-bottom: 1px solid var(--aud-border);
+}
+
+.identificacao-cabecalho {
+    min-width: 0;
+}
+
+.identificacao-pagina {
+    display: inline-flex;
+    align-items: center;
+
+    margin-bottom: 11px;
+
+    color: var(--aud-primary);
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.cabecalho-auditoria h1 {
+    margin: 0;
+
+    color: var(--aud-navy);
+
+    font-size: 29px;
+    font-weight: 800;
+    letter-spacing: -0.9px;
+    line-height: 1.25;
+}
+
+.descricao-pagina {
+    max-width: 700px;
+
+    margin: 10px 0 0;
+
+    color: var(--aud-secondary);
+
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+.acoes-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+.indicador-seguranca {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 11px 15px;
+
+    color: #24734D;
+    background: #ECF7F0;
+
+    border: 1px solid #D7EDDF;
+    border-radius: 9px;
+
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.indicador-seguranca svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ==========================================================
+   4. SEÇÕES
+========================================================== */
+
+.secao-indicadores,
+.filtros-auditoria,
+.tabela-auditoria {
+    width: 100%;
+    min-width: 0;
+}
+
+.secao-indicadores {
+    margin-bottom: 29px;
+}
+
+.cabecalho-secao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+.cabecalho-secao h2,
+.cabecalho-tabela h2 {
+    margin: 0;
+
+    color: var(--aud-navy);
+
+    font-size: 17px;
+    font-weight: 750;
+    letter-spacing: -0.4px;
+}
+
+.descricao-secao {
+    margin: 6px 0 0;
+
+    color: var(--aud-secondary);
+
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+/* ==========================================================
+   5. INDICADORES
+========================================================== */
+
+.indicadores-auditoria {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.cartao-auditoria {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    min-width: 0;
+    min-height: 126px;
+
+    padding: 21px;
+
+    background: var(--aud-white);
+
+    border: 1px solid var(--aud-border);
+    border-radius: var(--aud-radius);
+
+    box-shadow: var(--aud-shadow);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.cartao-auditoria:hover {
+    transform: translateY(-2px);
+
+    border-color: var(--aud-border-strong);
+    box-shadow: var(--aud-shadow-hover);
+}
+
+.icone-auditoria {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 47px;
+    height: 47px;
+
+    color: var(--aud-info);
+    background: var(--aud-info-bg);
+
+    border-radius: 12px;
+}
+
+.icone-auditoria svg {
+    width: 21px;
+    height: 21px;
+    stroke-width: 1.9;
+}
+
+.informacao-indicador {
+    min-width: 0;
+}
+
+.cartao-auditoria h3 {
+    margin: 0 0 7px;
+
+    color: var(--aud-secondary);
+
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.cartao-auditoria p {
+    margin: 0 0 5px;
+
+    color: var(--aud-navy);
+
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 1.1;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.cartao-auditoria span {
+    display: block;
+
+    color: var(--aud-muted);
+
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.cartao-auditoria:nth-child(1) .icone-auditoria {
+    color: var(--aud-info);
+    background: var(--aud-info-bg);
+}
+
+.cartao-auditoria:nth-child(2) .icone-auditoria {
+    color: var(--aud-success);
+    background: var(--aud-success-bg);
+}
+
+.cartao-auditoria:nth-child(3) .icone-auditoria {
+    color: var(--aud-warning);
+    background: var(--aud-warning-bg);
+}
+
+.cartao-auditoria:nth-child(4) .icone-auditoria {
+    color: var(--aud-purple);
+    background: var(--aud-purple-bg);
+}
+
+/* ==========================================================
+   6. FILTROS
+========================================================== */
+
+.filtros-auditoria {
+    margin-bottom: 27px;
+    padding: 25px;
+
+    background: var(--aud-white);
+
+    border: 1px solid var(--aud-border);
+    border-radius: var(--aud-radius-lg);
+
+    box-shadow: var(--aud-shadow);
+}
+
+.filtros-auditoria .cabecalho-secao {
+    margin-bottom: 22px;
+}
+
+.campos-filtro {
+    display: grid;
+
+    grid-template-columns:
+        minmax(220px, 1.5fr)
+        repeat(2, minmax(150px, 1fr));
+
+    gap: 18px;
+}
+
+.campo-filtro {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    gap: 8px;
+}
+
+.campo-filtro label {
+    color: var(--aud-text);
+
+    font-size: 11px;
+    font-weight: 750;
+}
+
+/* Campos */
+
+.campo-filtro input,
+.campo-filtro select {
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+
+    padding: 0 13px;
+
+    color: var(--aud-text);
+    background: #FFFFFF;
+
+    border: 1px solid var(--aud-border-strong);
+    border-radius: 8px;
+
+    outline: none;
+
+    font-size: 12px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.campo-filtro input::placeholder {
+    color: #A0AAB7;
+}
+
+.campo-filtro input:hover,
+.campo-filtro select:hover {
+    border-color: #BAC8D7;
+}
+
+.campo-filtro input:focus,
+.campo-filtro select:focus {
+    border-color: var(--aud-primary);
+
+    box-shadow:
+        0 0 0 3px rgba(23, 107, 154, 0.11);
+}
+
+.campo-filtro select {
+    cursor: pointer;
+}
+
+.campo-filtro input[type="date"] {
+    cursor: pointer;
+}
+
+/* Campo com ícone */
+
+.campo-com-icone {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.campo-com-icone > svg {
+    position: absolute;
+    left: 13px;
+
+    width: 16px;
+    height: 16px;
+
+    color: var(--aud-muted);
+
+    pointer-events: none;
+}
+
+.campo-com-icone input {
+    padding-left: 40px;
+}
+
+/* ==========================================================
+   7. BOTÕES
+========================================================== */
+
+.acoes-filtro {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 22px;
+    padding-top: 20px;
+
+    border-top: 1px solid #EDF1F5;
+}
+
+.botao-secundario,
+.botao-primario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 42px;
+    padding: 0 17px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-size: 11px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.botao-secundario svg,
+.botao-primario svg {
+    width: 15px;
+    height: 15px;
+}
+
+.botao-secundario {
+    color: #526176;
+    background: #FFFFFF;
+
+    border-color: var(--aud-border-strong);
+}
+
+.botao-secundario:hover {
+    color: var(--aud-navy);
+    background: #F5F7FA;
+
+    border-color: #BCC9D7;
+}
+
+.botao-primario {
+    color: #FFFFFF;
+    background: var(--aud-primary);
+
+    box-shadow: 0 2px 5px rgba(23, 107, 154, 0.15);
+}
+
+.botao-primario:hover {
+    background: var(--aud-primary-hover);
+
+    box-shadow: 0 4px 10px rgba(23, 107, 154, 0.2);
+
+    transform: translateY(-1px);
+}
+
+.botao-primario:active,
+.botao-secundario:active {
+    transform: translateY(0);
+}
+
+.botao-primario:disabled,
+.botao-secundario:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+
+    transform: none;
+    box-shadow: none;
+}
+
+/* ==========================================================
+   8. HISTÓRICO
+========================================================== */
+
+.tabela-auditoria {
+    padding: 25px;
+
+    background: var(--aud-white);
+
+    border: 1px solid var(--aud-border);
+    border-radius: var(--aud-radius-lg);
+
+    box-shadow: var(--aud-shadow);
+}
+
+.cabecalho-tabela {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    margin-bottom: 19px;
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #EDF1F5;
+}
+
+#quantidade-registros {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 30px;
+    padding: 5px 12px;
+
+    color: var(--aud-primary);
+    background: var(--aud-info-bg);
+
+    border: 1px solid #D8E8F2;
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 750;
+
+    white-space: nowrap;
+}
+
+/* ==========================================================
+   9. LEGENDA DO HISTÓRICO
+========================================================== */
+
+.legenda-auditoria {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+
+    margin-bottom: 19px;
+    padding: 12px 14px;
+
+    background: #F8FAFC;
+
+    border: 1px solid #EDF1F5;
+    border-radius: 9px;
+}
+
+.legenda-auditoria span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--aud-secondary);
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.legenda-auditoria svg {
+    width: 14px;
+    height: 14px;
+    color: var(--aud-primary);
+}
+
+/* ==========================================================
+   10. LISTAGEM DE REGISTROS
+========================================================== */
+
+#lista-auditoria {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.item-auditoria {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+
+    min-width: 0;
+    padding: 18px;
+
+    background: #FFFFFF;
+
+    border: 1px solid var(--aud-border);
+    border-radius: 11px;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.item-auditoria:hover {
+    background: #FBFDFF;
+    border-color: #C8DCE9;
+
+    box-shadow: 0 4px 13px rgba(17, 27, 58, 0.055);
+
+    transform: translateY(-1px);
+}
+
+.icone-registro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 43px;
+    height: 43px;
+
+    color: var(--aud-primary);
+    background: var(--aud-info-bg);
+
+    border-radius: 10px;
+}
+
+.icone-registro svg {
+    width: 19px;
+    height: 19px;
+    stroke-width: 1.9;
+}
+
+.informacoes-registro {
+    flex: 1;
+    min-width: 0;
+}
+
+.topo-registro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-bottom: 8px;
+}
+
+.topo-registro h3 {
+    margin: 0;
+
+    color: var(--aud-navy);
+
+    font-size: 13px;
+    font-weight: 750;
+    line-height: 1.5;
+}
+
+.identificador-registro {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 25px;
+    padding: 4px 9px;
+
+    color: #637187;
+    background: #F2F5F8;
+
+    border: 1px solid #E5EAF0;
+    border-radius: 6px;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+
+    white-space: nowrap;
+}
+
+.descricao-registro {
+    margin: 0;
+
+    color: #526176;
+
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+}
+
+.detalhes-registro {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+
+    margin-top: 12px;
+
+    color: var(--aud-secondary);
+
+    font-size: 10px;
+}
+
+.detalhes-registro span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.detalhes-registro svg {
+    width: 13px;
+    height: 13px;
+
+    color: #96A3B2;
+    flex-shrink: 0;
+}
+
+/* ==========================================================
+   11. CARREGAMENTO
+========================================================== */
+
+.estado-carregamento {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+
+    min-height: 180px;
+    padding: 28px;
+
+    color: var(--aud-secondary);
+    background: var(--aud-surface);
+
+    border: 1px dashed var(--aud-border-strong);
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+.estado-carregamento svg {
+    width: 27px;
+    height: 27px;
+
+    color: var(--aud-primary);
+
+    animation: auditoria-girar 1.2s linear infinite;
+}
+
+.estado-carregamento p {
+    margin: 0;
+
+    color: var(--aud-text);
+
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.estado-carregamento span {
+    color: var(--aud-muted);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+@keyframes auditoria-girar {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================================
+   12. ESTADOS VAZIOS E ERROS
+========================================================== */
+
+.estado-vazio,
+.mensagem-vazia,
+.erro-auditoria {
+    padding: 38px 22px;
+
+    color: var(--aud-secondary);
+    background: var(--aud-surface);
+
+    border: 1px dashed var(--aud-border-strong);
+    border-radius: 11px;
+
+    text-align: center;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.estado-vazio h3 {
+    margin: 10px 0 6px;
+
+    color: var(--aud-navy);
+
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.estado-vazio p {
+    margin: 0;
+}
+
+.estado-vazio svg {
+    width: 29px;
+    height: 29px;
+    color: var(--aud-secondary);
+}
+
+#mensagem-auditoria {
+    display: none;
+
+    margin-top: 15px;
+    padding: 13px 16px;
+
+    color: var(--aud-secondary);
+    background: var(--aud-info-bg);
+
+    border: 1px solid #D8E8F2;
+    border-radius: 8px;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+#mensagem-auditoria.visivel {
+    display: block;
+}
+
+#mensagem-auditoria[data-tipo="erro"] {
+    color: var(--aud-danger);
+    background: var(--aud-danger-bg);
+    border-color: #F3D3D6;
+}
+
+/* ==========================================================
+   13. RODAPÉ
+========================================================== */
+
+.rodape-auditoria {
+    margin-top: 30px;
+    padding: 19px 0 5px;
+
+    border-top: 1px solid var(--aud-border);
+}
+
+.rodape-auditoria p {
+    margin: 0;
+
+    color: var(--aud-muted);
+
+    font-size: 10px;
+    text-align: center;
+}
+
+/* ==========================================================
+   14. RESPONSIVIDADE — TELAS MÉDIAS
+========================================================== */
+
+@media (max-width: 1100px) {
+    .auditoria-pagina {
+        padding: 28px 25px;
+    }
+
+    .indicadores-auditoria {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .campos-filtro {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* ==========================================================
+   15. RESPONSIVIDADE — TABLETS
+========================================================== */
+
+@media (max-width: 760px) {
+    .auditoria-pagina {
+        padding: 23px 18px;
+    }
+
+    .cabecalho-auditoria {
+        align-items: flex-start;
+        flex-direction: column;
+
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+    }
+
+    .acoes-cabecalho {
+        justify-content: flex-start;
+    }
+
+    .cabecalho-auditoria h1 {
+        font-size: 25px;
+    }
+
+    .descricao-pagina {
+        font-size: 12px;
+    }
+
+    .filtros-auditoria,
+    .tabela-auditoria {
+        padding: 19px;
+    }
+
+    .cartao-auditoria {
+        min-height: 112px;
+        padding: 17px;
+    }
+
+    .item-auditoria {
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .detalhes-registro {
+        gap: 9px 13px;
+    }
+}
+
+/* ==========================================================
+   16. RESPONSIVIDADE — CELULARES
+========================================================== */
+
+@media (max-width: 520px) {
+    .auditoria-pagina {
+        padding: 19px 13px;
+    }
+
+    .indicadores-auditoria,
+    .campos-filtro {
+        grid-template-columns: 1fr;
+    }
+
+    .indicadores-auditoria {
+        gap: 11px;
+    }
+
+    .campos-filtro {
+        gap: 14px;
+    }
+
+    .acoes-filtro {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .botao-secundario,
+    .botao-primario {
+        width: 100%;
+    }
+
+    .cabecalho-tabela {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .item-auditoria {
+        align-items: flex-start;
+    }
+
+    .icone-registro {
+        width: 37px;
+        height: 37px;
+    }
+
+    .detalhes-registro {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .topo-registro {
+        align-items: flex-start;
+    }
+
+    .cartao-auditoria p {
+        font-size: 25px;
+    }
+
+    .legenda-auditoria {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* ==========================================================
+   17. ACESSIBILIDADE
+========================================================== */
+
+.auditoria-pagina button:focus-visible,
+.auditoria-pagina input:focus-visible,
+.auditoria-pagina select:focus-visible {
+    outline: 3px solid rgba(23, 107, 154, 0.2);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .auditoria-pagina *,
+    .auditoria-pagina *::before,
+    .auditoria-pagina *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==========================================================
+   18. NOVO LAYOUT — CARTÕES DE AUDITORIA
+   Organização profissional dos registros
+========================================================== */
+
+/* Cartão principal */
+#lista-auditoria .item-auditoria {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+
+    padding: 23px;
+
+    background: #FFFFFF;
+    border: 1px solid #E3E9F0;
+    border-radius: 13px;
+
+    box-shadow: 0 2px 7px rgba(17, 27, 58, 0.025);
+
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+#lista-auditoria .item-auditoria:hover {
+    background: #FFFFFF;
+    border-color: #C8D9E7;
+    box-shadow: 0 7px 20px rgba(17, 27, 58, 0.055);
+    transform: none;
+}
+
+/* Ícone da atividade */
+#lista-auditoria .icone-registro {
+    width: 44px;
+    height: 44px;
+    margin-top: 2px;
+
+    border-radius: 11px;
+    background: #EDF4F9;
+    color: #246B9A;
+}
+
+#lista-auditoria .icone-registro svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Conteúdo */
+#lista-auditoria .informacoes-registro {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    min-width: 0;
+}
+
+/* Cabeçalho */
+#lista-auditoria .topo-registro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin: 0;
+    padding-bottom: 17px;
+
+    border-bottom: 1px solid #E9EEF3;
+}
+
+#lista-auditoria .identificacao-atividade {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+
+    min-width: 0;
+}
+
+#lista-auditoria .identificacao-atividade h3 {
+    margin: 0;
+
+    color: #172640;
+    font-size: 15px;
+    font-weight: 750;
+    line-height: 1.45;
+    letter-spacing: -.2px;
+}
+
+/* Etiquetas de ação */
+#lista-auditoria .etiqueta-acao {
+    display: inline-flex;
+    align-items: center;
+
+    width: fit-content;
+    padding: 5px 9px;
+
+    border-radius: 5px;
+
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .65px;
+    text-transform: uppercase;
+}
+
+#lista-auditoria .etiqueta-acesso {
+    color: #246B9A;
+    background: #EAF3F9;
+}
+
+#lista-auditoria .etiqueta-cadastro {
+    color: #16834C;
+    background: #EAF6EF;
+}
+
+#lista-auditoria .etiqueta-atualizacao {
+    color: #94620E;
+    background: #FFF5E5;
+}
+
+#lista-auditoria .etiqueta-exclusao {
+    color: #B63843;
+    background: #FCEEEF;
+}
+
+#lista-auditoria .etiqueta-consulta {
+    color: #6654B5;
+    background: #F0EDFA;
+}
+
+#lista-auditoria .etiqueta-estoque {
+    color: #2877A8;
+    background: #EAF3F9;
+}
+
+#lista-auditoria .etiqueta-denuncia {
+    color: #B65A30;
+    background: #FFF0E9;
+}
+
+/* Identificação do log */
+#lista-auditoria .identificador-registro {
+    min-height: 29px;
+    padding: 6px 10px;
+
+    color: #53647B;
+    background: #F5F7FA;
+
+    border: 1px solid #E5EAF0;
+    border-radius: 6px;
+
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: .3px;
+}
+
+/* ==========================================================
+   19. BLOCOS DE INFORMAÇÕES
+========================================================== */
+
+#lista-auditoria .bloco-detalhes-auditoria {
+    min-width: 0;
+    padding: 17px 18px;
+
+    background: #F9FBFD;
+    border: 1px solid #E9EEF4;
+    border-radius: 9px;
+}
+
+/* Título de cada bloco */
+#lista-auditoria .titulo-detalhes-auditoria {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 15px;
+    padding-bottom: 11px;
+
+    border-bottom: 1px solid #E8EDF3;
+}
+
+#lista-auditoria .titulo-detalhes-auditoria svg {
+    width: 16px;
+    height: 16px;
+
+    color: #397CA5;
+    flex-shrink: 0;
+}
+
+#lista-auditoria .titulo-detalhes-auditoria strong {
+    color: #243650;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .2px;
+}
+
+/* Grade dos dados */
+#lista-auditoria .dados-responsavel-auditoria {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px 24px;
+
+    min-width: 0;
+}
+
+/* Cada informação */
+#lista-auditoria .campo-dado-auditoria {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    min-width: 0;
+}
+
+#lista-auditoria .campo-dado-auditoria > span {
+    color: #8491A2;
+
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: .55px;
+    text-transform: uppercase;
+}
+
+#lista-auditoria .campo-dado-auditoria > strong {
+    color: #34445B;
+
+    font-size: 11px;
+    font-weight: 650;
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+}
+
+/* Endpoint ocupa toda a largura */
+#lista-auditoria .campo-endpoint-auditoria {
+    grid-column: 1 / -1;
+}
+
+#lista-auditoria .campo-endpoint-auditoria strong {
+    padding: 9px 11px;
+
+    color: #42617D;
+    background: #F0F4F8;
+
+    border: 1px solid #E4EAF0;
+    border-radius: 6px;
+
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+/* ==========================================================
+   20. ALTERAÇÕES REALIZADAS
+========================================================== */
+
+#lista-auditoria .lista-alteracoes-auditoria {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#lista-auditoria .alteracao-campo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding: 12px 13px;
+
+    background: #FFFFFF;
+    border: 1px solid #E7ECF2;
+    border-radius: 7px;
+}
+
+#lista-auditoria .alteracao-campo > strong {
+    color: #34445B;
+    font-size: 11px;
+    font-weight: 750;
+}
+
+#lista-auditoria .valores-alteracao {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    font-size: 10px;
+}
+
+#lista-auditoria .valores-alteracao svg {
+    width: 13px;
+    height: 13px;
+    color: #91A0B0;
+}
+
+#lista-auditoria .valor-anterior {
+    padding: 5px 8px;
+
+    color: #A33C46;
+    background: #FCEEEF;
+    border-radius: 5px;
+
+    text-decoration: line-through;
+}
+
+#lista-auditoria .valor-novo {
+    padding: 5px 8px;
+
+    color: #16834C;
+    background: #EAF6EF;
+    border-radius: 5px;
+
+    font-weight: 750;
+}
+
+/* ==========================================================
+   21. DESCRIÇÃO E OBSERVAÇÕES
+========================================================== */
+
+#lista-auditoria .descricao-registro {
+    margin: -5px 0 0;
+    padding: 12px 14px;
+
+    color: #65748A;
+    background: #F7F9FB;
+
+    border-left: 3px solid #B7CADA;
+    border-radius: 0 6px 6px 0;
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+#lista-auditoria .observacao-auditoria {
+    margin-top: 13px;
+    padding: 11px 13px;
+
+    color: #65748A;
+    background: #FFFFFF;
+
+    border: 1px solid #E8EDF2;
+    border-radius: 7px;
+
+    font-size: 10px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+#lista-auditoria .observacao-auditoria strong {
+    color: #34445B;
+}
+
+/* Navegador e dispositivo */
+#lista-auditoria .dados-navegador-auditoria {
+    margin-top: 13px;
+    padding: 11px 13px;
+
+    background: #FFFFFF;
+    border: 1px solid #E8EDF2;
+    border-radius: 7px;
+}
+
+#lista-auditoria .dados-navegador-auditoria summary {
+    color: #39749B;
+    font-size: 10px;
+    font-weight: 750;
+    cursor: pointer;
+}
+
+#lista-auditoria .dados-navegador-auditoria p {
+    margin: 10px 0 0;
+
+    color: #68788D;
+    font-size: 10px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+/* ==========================================================
+   22. RESULTADO DA OPERAÇÃO
+========================================================== */
+
+#lista-auditoria .rodape-registro-auditoria {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #E9EEF3;
+}
+
+#lista-auditoria .resultado-auditoria {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 6px 10px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+    font-weight: 750;
+}
+
+#lista-auditoria .resultado-auditoria svg {
+    width: 14px;
+    height: 14px;
+}
+
+#lista-auditoria .resultado-sucesso {
+    color: #16834C;
+    background: #EAF6EF;
+}
+
+#lista-auditoria .resultado-falha {
+    color: #B63843;
+    background: #FCEEEF;
+}
+
+#lista-auditoria .resultado-indefinido {
+    color: #778397;
+    background: #F0F3F6;
+}
+
+/* ==========================================================
+   23. RESPONSIVIDADE DOS CARTÕES
+========================================================== */
+
+@media (max-width: 760px) {
+    #lista-auditoria .item-auditoria {
+        gap: 12px;
+        padding: 16px;
+    }
+
+    #lista-auditoria .informacoes-registro {
+        gap: 14px;
+    }
+
+    #lista-auditoria .bloco-detalhes-auditoria {
+        padding: 14px;
+    }
+}
+
+@media (max-width: 520px) {
+    #lista-auditoria .item-auditoria {
+        flex-direction: column;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    #lista-auditoria .icone-registro {
+        width: 38px;
+        height: 38px;
+    }
+
+    #lista-auditoria .informacoes-registro {
+        width: 100%;
+    }
+
+    #lista-auditoria .topo-registro {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    #lista-auditoria .dados-responsavel-auditoria {
+        grid-template-columns: 1fr;
+        gap: 13px;
+    }
+
+    #lista-auditoria .campo-endpoint-auditoria {
+        grid-column: auto;
+    }
+
+    #lista-auditoria .alteracao-campo {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    #lista-auditoria .rodape-registro-auditoria {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

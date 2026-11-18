@@ -1,0 +1,1067 @@
+
+/* ==========================================================
+   SAFEMARKET — CARRINHO
+   Identidade: Azul-marinho e Ciano
+========================================================== */
+
+
+/* ==========================================================
+   01. VARIÁVEIS
+========================================================== */
+
+.pagina-carrinho {
+    --cart-navy: #111B3A;
+    --cart-navy-light: #1A2B4D;
+
+    --cart-cyan: #00B8D9;
+    --cart-blue: #007F99;
+
+    --cart-bg: #F4F6FA;
+    --cart-white: #FFFFFF;
+
+    --cart-text: #202B3C;
+    --cart-muted: #64748B;
+
+    --cart-border: #E3E9F0;
+    --cart-border-strong: #CBD5E1;
+
+    --cart-danger: #B42318;
+    --cart-danger-bg: #FEF3F2;
+
+    --cart-success: #16865C;
+
+    --cart-radius-sm: 8px;
+    --cart-radius-md: 12px;
+    --cart-radius-lg: 18px;
+
+    --cart-shadow-sm:
+        0 2px 8px rgba(17, 27, 58, 0.04);
+
+    --cart-shadow-md:
+        0 8px 24px rgba(17, 27, 58, 0.07);
+
+    --cart-transition: 180ms ease;
+}
+
+
+/* ==========================================================
+   02. RESET E CONFIGURAÇÕES GERAIS
+========================================================== */
+
+body.pagina-carrinho {
+    display: block;
+
+    width: 100%;
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 0;
+
+    background: var(--cart-bg);
+    color: var(--cart-text);
+
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+
+    line-height: 1.5;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+.pagina-carrinho *,
+.pagina-carrinho *::before,
+.pagina-carrinho *::after {
+    box-sizing: border-box;
+}
+
+.pagina-carrinho button,
+.pagina-carrinho input,
+.pagina-carrinho select {
+    font: inherit;
+}
+
+.pagina-carrinho button {
+    cursor: pointer;
+}
+
+.pagina-carrinho a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.pagina-carrinho [hidden] {
+    display: none !important;
+}
+
+
+/* ==========================================================
+   03. ESTRUTURA PRINCIPAL
+========================================================== */
+
+.carrinho-layout {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    min-height: 100vh;
+}
+
+.carrinho-main {
+    flex: 1;
+
+    width: 100%;
+    max-width: 1320px;
+
+    margin: 0 auto;
+
+    padding: 42px 36px 65px;
+}
+
+
+/* ==========================================================
+   04. CABEÇALHO
+========================================================== */
+
+.carrinho-header {
+    position: relative;
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    width: 100%;
+    min-height: 82px;
+
+    padding: 14px clamp(20px, 5%, 75px);
+
+    background: var(--cart-white);
+
+    border-bottom: 1px solid var(--cart-border);
+
+    box-shadow: var(--cart-shadow-sm);
+}
+
+
+/* LOGO */
+
+.carrinho-logo {
+    display: inline-flex;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    gap: 11px;
+
+    color: var(--cart-navy);
+
+    font-size: 21px;
+    font-weight: 800;
+
+    letter-spacing: -0.6px;
+}
+
+.carrinho-logo img {
+    display: block;
+
+    width: 46px;
+    height: 46px;
+
+    object-fit: contain;
+}
+
+
+/* BOTÃO VOLTAR */
+
+.botao-voltar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    min-height: 42px;
+
+    padding: 0 16px;
+
+    border: 1px solid var(--cart-border);
+    border-radius: var(--cart-radius-sm);
+
+    background: var(--cart-white);
+    color: var(--cart-navy);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    transition:
+        background var(--cart-transition),
+        border-color var(--cart-transition),
+        color var(--cart-transition);
+}
+
+.botao-voltar:hover {
+    border-color: var(--cart-cyan);
+
+    background: #EAFBFE;
+    color: var(--cart-blue);
+}
+
+
+/* ==========================================================
+   05. INTRODUÇÃO
+========================================================== */
+
+.carrinho-introducao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 32px;
+}
+
+.carrinho-etiqueta {
+    display: inline-block;
+
+    margin-bottom: 9px;
+
+    color: var(--cart-blue);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.6px;
+}
+
+.carrinho-introducao h1 {
+    margin: 0;
+
+    color: var(--cart-navy);
+
+    font-size: clamp(28px, 3.5vw, 36px);
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+.carrinho-introducao p {
+    margin: 9px 0 0;
+
+    color: var(--cart-muted);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* SELO */
+
+.carrinho-selo {
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    gap: 12px;
+
+    padding: 14px 18px;
+
+    border: 1px solid #CBEFF4;
+    border-radius: var(--cart-radius-md);
+
+    background: #EAFBFE;
+}
+
+.selo-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 37px;
+    height: 37px;
+
+    border-radius: 50%;
+
+    background: var(--cart-cyan);
+    color: var(--cart-navy);
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.carrinho-selo strong,
+.carrinho-selo span {
+    display: block;
+}
+
+.carrinho-selo strong {
+    color: var(--cart-navy);
+
+    font-size: 12px;
+}
+
+.carrinho-selo div span {
+    margin-top: 3px;
+
+    color: var(--cart-muted);
+
+    font-size: 10px;
+}
+
+
+/* ==========================================================
+   06. GRID PRINCIPAL
+========================================================== */
+
+.carrinho-grid {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) 355px;
+
+    align-items: start;
+
+    gap: 24px;
+}
+
+
+/* ==========================================================
+   07. CARDS PRINCIPAIS
+========================================================== */
+
+.carrinho-produtos,
+.resumo-compra,
+.historico-pedidos {
+    border: 1px solid var(--cart-border);
+    border-radius: var(--cart-radius-lg);
+
+    background: var(--cart-white);
+
+    box-shadow: var(--cart-shadow-sm);
+}
+
+.carrinho-produtos {
+    min-width: 0;
+
+    padding: 27px;
+}
+
+
+/* CABEÇALHO DE SEÇÃO */
+
+.secao-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+
+    margin-bottom: 24px;
+}
+
+.secao-cabecalho h2 {
+    margin: 0;
+
+    color: var(--cart-navy);
+
+    font-size: 20px;
+    font-weight: 800;
+
+    letter-spacing: -0.4px;
+}
+
+.secao-cabecalho p {
+    margin: 7px 0 0;
+
+    color: var(--cart-muted);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* ÍCONES */
+
+.secao-icone,
+.historico-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    border-radius: var(--cart-radius-md);
+
+    background: #EAFBFE;
+
+    font-size: 21px;
+}
+
+
+/* ==========================================================
+   08. LISTA DE PRODUTOS
+========================================================== */
+
+.lista-itens {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+
+    min-width: 0;
+}
+
+
+/* CARDS GERADOS PELO JAVASCRIPT */
+
+.lista-itens article {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 16px;
+
+    min-width: 0;
+
+    padding: 19px;
+
+    border: 1px solid var(--cart-border);
+    border-radius: var(--cart-radius-md);
+
+    background: #FAFBFD;
+
+    transition:
+        border-color var(--cart-transition),
+        box-shadow var(--cart-transition);
+}
+
+.lista-itens article:hover {
+    border-color: #A7E5EE;
+
+    box-shadow: var(--cart-shadow-sm);
+}
+
+.lista-itens article h3,
+.lista-itens article h4 {
+    margin: 0 0 8px;
+
+    color: var(--cart-navy);
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.lista-itens article p {
+    margin: 5px 0;
+
+    color: var(--cart-muted);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+.lista-itens article img {
+    max-width: 100%;
+    border-radius: 9px;
+    object-fit: cover;
+}
+
+
+/* BOTÕES DOS PRODUTOS */
+
+.lista-itens button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 34px;
+
+    padding: 7px 12px;
+
+    margin: 3px;
+
+    border: 1px solid var(--cart-border-strong);
+    border-radius: var(--cart-radius-sm);
+
+    background: var(--cart-white);
+    color: var(--cart-navy);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    transition:
+        background var(--cart-transition),
+        border-color var(--cart-transition),
+        color var(--cart-transition);
+}
+
+.lista-itens button:hover {
+    border-color: var(--cart-cyan);
+
+    background: #EAFBFE;
+    color: var(--cart-blue);
+}
+
+.lista-itens button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* ==========================================================
+   09. RESUMO DA COMPRA
+========================================================== */
+
+.resumo-compra {
+    position: sticky;
+    top: 24px;
+
+    padding: 25px;
+}
+
+.resumo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 19px;
+
+    border-bottom: 1px solid var(--cart-border);
+}
+
+.resumo-header > span {
+    color: var(--cart-muted);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+.resumo-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    background: #EAFBFE;
+
+    font-size: 18px;
+}
+
+
+/* TOTAL */
+
+.resumo-informacao {
+    padding: 23px 0;
+}
+
+.resumo-informacao p {
+    margin: 0 0 9px;
+
+    color: var(--cart-muted);
+
+    font-size: 12px;
+}
+
+.resumo-informacao h2 {
+    margin: 0;
+
+    color: var(--cart-navy);
+
+    font-size: 31px;
+    font-weight: 800;
+
+    letter-spacing: -0.7px;
+
+    overflow-wrap: anywhere;
+}
+
+.resumo-separador {
+    height: 1px;
+
+    background: var(--cart-border);
+}
+
+
+/* SEGURANÇA */
+
+.seguranca-compra {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin: 19px 0;
+
+    padding: 13px;
+
+    border: 1px solid #D5EDF2;
+    border-radius: 10px;
+
+    background: #F0FBFD;
+}
+
+.seguranca-compra span {
+    flex-shrink: 0;
+
+    font-size: 17px;
+}
+
+.seguranca-compra p {
+    margin: 0;
+
+    color: var(--cart-muted);
+
+    font-size: 10px;
+
+    line-height: 1.7;
+}
+
+
+/* ==========================================================
+   10. BOTÃO FINALIZAR
+========================================================== */
+
+.botao-finalizar {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    width: 100%;
+    min-height: 51px;
+
+    padding: 13px 16px;
+
+    border: 1px solid var(--cart-blue);
+    border-radius: 10px;
+
+    background: var(--cart-blue);
+    color: var(--cart-white);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.6px;
+
+    transition:
+        background var(--cart-transition),
+        border-color var(--cart-transition),
+        box-shadow var(--cart-transition),
+        transform var(--cart-transition);
+}
+
+.botao-finalizar:hover {
+    border-color: var(--cart-navy);
+
+    background: var(--cart-navy);
+
+    box-shadow: 0 5px 15px rgba(17, 27, 58, 0.15);
+
+    transform: translateY(-2px);
+}
+
+.botao-finalizar:active {
+    transform: translateY(0);
+}
+
+.botao-finalizar:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+.botao-seta {
+    color: var(--cart-cyan);
+    font-size: 17px;
+}
+
+
+/* ==========================================================
+   11. MENSAGENS
+========================================================== */
+
+.mensagem-carrinho {
+    margin: 12px 0 0;
+
+    color: var(--cart-muted);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+    text-align: center;
+
+    overflow-wrap: anywhere;
+}
+
+.mensagem-carrinho:empty {
+    display: none;
+}
+
+
+/* ==========================================================
+   12. CONTINUAR COMPRANDO
+========================================================== */
+
+.continuar-comprando {
+    display: block;
+
+    margin-top: 17px;
+
+    color: var(--cart-blue);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-align: center;
+
+    transition: color var(--cart-transition);
+}
+
+.continuar-comprando:hover {
+    color: var(--cart-cyan);
+}
+
+
+/* ==========================================================
+   13. HISTÓRICO DE PEDIDOS
+========================================================== */
+
+.historico-pedidos {
+    margin-top: 27px;
+
+    padding: 27px;
+}
+
+.lista-pedidos {
+    display: flex;
+    flex-direction: column;
+
+    gap: 13px;
+}
+
+
+/* PEDIDOS GERADOS PELO JAVASCRIPT */
+
+.lista-pedidos article {
+    padding: 19px;
+
+    border: 1px solid var(--cart-border);
+    border-radius: var(--cart-radius-md);
+
+    background: #FAFBFD;
+
+    transition:
+        border-color var(--cart-transition),
+        box-shadow var(--cart-transition);
+}
+
+.lista-pedidos article:hover {
+    border-color: #A7E5EE;
+
+    box-shadow: var(--cart-shadow-sm);
+}
+
+.lista-pedidos article h3,
+.lista-pedidos article h4 {
+    margin: 0 0 8px;
+
+    color: var(--cart-navy);
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.lista-pedidos article p {
+    margin: 5px 0;
+
+    color: var(--cart-muted);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+.lista-pedidos article button {
+    min-height: 34px;
+
+    padding: 7px 12px;
+
+    border: 1px solid var(--cart-border-strong);
+    border-radius: 8px;
+
+    background: var(--cart-white);
+    color: var(--cart-navy);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* ==========================================================
+   14. RODAPÉ
+========================================================== */
+
+.carrinho-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+    width: 100%;
+
+    padding: 25px clamp(20px, 5%, 75px);
+
+    border-top: 1px solid var(--cart-border);
+
+    background: var(--cart-white);
+}
+
+.footer-marca {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: var(--cart-navy);
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.footer-marca img {
+    width: 30px;
+    height: 30px;
+
+    object-fit: contain;
+}
+
+.carrinho-footer p,
+.carrinho-footer > span {
+    margin: 0;
+
+    color: var(--cart-muted);
+
+    font-size: 10px;
+}
+
+
+/* ==========================================================
+   15. FOCO E ACESSIBILIDADE
+========================================================== */
+
+.pagina-carrinho a:focus-visible,
+.pagina-carrinho button:focus-visible {
+    outline: 3px solid var(--cart-blue);
+    outline-offset: 3px;
+}
+
+
+/* ==========================================================
+   16. TABLETS
+========================================================== */
+
+@media (max-width: 950px) {
+
+    .carrinho-main {
+        padding: 32px 24px 50px;
+    }
+
+    .carrinho-grid {
+        grid-template-columns: minmax(0, 1fr) 310px;
+
+        gap: 17px;
+    }
+
+    .carrinho-produtos,
+    .resumo-compra,
+    .historico-pedidos {
+        padding: 21px;
+    }
+
+}
+
+
+/* ==========================================================
+   17. TABLETS PEQUENOS
+========================================================== */
+
+@media (max-width: 760px) {
+
+    .carrinho-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .resumo-compra {
+        position: static;
+    }
+
+}
+
+
+/* ==========================================================
+   18. CELULARES
+========================================================== */
+
+@media (max-width: 600px) {
+
+    .carrinho-header {
+        flex-wrap: wrap;
+
+        gap: 12px;
+
+        padding: 13px 17px;
+    }
+
+    .carrinho-logo {
+        font-size: 17px;
+    }
+
+    .carrinho-logo img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .botao-voltar {
+        min-height: 39px;
+
+        padding: 0 11px;
+
+        font-size: 10px;
+    }
+
+    .carrinho-main {
+        padding: 25px 15px 40px;
+    }
+
+    .carrinho-introducao {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+    .carrinho-introducao h1 {
+        font-size: 28px;
+    }
+
+    .carrinho-selo {
+        width: 100%;
+    }
+
+    .carrinho-produtos,
+    .resumo-compra,
+    .historico-pedidos {
+        padding: 18px;
+
+        border-radius: 13px;
+    }
+
+    .secao-cabecalho h2 {
+        font-size: 17px;
+    }
+
+    .lista-itens article {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding: 15px;
+    }
+
+    .resumo-informacao h2 {
+        font-size: 27px;
+    }
+
+    .carrinho-footer {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        padding: 23px 17px;
+    }
+
+}
+
+
+/* ==========================================================
+   19. CELULARES PEQUENOS
+========================================================== */
+
+@media (max-width: 360px) {
+
+    .carrinho-main {
+        padding-right: 11px;
+        padding-left: 11px;
+    }
+
+    .carrinho-logo {
+        font-size: 15px;
+    }
+
+    .botao-voltar {
+        font-size: 9px;
+    }
+
+    .carrinho-introducao h1 {
+        font-size: 25px;
+    }
+
+    .secao-icone,
+    .historico-icone {
+        width: 38px;
+        height: 38px;
+    }
+
+}
+
+
+/* ==========================================================
+   20. MOVIMENTO REDUZIDO
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .pagina-carrinho *,
+    .pagina-carrinho *::before,
+    .pagina-carrinho *::after {
+
+        scroll-behavior: auto !important;
+
+        animation: none !important;
+
+        transition-duration: 0.01ms !important;
+
+    }
+
+}

@@ -1,0 +1,478 @@
+
+/* =========================================================
+   SAFEMARKET — MENU LATERAL
+   Arquivo: css/menu.css
+
+   RESPONSABILIDADES:
+   - Estrutura do menu lateral
+   - Navegação em ordem fixa
+   - Destaque da página atual
+   - Recolhimento do menu
+   - Posicionamento do conteúdo
+   - Responsividade
+========================================================= */
+
+
+/* =========================================================
+   1. VARIÁVEIS
+========================================================= */
+
+:root {
+    --sm-menu-largura: 250px;
+    --sm-menu-recolhido: 76px;
+
+    --sm-fundo-menu: #111B3A;
+    --sm-texto-menu: #FFFFFF;
+    --sm-texto-menu-secundario: #B8C5D9;
+
+    --sm-ciano: #00B8D9;
+    --sm-azul-botao: #007F99;
+    --sm-azul-hover: #006D83;
+
+    --sm-transicao: 0.25s ease;
+    --sm-transicao-rapida: 0.18s ease;
+
+    --sm-menu-item-altura: 46px;
+    --sm-menu-espacamento: 7px;
+
+    --sm-sombra-menu:
+        3px 0 18px rgba(17, 27, 58, 0.12);
+}
+
+
+/* =========================================================
+   2. ESTRUTURA DO MENU
+========================================================= */
+
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+
+    width: var(--sm-menu-largura);
+    height: 100vh;
+    height: 100dvh;
+
+    padding: 22px 14px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    background: var(--sm-fundo-menu);
+    color: var(--sm-texto-menu);
+
+    box-shadow: var(--sm-sombra-menu);
+
+    box-sizing: border-box;
+
+    transition:
+        width var(--sm-transicao),
+        padding var(--sm-transicao);
+}
+
+
+/* =========================================================
+   3. CABEÇALHO
+========================================================= */
+
+.menu-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 48px;
+    flex-shrink: 0;
+
+    margin-bottom: 32px;
+    padding: 0 7px;
+}
+
+.logo-menu {
+    margin: 0;
+
+    color: #FFFFFF;
+
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   4. BOTÃO DO MENU
+========================================================= */
+
+.botao-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    color: #FFFFFF;
+    background: transparent;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition:
+        background-color var(--sm-transicao-rapida),
+        border-color var(--sm-transicao-rapida),
+        color var(--sm-transicao-rapida);
+}
+
+.botao-menu:hover {
+    color: #FFFFFF;
+    background: rgba(0, 184, 217, 0.16);
+    border-color: rgba(0, 184, 217, 0.45);
+}
+
+.botao-menu svg {
+    display: block;
+
+    width: 19px;
+    height: 19px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   5. NAVEGAÇÃO
+========================================================= */
+
+#menu-navegacao {
+    display: flex !important;
+    flex-direction: column !important;
+
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+
+    gap: var(--sm-menu-espacamento) !important;
+
+    width: 100%;
+    min-width: 0;
+
+    height: auto;
+    min-height: 0;
+
+    flex: 0 0 auto;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: visible;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   6. LINKS DO MENU
+========================================================= */
+
+#menu-navegacao > a {
+    position: relative;
+
+    display: flex !important;
+    flex-direction: row !important;
+
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    order: 0 !important;
+
+    width: 100%;
+    min-width: 0;
+
+    height: var(--sm-menu-item-altura);
+    min-height: var(--sm-menu-item-altura);
+
+    flex: 0 0 var(--sm-menu-item-altura) !important;
+
+    margin: 0 !important;
+    padding: 0 13px;
+
+    gap: 13px;
+
+    box-sizing: border-box;
+
+    color: var(--sm-texto-menu-secundario);
+    background: transparent;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    border: none;
+    border-radius: 8px;
+
+    transform: none !important;
+
+    transition:
+        background-color var(--sm-transicao-rapida),
+        color var(--sm-transicao-rapida);
+}
+
+
+/* =========================================================
+   7. ÍCONES
+========================================================= */
+
+#menu-navegacao > a svg {
+    display: block;
+
+    width: 19px;
+    height: 19px;
+
+    min-width: 19px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   8. TEXTOS
+========================================================= */
+
+#menu-navegacao > a span {
+    display: block;
+
+    min-width: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   9. HOVER
+========================================================= */
+
+#menu-navegacao > a:hover {
+    color: #FFFFFF;
+    background: rgba(0, 184, 217, 0.16);
+}
+
+
+/* =========================================================
+   10. ITEM ATIVO
+========================================================= */
+
+#menu-navegacao > a.ativo,
+#menu-navegacao > a[aria-current="page"] {
+    color: #FFFFFF;
+
+    background: rgba(0, 184, 217, 0.16);
+
+    box-shadow: inset 3px 0 var(--sm-ciano);
+
+    font-weight: 600;
+}
+
+#menu-navegacao > a.ativo:hover,
+#menu-navegacao > a[aria-current="page"]:hover {
+    color: #FFFFFF;
+
+    background: rgba(0, 184, 217, 0.23);
+
+    box-shadow: inset 3px 0 var(--sm-ciano);
+}
+
+
+/* =========================================================
+   11. MENU RECOLHIDO
+========================================================= */
+
+body.menu-recolhido .menu-lateral {
+    width: var(--sm-menu-recolhido);
+
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+body.menu-recolhido .logo-menu,
+body.menu-recolhido #menu-navegacao > a span {
+    display: none;
+}
+
+body.menu-recolhido .menu-topo {
+    justify-content: center;
+    padding: 0;
+}
+
+body.menu-recolhido #menu-navegacao {
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+}
+
+body.menu-recolhido #menu-navegacao > a {
+    justify-content: center !important;
+
+    gap: 0;
+    padding: 0;
+}
+
+body.menu-recolhido #menu-navegacao > a svg {
+    margin: 0;
+}
+
+
+/* =========================================================
+   12. CONTEÚDO PRINCIPAL
+========================================================= */
+
+.conteudo {
+    width: calc(100% - var(--sm-menu-largura));
+
+    min-width: 0;
+    min-height: 100vh;
+
+    margin-left: var(--sm-menu-largura);
+
+    box-sizing: border-box;
+
+    transition:
+        margin-left var(--sm-transicao),
+        width var(--sm-transicao);
+}
+
+body.menu-recolhido .conteudo {
+    width: calc(100% - var(--sm-menu-recolhido));
+
+    margin-left: var(--sm-menu-recolhido);
+}
+
+
+/* =========================================================
+   13. ACESSIBILIDADE
+========================================================= */
+
+#menu-navegacao > a:focus-visible,
+.botao-menu:focus-visible {
+    outline: 2px solid var(--sm-ciano);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   14. RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .menu-lateral {
+        z-index: 1000;
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .menu-lateral {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    #menu-navegacao > a {
+        gap: 9px;
+        padding-right: 9px;
+        padding-left: 9px;
+    }
+
+}
+
+
+/* =========================================================
+   15. MOVIMENTO REDUZIDO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .menu-lateral,
+    .botao-menu,
+    #menu-navegacao > a,
+    .conteudo {
+        transition: none !important;
+    }
+
+}
+
+/* =====================================================
+   SAFEMARKET — BOTÃO DE RECOLHER O MENU
+===================================================== */
+
+.botao-alternar-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+
+    width: 100%;
+    min-height: 42px;
+    padding: 9px 12px;
+
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.botao-alternar-menu:hover {
+    color: #FFFFFF;
+    background: #007F99;
+    border-color: #00B8D9;
+}
+
+.botao-alternar-menu i,
+.botao-alternar-menu svg {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+}
+
+body.menu-recolhido .botao-alternar-menu {
+    justify-content: center;
+    padding: 10px 5px;
+}
+
+body.menu-recolhido .botao-alternar-menu span {
+    display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .botao-alternar-menu {
+        transition: none;
+    }
+}

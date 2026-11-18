@@ -14,107 +14,293 @@
 
 <body>
 
-    <div class="login-card cadastro-card">
+    <main class="cadastro-layout">
 
-<div class="logo-container">
-    <div class="logo-glass">
-        <img src="../imagem/logo.png" alt="Logo SafeMarket">
-    </div>
-</div>
-        <h2 class="titulo-cadastro">Criar conta</h2>
+        <!-- LADO ESQUERDO: IDENTIDADE SAFEMARKET -->
+        <section class="painel-marca">
 
-        <p class="subtitulo-cadastro">
-        </p>
+            <div class="marca-conteudo">
 
-        <form id="form-cadastro">
+                <div class="logo-container">
+                    <div class="logo-glass">
+                        <img
+                            src="../imagem/logo.png"
+                            alt="Logo SafeMarket"
+                        >
+                    </div>
+                </div>
 
-            <div class="campo-cadastro">
-                <label for="nome">Nome completo</label>
-                <input
-                    type="text"
-                    id="nome"
-                    name="nome"
-                    placeholder="Digite seu nome"
-                    autocomplete="name"
-                    required
-                >
+                <h1 class="marca-titulo">SafeMarket</h1>
+
+                <h2 class="marca-subtitulo">
+                    Negocie com confiança.
+                </h2>
+
+                <p class="marca-descricao">
+                    Sua segurança é nossa prioridade.
+                    Um ambiente desenvolvido para tornar
+                    suas negociações mais protegidas.
+                </p>
+
+                <div class="marca-destaques">
+
+                    <div class="destaque-item">
+                        <span class="destaque-icone">✓</span>
+                        <span>Mais segurança nas negociações</span>
+                    </div>
+
+                    <div class="destaque-item">
+                        <span class="destaque-icone">✓</span>
+                        <span>Proteção das informações</span>
+                    </div>
+
+                    <div class="destaque-item">
+                        <span class="destaque-icone">✓</span>
+                        <span>Monitoramento de atividades</span>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="campo-cadastro">
-                <label for="email">E-mail</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Digite seu e-mail"
-                    autocomplete="email"
-                    required
-                >
+            <div class="marca-rodape">
+                © 2026 SafeMarket. Todos os direitos reservados.
             </div>
 
-            <div class="campo-cadastro">
-                <label for="senha">Senha</label>
-                <input
-                    type="password"
-                    id="senha"
-                    name="senha"
-                    placeholder="Crie uma senha"
-                    autocomplete="new-password"
-                    minlength="8"
-                    required
-                >
+        </section>
+
+
+        <!-- LADO DIREITO: FORMULÁRIO -->
+        <section class="painel-cadastro">
+
+            <div class="cadastro-card">
+
+                <header class="cabecalho-cadastro">
+
+                    <span class="etiqueta-cadastro">
+                        CRIE SUA CONTA
+                    </span>
+
+                    <h2 class="titulo-cadastro">
+                        Criar conta
+                    </h2>
+
+                    <p class="subtitulo-cadastro">
+                        Preencha seus dados para acessar
+                        o SafeMarket com segurança.
+                    </p>
+
+                </header>
+
+
+                <form id="form-cadastro">
+
+                    <!-- Nome completo -->
+                    <div class="campo-cadastro">
+
+                        <label for="nome">
+                            Nome completo
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite seu nome completo"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- E-mail -->
+                    <div class="campo-cadastro">
+
+                        <label for="email">
+                            E-mail
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Digite seu e-mail"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Senha -->
+                    <div class="campo-cadastro">
+
+                        <label for="senha">
+                            Senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Crie uma senha segura"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Requisitos de segurança -->
+                    <div
+                        class="requisitos-senha"
+                        id="requisitos-senha"
+                    >
+
+                        <p>Sua senha deve conter:</p>
+
+                        <ul>
+
+                            <li id="regra-tamanho">
+                                <span class="indicador">○</span>
+                                Pelo menos 8 caracteres
+                            </li>
+
+                            <li id="regra-maiuscula">
+                                <span class="indicador">○</span>
+                                Uma letra maiúscula (A-Z)
+                            </li>
+
+                            <li id="regra-minuscula">
+                                <span class="indicador">○</span>
+                                Uma letra minúscula (a-z)
+                            </li>
+
+                            <li id="regra-numero">
+                                <span class="indicador">○</span>
+                                Pelo menos um número (0-9)
+                            </li>
+
+                            <li id="regra-especial">
+                                <span class="indicador">○</span>
+                                Um caractere especial (!@#$%)
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <!-- Força da senha -->
+                    <div
+                        class="forca-senha"
+                        id="forca-senha"
+                    >
+
+                        <div class="forca-senha-topo">
+
+                            <span>Força da senha</span>
+
+                            <strong id="texto-forca">
+                                Não informada
+                            </strong>
+
+                        </div>
+
+                        <div class="barra-forca">
+                            <div id="progresso-forca"></div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Confirmar senha -->
+                    <div class="campo-cadastro">
+
+                        <label for="confirmar-senha">
+                            Confirmar senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmar-senha"
+                            name="confirmar-senha"
+                            placeholder="Digite a senha novamente"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Botão -->
+                    <button
+                        type="submit"
+                        class="bnt-login"
+                    >
+                        CRIAR MINHA CONTA
+                    </button>
+
+
+                    <!-- Mensagens -->
+                    <div
+                        id="mensagem-cadastro"
+                        role="status"
+                        aria-live="polite"
+                    ></div>
+
+                </form>
+
+
+                <!-- Cadastro social -->
+                <div class="separador-cadastro">
+                    <span>OU CADASTRE-SE COM</span>
+                </div>
+
+
+                <div class="botoes-sociais">
+
+                    <button
+                        type="button"
+                        class="botao-social"
+                        id="cadastro-google"
+                    >
+                        <strong class="google-icone">G</strong>
+                        Google
+                    </button>
+
+                    <button
+                        type="button"
+                        class="botao-social"
+                        id="cadastro-facebook"
+                    >
+                        <strong class="facebook-icone">f</strong>
+                        Facebook
+                    </button>
+
+                </div>
+
+
+                <!-- Login -->
+                <div class="links-recuperacao">
+                    <a href="index.html">
+                        Já tem uma conta? Entrar
+                    </a>
+                </div>
+
             </div>
 
-            <div class="campo-cadastro">
-                <label for="confirmar-senha">Confirmar senha</label>
-                <input
-                    type="password"
-                    id="confirmar-senha"
-                    name="confirmar-senha"
-                    placeholder="Digite a senha novamente"
-                    autocomplete="new-password"
-                    minlength="8"
-                    required
-                >
-            </div>
+        </section>
 
-            <button type="submit" class="bnt-login">
-                CRIAR CONTA
-            </button>
+    </main>
 
-            <div id="mensagem-cadastro" role="status"></div>
 
-        </form>
-
-        <div class="separador-cadastro">
-            <span>OU CADASTRE-SE COM</span>
-        </div>
-
-        <div class="botoes-sociais">
-
-            <button type="button" class="botao-social"
-                id="cadastro-google">
-                <strong class="google-icone">G</strong>
-                Google
-            </button>
-
-            <button type="button" class="botao-social"
-                id="cadastro-facebook">
-                <strong class="facebook-icone">f</strong>
-                Facebook
-            </button>
-
-        </div>
-
-        <div class="links-recuperacao">
-            <a href="index.html">Já tem uma conta? Entrar</a>
-        </div>
-
-    </div>
-
+    <!-- Scripts -->
     <script src="../js/api.js"></script>
-<script src="../js/cadastro.js"></script>
+    <script src="../js/cadastro.js"></script>
 
 </body>
-
 </html>

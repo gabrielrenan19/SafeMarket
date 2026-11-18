@@ -1,0 +1,560 @@
+
+/* =========================================================
+   SAFEMARKET — CONFIGURAÇÕES
+   Arquivo: css/configuracoes.css
+
+   RESPONSABILIDADES:
+   - Cabeçalho da página
+   - Seção de configurações
+   - Preferências e notificações
+   - Interruptores
+   - Botão salvar
+   - Mensagens de retorno
+   - Responsividade
+
+   IDENTIDADE VISUAL:
+   Azul-marinho, ciano e branco
+========================================================= */
+
+
+/* =========================================================
+   1. VARIÁVEIS LOCAIS
+========================================================= */
+
+main.conteudo {
+    --config-azul-marinho: #111B3A;
+    --config-ciano: #00B8D9;
+    --config-botao: #007F99;
+    --config-hover: #006D83;
+
+    --config-texto: #111B3A;
+    --config-secundario: #64748B;
+
+    --config-fundo: #FFFFFF;
+    --config-fundo-secundario: #F8FAFC;
+    --config-borda: #E2E8F0;
+
+    --config-sombra:
+        0 4px 18px rgba(17, 27, 58, 0.05);
+}
+
+
+/* =========================================================
+   2. CONTEÚDO PRINCIPAL
+========================================================= */
+
+main.conteudo {
+    min-width: 0;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   3. CABEÇALHO
+========================================================= */
+
+main.conteudo > header {
+    margin-bottom: 30px;
+}
+
+main.conteudo > header h1 {
+    margin: 0 0 8px;
+
+    color: var(--config-azul-marinho);
+
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+main.conteudo .descricao-pagina {
+    margin: 0;
+
+    color: var(--config-secundario);
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   4. SEÇÃO DE CONFIGURAÇÕES
+========================================================= */
+
+main.conteudo > section.atividades {
+    width: 100%;
+    min-width: 0;
+
+    padding: 28px;
+
+    background: var(--config-fundo);
+
+    border: 1px solid var(--config-borda);
+    border-radius: 14px;
+
+    box-shadow: var(--config-sombra);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   5. CABEÇALHO DA SEÇÃO
+========================================================= */
+
+main.conteudo .cabecalho-secao-configuracoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 20px;
+    margin-bottom: 0;
+
+    border-bottom: 1px solid var(--config-borda);
+}
+
+main.conteudo .cabecalho-secao-configuracoes h2 {
+    margin: 0 0 7px;
+
+    color: var(--config-azul-marinho);
+
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+main.conteudo .cabecalho-secao-configuracoes p {
+    margin: 0;
+
+    color: var(--config-secundario);
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+main.conteudo .cabecalho-secao-configuracoes > svg {
+    width: 23px;
+    height: 23px;
+
+    flex-shrink: 0;
+
+    color: var(--config-ciano);
+}
+
+
+/* =========================================================
+   6. FORMULÁRIO
+========================================================= */
+
+#form-configuracoes {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    min-width: 0;
+
+    gap: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   7. OPÇÕES DE CONFIGURAÇÃO
+========================================================= */
+
+#form-configuracoes .atividade {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    min-width: 0;
+
+    gap: 24px;
+
+    margin: 0;
+    padding: 23px 4px;
+
+    background: transparent;
+
+    border: none;
+    border-bottom: 1px solid var(--config-borda);
+    border-radius: 0;
+
+    box-sizing: border-box;
+
+    transition: background-color 0.2s ease;
+}
+
+#form-configuracoes .atividade:hover {
+    background: var(--config-fundo-secundario);
+}
+
+#form-configuracoes .atividade-informacoes {
+    flex: 1;
+    min-width: 0;
+}
+
+#form-configuracoes .atividade-informacoes p {
+    margin: 0 0 6px;
+
+    color: var(--config-azul-marinho);
+
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+#form-configuracoes .atividade-informacoes span {
+    display: block;
+
+    color: var(--config-secundario);
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   8. INTERRUPTORES
+========================================================= */
+
+#form-configuracoes .atividade label {
+    display: inline-flex;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    gap: 10px;
+
+    color: var(--config-texto);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#form-configuracoes .atividade input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+
+    position: relative;
+
+    width: 44px;
+    height: 24px;
+
+    flex-shrink: 0;
+
+    margin: 0;
+
+    background: #CBD5E1;
+
+    border: 1px solid #B8C4D3;
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+#form-configuracoes .atividade input[type="checkbox"]::before {
+    content: "";
+
+    position: absolute;
+
+    top: 3px;
+    left: 3px;
+
+    width: 16px;
+    height: 16px;
+
+    background: #FFFFFF;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 1px 3px rgba(17, 27, 58, 0.2);
+
+    transition: transform 0.2s ease;
+}
+
+#form-configuracoes .atividade input[type="checkbox"]:checked {
+    background: var(--config-ciano);
+    border-color: var(--config-ciano);
+}
+
+#form-configuracoes .atividade input[type="checkbox"]:checked::before {
+    transform: translateX(20px);
+}
+
+#form-configuracoes .atividade input[type="checkbox"]:focus-visible {
+    outline: 3px solid rgba(0, 184, 217, 0.25);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   9. LINK DE PERMISSÕES
+========================================================= */
+
+#form-configuracoes .atividade > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    min-height: 42px;
+
+    gap: 8px;
+
+    padding: 9px 15px;
+
+    color: var(--config-botao);
+    background: #F0FAFC;
+
+    border: 1px solid rgba(0, 184, 217, 0.35);
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+#form-configuracoes .atividade > a svg {
+    width: 17px;
+    height: 17px;
+}
+
+#form-configuracoes .atividade > a:hover {
+    color: #FFFFFF;
+
+    background: var(--config-botao);
+
+    border-color: var(--config-botao);
+}
+
+#form-configuracoes .atividade > a:focus-visible {
+    outline: 3px solid rgba(0, 184, 217, 0.25);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   10. AÇÕES DO FORMULÁRIO
+========================================================= */
+
+#form-configuracoes .acoes-configuracoes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   11. BOTÃO SALVAR
+========================================================= */
+
+#form-configuracoes .bnt-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+
+    min-height: 44px;
+
+    gap: 9px;
+
+    margin-top: 25px;
+    padding: 12px 24px;
+
+    color: #FFFFFF;
+    background: var(--config-botao);
+
+    border: 1px solid var(--config-botao);
+    border-radius: 8px;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#form-configuracoes .bnt-login svg {
+    width: 17px;
+    height: 17px;
+}
+
+#form-configuracoes .bnt-login:hover {
+    background: var(--config-hover);
+    border-color: var(--config-hover);
+
+    box-shadow:
+        0 4px 12px rgba(0, 127, 153, 0.18);
+}
+
+#form-configuracoes .bnt-login:active {
+    transform: translateY(1px);
+}
+
+#form-configuracoes .bnt-login:focus-visible {
+    outline: 3px solid rgba(0, 184, 217, 0.25);
+    outline-offset: 3px;
+}
+
+#form-configuracoes .bnt-login:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   12. MENSAGEM DE RETORNO
+========================================================= */
+
+#mensagem-configuracoes {
+    display: block;
+
+    margin: 16px 0 0;
+    padding: 12px 14px;
+
+    color: var(--config-azul-marinho);
+    background: var(--config-fundo-secundario);
+
+    border: 1px solid var(--config-borda);
+    border-radius: 8px;
+
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+#mensagem-configuracoes:empty {
+    display: none;
+}
+
+#mensagem-configuracoes[hidden] {
+    display: none;
+}
+
+
+/* =========================================================
+   13. RESPONSIVIDADE — TABLETS
+========================================================= */
+
+@media (max-width: 760px) {
+
+    main.conteudo {
+        padding: 24px 20px;
+    }
+
+    main.conteudo > section.atividades {
+        padding: 22px 18px;
+    }
+
+    #form-configuracoes .atividade {
+        gap: 16px;
+    }
+
+}
+
+
+/* =========================================================
+   14. RESPONSIVIDADE — CELULARES
+========================================================= */
+
+@media (max-width: 450px) {
+
+    main.conteudo {
+        padding: 20px 15px;
+    }
+
+    main.conteudo > header h1 {
+        font-size: 24px;
+    }
+
+    main.conteudo > section.atividades {
+        padding: 20px 15px;
+    }
+
+    main.conteudo .cabecalho-secao-configuracoes {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    main.conteudo .cabecalho-secao-configuracoes h2 {
+        font-size: 17px;
+    }
+
+    #form-configuracoes .atividade {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 14px;
+
+        padding: 20px 2px;
+    }
+
+    #form-configuracoes .atividade label {
+        align-self: flex-start;
+    }
+
+    #form-configuracoes .atividade > a {
+        align-self: flex-start;
+    }
+
+    #form-configuracoes .acoes-configuracoes {
+        width: 100%;
+    }
+
+    #form-configuracoes .bnt-login {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   15. ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #form-configuracoes .atividade,
+    #form-configuracoes .atividade input[type="checkbox"],
+    #form-configuracoes .atividade input[type="checkbox"]::before,
+    #form-configuracoes .atividade > a,
+    #form-configuracoes .bnt-login {
+        transition: none !important;
+    }
+
+}

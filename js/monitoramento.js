@@ -113,3 +113,5 @@ window.monitoramentoSafeMarket = {
     atualizarAtividades: atualizarAtividadesMonitoramento,
     exibirErro: exibirErroMonitoramento
 };
+
+(async()=>{try{const d=await requisicaoAPI('/admin/monitoramento');window.monitoramentoSafeMarket.atualizarIndicadores(d);window.monitoramentoSafeMarket.atualizarAtividades(d.atividades);}catch(e){window.monitoramentoSafeMarket.exibirErro(e.message);}})();

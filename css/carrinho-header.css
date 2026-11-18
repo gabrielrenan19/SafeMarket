@@ -1,0 +1,306 @@
+
+/* ==========================================================
+   SAFEMARKET — CARRINHO DO CABEÇALHO
+========================================================== */
+
+.carrinho-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* BOTÃO */
+
+.botao-carrinho-header {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 42px;
+    padding: 0 14px;
+    border: 1px solid #DCE3EB;
+    border-radius: 10px;
+    background: #FFFFFF;
+    color: #111B3A;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s ease,
+                border-color .2s ease,
+                color .2s ease;
+}
+
+.botao-carrinho-header:hover {
+    background: #F0FAFC;
+    border-color: #00B8D9;
+    color: #007F99;
+}
+
+.botao-carrinho-header svg {
+    width: 19px;
+    height: 19px;
+}
+
+.contador-carrinho {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 20px;
+    background: #00B8D9;
+    color: #111B3A;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+/* PRÉVIA */
+
+.previa-carrinho {
+    position: absolute;
+    z-index: 1000;
+    top: calc(100% + 13px);
+    right: 0;
+    width: 370px;
+    max-width: calc(100vw - 24px);
+    padding: 18px;
+    border: 1px solid #DCE3EB;
+    border-radius: 14px;
+    background: #FFFFFF;
+    box-shadow: 0 12px 35px rgba(17, 27, 58, .16);
+    animation: aparecerCarrinho .18s ease;
+}
+
+.previa-carrinho[hidden] {
+    display: none;
+}
+
+@keyframes aparecerCarrinho {
+    from {
+        opacity: 0;
+        transform: translateY(-7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* CABEÇALHO DA PRÉVIA */
+
+.previa-carrinho-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #DCE3EB;
+}
+
+.previa-carrinho-topo h3 {
+    margin: 0 0 4px;
+    color: #111B3A;
+    font-size: 17px;
+}
+
+.previa-carrinho-topo span {
+    color: #718096;
+    font-size: 12px;
+}
+
+.fechar-previa-carrinho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 8px;
+    background: #F3F6FA;
+    color: #263548;
+    cursor: pointer;
+}
+
+.fechar-previa-carrinho:hover {
+    background: #E5F8FB;
+    color: #007F99;
+}
+
+/* LISTA */
+
+.lista-previa-carrinho {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-height: 310px;
+    overflow-y: auto;
+    padding: 15px 2px;
+}
+
+.item-previa-carrinho {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 11px;
+}
+
+.imagem-previa-carrinho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 9px;
+    background: #F0FAFC;
+    color: #007F99;
+}
+
+.imagem-previa-carrinho svg {
+    width: 21px;
+    height: 21px;
+}
+
+.info-previa-carrinho {
+    min-width: 0;
+}
+
+.info-previa-carrinho strong {
+    display: block;
+    overflow: hidden;
+    color: #263548;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.info-previa-carrinho span {
+    display: block;
+    margin-top: 4px;
+    color: #718096;
+    font-size: 12px;
+}
+
+.previa-item-acoes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.previa-item-acoes strong {
+    color: #111B3A;
+    font-size: 13px;
+}
+
+.remover-previa-carrinho {
+    border: 0;
+    background: transparent;
+    color: #C83D3D;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.remover-previa-carrinho:hover {
+    text-decoration: underline;
+}
+
+/* ESTADOS */
+
+.carrinho-vazio,
+.carrinho-carregando,
+.carrinho-erro {
+    padding: 24px 8px;
+    color: #718096;
+    font-size: 13px;
+    text-align: center;
+}
+
+.carrinho-vazio svg {
+    display: block;
+    width: 34px;
+    height: 34px;
+    margin: 0 auto 10px;
+    color: #00B8D9;
+}
+
+/* RODAPÉ */
+
+.previa-carrinho-rodape {
+    padding-top: 15px;
+    border-top: 1px solid #DCE3EB;
+}
+
+.previa-carrinho-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.previa-carrinho-total span {
+    color: #718096;
+    font-size: 13px;
+}
+
+.previa-carrinho-total strong {
+    color: #111B3A;
+    font-size: 19px;
+}
+
+.botao-ver-carrinho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 100%;
+    min-height: 44px;
+    border-radius: 9px;
+    background: #007F99;
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background .2s ease;
+}
+
+.botao-ver-carrinho:hover {
+    background: #006D83;
+}
+
+.botao-ver-carrinho svg {
+    width: 17px;
+    height: 17px;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 600px) {
+    .texto-carrinho-header {
+        display: none;
+    }
+
+    .botao-carrinho-header {
+        gap: 6px;
+        padding: 0 9px;
+    }
+
+    .previa-carrinho {
+        position: fixed;
+        top: 76px;
+        right: 12px;
+        width: 370px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .previa-carrinho {
+        animation: none;
+    }
+
+    .botao-carrinho-header,
+    .botao-ver-carrinho {
+        transition: none;
+    }
+}

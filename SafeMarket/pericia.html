@@ -8,210 +8,660 @@
 
     <meta
         name="description"
-        content="Consulta e análise de investigações de segurança do SafeMarket"
+        content="Consulta, investigação e análise dos registros de auditoria do SafeMarket."
     >
 
-    <title>SafeMarket - Perícia Digital</title>
+    <meta name="theme-color" content="#111B3A">
 
+    <title>Perícia Digital | SafeMarket</title>
+
+    <!-- ESTILIZAÇÃO -->
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/pericia.css">
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- BIBLIOTECAS E SCRIPTS -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
     <script src="../js/api.js" defer></script>
-    <script src="../js/pericia.js" defer></script>
     <script src="../js/menu.js" defer></script>
+    <script src="../js/pericia.js" defer></script>
 </head>
 
 <body>
 
-    <!-- Menu lateral -->
+    <!-- =================================================
+         MENU LATERAL
+    ================================================== -->
+
     <aside class="menu-lateral" id="menu-lateral">
 
-        <div class="menu-topo">
-            <h2 class="logo-menu">SafeMarket</h2>
+        <div class="menu-cabecalho">
+
+            <h2>SafeMarket</h2>
 
             <button
                 type="button"
-                class="botao-menu"
                 id="alternar-menu"
+                class="botao-alternar-menu"
                 aria-label="Recolher menu"
                 aria-expanded="true"
                 aria-controls="menu-navegacao"
                 title="Recolher menu"
             >
-                <i
-                    data-lucide="panel-left-close"
-                    aria-hidden="true"
-                ></i>
+
+                <i data-lucide="panel-left-close"></i>
+
+                <span>Recolher menu</span>
+
             </button>
+
         </div>
 
-        <nav id="menu-navegacao" aria-label="Menu principal">
+        <nav
+            class="menu-navegacao"
+            id="menu-navegacao"
+            aria-label="Menu administrativo"
+        >
 
-            <a href="dashboard.html" title="Dashboard">
-                <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+            <a href="dashboard.html" class="item-menu">
+                <i data-lucide="layout-dashboard"></i>
                 <span>Dashboard</span>
             </a>
 
-            <a href="monitoramento.html" title="Monitoramento">
-                <i data-lucide="activity" aria-hidden="true"></i>
-                <span>Monitoramento</span>
-            </a>
-
-            <a href="auditoria.html" title="Auditoria">
-                <i data-lucide="clipboard-check" aria-hidden="true"></i>
-                <span>Auditoria</span>
-            </a>
-
-            <a href="alertas.html" title="Alertas">
-                <i data-lucide="shield-alert" aria-hidden="true"></i>
-                <span>Alertas</span>
-            </a>
-
-            <a href="usuarios.html" title="Usuários">
-                <i data-lucide="users" aria-hidden="true"></i>
+            <a href="usuarios.html" class="item-menu">
+                <i data-lucide="users"></i>
                 <span>Usuários</span>
             </a>
 
-            <a href="configuracoes.html" title="Configurações">
-                <i data-lucide="settings" aria-hidden="true"></i>
-                <span>Configurações</span>
+            <a href="anuncios.html" class="item-menu">
+                <i data-lucide="package"></i>
+                <span>Anúncios</span>
+            </a>
+
+            <a href="auditoria.html" class="item-menu">
+                <i data-lucide="clipboard-list"></i>
+                <span>Auditoria e Logs</span>
+            </a>
+
+            <a href="monitoramento.html" class="item-menu">
+                <i data-lucide="activity"></i>
+                <span>Monitoramento</span>
+            </a>
+
+            <a href="alertas.html" class="item-menu">
+                <i data-lucide="bell"></i>
+                <span>Alertas</span>
             </a>
 
             <a
                 href="pericia.html"
+                class="item-menu ativo"
                 aria-current="page"
-                title="Perícia Digital"
             >
-                <i data-lucide="search" aria-hidden="true"></i>
+                <i data-lucide="scan-search"></i>
                 <span>Perícia Digital</span>
             </a>
 
+            <a href="configuracoes.html" class="item-menu">
+                <i data-lucide="settings"></i>
+                <span>Configurações</span>
+            </a>
+
         </nav>
+
     </aside>
 
-    <!-- Conteúdo principal -->
+
+    <!-- =================================================
+         CONTEÚDO PRINCIPAL
+    ================================================== -->
+
     <main class="conteudo pagina-pericia">
 
-        <header>
-            <h1>Perícia Digital</h1>
 
-            <p class="descricao-pagina">
-                Investigue incidentes e consulte os registros
-                relacionados à segurança da plataforma.
-            </p>
+        <!-- CABEÇALHO -->
+
+        <header class="cabecalho-pagina">
+
+            <div class="identificacao-pagina">
+
+                <span class="subtitulo-pagina">
+                    SEGURANÇA E RASTREABILIDADE
+                </span>
+
+                <h1 class="titulo-pagina">
+                    Perícia Digital
+                </h1>
+
+                <p>
+                    Consulte, investigue e analise as atividades registradas
+                    no SafeMarket, identificando responsáveis, operações
+                    e informações relacionadas a cada evento.
+                </p>
+
+            </div>
+
         </header>
 
-        <!-- Indicadores -->
-        <section class="cartoes" aria-label="Indicadores de perícia">
+
+        <!-- =================================================
+             INDICADORES
+        ================================================== -->
+
+        <section
+            class="cartoes"
+            aria-label="Indicadores de auditoria"
+        >
 
             <article class="cartao">
-                <h3>Investigações abertas</h3>
-                <p id="total-abertas">—</p>
+
+                <div class="indicador-cabecalho">
+                    <h3>Registros retornados</h3>
+                    <i data-lucide="clipboard-list"></i>
+                </div>
+
+                <p id="total-registros" aria-live="polite">—</p>
+
+                <span class="indicador-descricao">
+                    Eventos encontrados na consulta
+                </span>
+
             </article>
 
-            <article class="cartao">
-                <h3>Em análise</h3>
-                <p id="total-analise">—</p>
-            </article>
 
             <article class="cartao">
-                <h3>Concluídas</h3>
-                <p id="total-concluidas">—</p>
+
+                <div class="indicador-cabecalho">
+                    <h3>Usuários identificados</h3>
+                    <i data-lucide="users"></i>
+                </div>
+
+                <p id="total-usuarios" aria-live="polite">—</p>
+
+                <span class="indicador-descricao">
+                    Responsáveis identificados
+                </span>
+
             </article>
 
+
             <article class="cartao">
-                <h3>Evidências registradas</h3>
-                <p id="total-evidencias">—</p>
+
+                <div class="indicador-cabecalho">
+                    <h3>Tipos de ação</h3>
+                    <i data-lucide="activity"></i>
+                </div>
+
+                <p id="total-acoes" aria-live="polite">—</p>
+
+                <span class="indicador-descricao">
+                    Categorias de operações encontradas
+                </span>
+
+            </article>
+
+
+            <article class="cartao">
+
+                <div class="indicador-cabecalho">
+                    <h3>IPs identificados</h3>
+                    <i data-lucide="network"></i>
+                </div>
+
+                <p id="total-ips" aria-live="polite">—</p>
+
+                <span class="indicador-descricao">
+                    Endereços de origem registrados
+                </span>
+
             </article>
 
         </section>
 
-        <!-- Pesquisa e filtros -->
+
+        <!-- =================================================
+             HISTÓRICO E PESQUISA
+        ================================================== -->
+
         <section class="painel-pericia">
 
-            <h2>Investigações</h2>
+            <div class="cabecalho-painel">
 
-            <div class="filtros-pericia">
+                <div>
 
-                <label for="pesquisa-caso">
-                    Pesquisar investigação
-                </label>
+                    <span class="subtitulo-painel">
+                        CONSULTA E INVESTIGAÇÃO
+                    </span>
 
-                <input
-                    type="search"
-                    id="pesquisa-caso"
-                    placeholder="Buscar por ID ou descrição"
-                    autocomplete="off"
+                    <h2>
+                        Histórico de registros de auditoria
+                    </h2>
+
+                    <p>
+                        Consulte as atividades realizadas no sistema,
+                        filtre eventos e investigue informações específicas.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FILTROS -->
+
+            <div class="area-filtros">
+
+                <div class="titulo-filtros">
+
+                    <i data-lucide="filter"></i>
+
+                    <div>
+                        <strong>Filtros de pesquisa</strong>
+
+                        <span>
+                            Utilize os campos para localizar registros específicos.
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="filtros-pericia">
+
+
+                    <!-- PESQUISA -->
+
+                    <div class="campo-filtro campo-pesquisa">
+
+                        <label for="pesquisa-caso">
+                            Pesquisar registro
+                        </label>
+
+                        <input
+                            type="search"
+                            id="pesquisa-caso"
+                            placeholder="Usuário, ação ou detalhes"
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <!-- USUÁRIO -->
+
+                    <div class="campo-filtro">
+
+                        <label for="filtro-usuario">
+                            ID do usuário
+                        </label>
+
+                        <input
+                            type="number"
+                            id="filtro-usuario"
+                            min="1"
+                            step="1"
+                            placeholder="Ex.: 2"
+                        >
+
+                    </div>
+
+
+                    <!-- AÇÃO -->
+
+                    <div class="campo-filtro">
+
+                        <label for="filtro-acao">
+                            Tipo de ação
+                        </label>
+
+                        <select id="filtro-acao">
+
+                            <option value="">
+                                Todas as ações
+                            </option>
+
+                            <option value="LOGIN">
+                                LOGIN
+                            </option>
+
+                            <option value="LOGIN_FALHA">
+                                LOGIN_FALHA
+                            </option>
+
+                            <option value="LOGOUT">
+                                LOGOUT
+                            </option>
+
+                            <option value="CADASTRAR">
+                                CADASTRAR
+                            </option>
+
+                            <option value="ATUALIZAR">
+                                ATUALIZAR
+                            </option>
+
+                            <option value="EXCLUIR">
+                                EXCLUIR
+                            </option>
+
+                            <option value="CONSULTAR">
+                                CONSULTAR
+                            </option>
+
+                            <option value="MOVIMENTAR_ESTOQUE">
+                                MOVIMENTAR_ESTOQUE
+                            </option>
+
+                            <option value="DENUNCIAR">
+                                DENUNCIAR
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- IP -->
+
+                    <div class="campo-filtro">
+
+                        <label for="filtro-ip">
+                            Endereço IP
+                        </label>
+
+                        <input
+                            type="text"
+                            id="filtro-ip"
+                            placeholder="Ex.: 127.0.0.1"
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <!-- DATA INICIAL -->
+
+                    <div class="campo-filtro">
+
+                        <label for="data-inicio">
+                            Data inicial
+                        </label>
+
+                        <input
+                            type="date"
+                            id="data-inicio"
+                        >
+
+                    </div>
+
+
+                    <!-- DATA FINAL -->
+
+                    <div class="campo-filtro">
+
+                        <label for="data-fim">
+                            Data final
+                        </label>
+
+                        <input
+                            type="date"
+                            id="data-fim"
+                        >
+
+                    </div>
+
+
+                    <!-- AÇÕES -->
+
+                    <div class="acoes-filtro">
+
+                        <button
+                            type="button"
+                            id="btn-filtrar"
+                            class="botao-detalhes"
+                        >
+
+                            <i data-lucide="search"></i>
+
+                            Aplicar filtros
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="btn-limpar-filtros"
+                            class="botao-limpar"
+                        >
+
+                            <i data-lucide="rotate-ccw"></i>
+
+                            Limpar filtros
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <p class="observacao-filtros">
+                    <i data-lucide="info"></i>
+
+                    A consulta apresenta até os 200 registros mais recentes
+                    retornados pelo servidor.
+                </p>
+
+            </div>
+
+
+            <!-- MENSAGEM DE STATUS -->
+
+            <div
+                id="mensagem-pericia"
+                class="mensagem-pericia"
+                role="status"
+                aria-live="polite"
+            ></div>
+
+
+            <!-- CABEÇALHO DA LISTA -->
+
+            <div class="cabecalho-lista">
+
+                <div>
+
+                    <h3>Eventos registrados</h3>
+
+                    <p>
+                        Histórico das atividades encontradas na consulta.
+                    </p>
+
+                </div>
+
+                <span class="etiqueta-historico">
+                    <i data-lucide="shield-check"></i>
+                    Registro de auditoria
+                </span>
+
+            </div>
+
+
+            <!-- LISTA -->
+
+            <div
+                class="lista-registros"
+                id="lista-investigacoes"
+            >
+
+                <div
+                    class="estado-vazio"
+                    id="sem-resultados"
+                    hidden
                 >
 
-                <label for="filtro-status">
-                    Status
-                </label>
+                    <i data-lucide="search-x"></i>
 
-                <select id="filtro-status">
-                    <option value="">Todos os status</option>
-                    <option value="aberta">Aberta</option>
-                    <option value="analise">Em análise</option>
-                    <option value="concluida">Concluída</option>
-                </select>
+                    <strong>Nenhum registro encontrado</strong>
+
+                    <p>
+                        Não foram encontrados eventos correspondentes
+                        aos filtros ou à pesquisa informada.
+                    </p>
+
+                </div>
 
             </div>
-
-            <div id="lista-investigacoes" aria-live="polite">
-                <p>Nenhuma investigação carregada.</p>
-            </div>
-
-            <p id="sem-resultados" hidden>
-                Nenhuma investigação encontrada para os filtros selecionados.
-            </p>
 
         </section>
 
-        <!-- Detalhes da investigação -->
+
+        <!-- =================================================
+             DETALHES DA INVESTIGAÇÃO
+        ================================================== -->
+
         <section
-            class="painel-pericia"
+            class="painel-pericia painel-detalhes"
             id="detalhes-investigacao"
-            aria-labelledby="titulo-investigacao"
             hidden
         >
 
-            <h2 id="titulo-investigacao">
-                Detalhes da investigação
-            </h2>
+            <div class="cabecalho-painel">
 
-            <p id="descricao-investigacao"></p>
+                <div>
 
-            <p id="gravidade-investigacao"></p>
+                    <span class="subtitulo-painel">
+                        ANÁLISE DO EVENTO
+                    </span>
 
-            <h3>Linha do tempo</h3>
+                    <h2>
+                        Detalhes do registro
+                    </h2>
 
-            <div id="linha-tempo" class="linha-tempo">
-                <p>Nenhum evento carregado.</p>
+                    <p>
+                        Informações disponíveis sobre a operação investigada.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="fechar-detalhes"
+                    class="botao-limpar"
+                >
+
+                    <i data-lucide="x"></i>
+
+                    Fechar
+
+                </button>
+
             </div>
 
-            <h3>Evidências registradas</h3>
 
-            <ul id="lista-evidencias">
-                <li>Nenhuma evidência carregada.</li>
-            </ul>
+            <!-- IDENTIFICAÇÃO DO REGISTRO -->
+
+            <div class="titulo-secao-detalhes">
+
+                <i data-lucide="file-search"></i>
+
+                <h3>Identificação do evento</h3>
+
+            </div>
+
+
+            <div class="detalhes-conteudo">
+
+
+                <div class="detalhe-item">
+
+                    <span>ID do registro</span>
+
+                    <strong id="detalhe-id">—</strong>
+
+                </div>
+
+
+                <div class="detalhe-item">
+
+                    <span>Usuário responsável</span>
+
+                    <strong id="detalhe-usuario">—</strong>
+
+                </div>
+
+
+                <div class="detalhe-item">
+
+                    <span>E-mail</span>
+
+                    <strong id="detalhe-email">—</strong>
+
+                </div>
+
+
+                <div class="detalhe-item">
+
+                    <span>Ação realizada</span>
+
+                    <strong id="detalhe-acao">—</strong>
+
+                </div>
+
+
+                <div class="detalhe-item">
+
+                    <span>Entidade</span>
+
+                    <strong id="detalhe-entidade">—</strong>
+
+                </div>
+
+
+                <div class="detalhe-item">
+
+                    <span>ID da entidade</span>
+
+                    <strong id="detalhe-entidade-id">—</strong>
+
+                </div>
+
+
+                <div class="detalhe-item">
+
+                    <span>Endereço IP de origem</span>
+
+                    <strong id="detalhe-ip">—</strong>
+
+                </div>
+
+
+                <div class="detalhe-item">
+
+                    <span>Data e horário</span>
+
+                    <strong id="detalhe-data">—</strong>
+
+                </div>
+
+
+                <!-- DESCRIÇÃO -->
+
+                <div class="detalhe-item detalhe-completo">
+
+                    <span>
+                        Detalhes e informações da operação
+                    </span>
+
+                    <p id="detalhe-descricao">—</p>
+
+                </div>
+
+            </div>
 
         </section>
 
-        <p
-            id="mensagem-pericia"
-            role="status"
-            aria-live="polite"
-        ></p>
-
     </main>
-
-    <!-- Inicialização dos ícones -->
-    <script>
-        if (window.lucide) {
-            window.lucide.createIcons();
-        }
-    </script>
 
 </body>
 

@@ -5,13 +5,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Configurações do sistema SafeMarket">
 
-    <title>SafeMarket - Configurações</title>
+    <meta
+        name="description"
+        content="Gerencie as configurações, notificações e preferências de segurança do SafeMarket."
+    >
 
+    <meta name="theme-color" content="#111B3A">
+
+    <title>SafeMarket | Configurações</title>
+
+    <!-- ESTILIZAÇÃO GLOBAL E MENU -->
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/configuracoes.css">
 
+    <!-- BIBLIOTECA DE ÍCONES -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- SCRIPTS DO SISTEMA -->
     <script src="../js/api.js" defer></script>
     <script src="../js/configuracoes.js" defer></script>
     <script src="../js/menu.js" defer></script>
@@ -19,7 +31,7 @@
 
 <body>
 
-    <!-- Menu lateral -->
+    <!-- MENU LATERAL -->
     <aside class="menu-lateral" id="menu-lateral">
 
         <div class="menu-topo">
@@ -32,33 +44,17 @@
                 aria-label="Recolher menu"
                 aria-expanded="true"
                 aria-controls="menu-navegacao"
-                title="Recolher menu">
-
+                title="Recolher menu"
+            >
                 <i data-lucide="panel-left-close" aria-hidden="true"></i>
-
             </button>
         </div>
 
-        <nav id="menu-navegacao" aria-label="Menu principal">
+        <nav id="menu-navegacao" aria-label="Navegação principal">
 
             <a href="dashboard.html" title="Dashboard">
                 <i data-lucide="layout-dashboard" aria-hidden="true"></i>
                 <span>Dashboard</span>
-            </a>
-
-            <a href="monitoramento.html" title="Monitoramento">
-                <i data-lucide="activity" aria-hidden="true"></i>
-                <span>Monitoramento</span>
-            </a>
-
-            <a href="auditoria.html" title="Auditoria">
-                <i data-lucide="clipboard-check" aria-hidden="true"></i>
-                <span>Auditoria</span>
-            </a>
-
-            <a href="alertas.html" title="Alertas">
-                <i data-lucide="shield-alert" aria-hidden="true"></i>
-                <span>Alertas</span>
             </a>
 
             <a href="usuarios.html" title="Usuários">
@@ -66,27 +62,43 @@
                 <span>Usuários</span>
             </a>
 
-            <a
-                href="configuracoes.html"
-                aria-current="page"
-                title="Configurações">
+            <a href="auditoria.html" title="Auditoria e Logs">
+                <i data-lucide="clipboard-list" aria-hidden="true"></i>
+                <span>Auditoria e Logs</span>
+            </a>
 
-                <i data-lucide="settings" aria-hidden="true"></i>
-                <span>Configurações</span>
+            <a href="monitoramento.html" title="Monitoramento">
+                <i data-lucide="activity" aria-hidden="true"></i>
+                <span>Monitoramento</span>
+            </a>
+
+            <a href="alertas.html" title="Alertas">
+                <i data-lucide="bell" aria-hidden="true"></i>
+                <span>Alertas</span>
             </a>
 
             <a href="pericia.html" title="Perícia Digital">
-                <i data-lucide="search" aria-hidden="true"></i>
+                <i data-lucide="search-check" aria-hidden="true"></i>
                 <span>Perícia Digital</span>
+            </a>
+
+            <a
+                href="configuracoes.html"
+                class="ativo"
+                aria-current="page"
+                title="Configurações"
+            >
+                <i data-lucide="settings" aria-hidden="true"></i>
+                <span>Configurações</span>
             </a>
 
         </nav>
     </aside>
 
-    <!-- Conteúdo principal -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="conteudo">
 
-        <header>
+        <header class="cabecalho-configuracoes">
             <h1>Configurações</h1>
 
             <p class="descricao-pagina">
@@ -94,100 +106,157 @@
             </p>
         </header>
 
-        <section class="atividades" aria-labelledby="titulo-configuracoes">
+        <!-- PREFERÊNCIAS DO SISTEMA -->
+        <section
+            class="atividades"
+            aria-labelledby="titulo-configuracoes"
+        >
 
-            <h2 id="titulo-configuracoes">Configurações do sistema</h2>
+            <div class="cabecalho-secao-configuracoes">
+                <div>
+                    <h2 id="titulo-configuracoes">
+                        Configurações do sistema
+                    </h2>
+
+                    <p>
+                        Personalize as notificações e os recursos de proteção
+                        da plataforma.
+                    </p>
+                </div>
+
+                <i data-lucide="sliders-horizontal" aria-hidden="true"></i>
+            </div>
 
             <form id="form-configuracoes">
 
+                <!-- NOTIFICAÇÕES -->
                 <div class="atividade">
-                    <div>
+
+                    <div class="atividade-informacoes">
                         <p>Notificações</p>
+
                         <span>
-                            Recebimento de notificações do sistema.
+                            Recebimento de notificações gerais do sistema.
                         </span>
                     </div>
 
-                    <label>
+                    <label for="notificacoes">
                         <input
                             type="checkbox"
                             id="notificacoes"
                             name="notificacoes"
+                            aria-label="Ativar notificações gerais"
                         >
-                        Ativar
+                        <span>Ativar</span>
                     </label>
+
                 </div>
 
+                <!-- ALERTAS DE SEGURANÇA -->
                 <div class="atividade">
-                    <div>
+
+                    <div class="atividade-informacoes">
                         <p>Segurança</p>
+
                         <span>
-                            Preferência para notificações relacionadas à segurança.
+                            Receba notificações relacionadas à segurança
+                            da plataforma.
                         </span>
                     </div>
 
-                    <label>
+                    <label for="alertas-seguranca">
                         <input
                             type="checkbox"
                             id="alertas-seguranca"
                             name="alertasSeguranca"
+                            aria-label="Ativar alertas de segurança"
                         >
-                        Ativar alertas
+                        <span>Ativar alertas</span>
                     </label>
+
                 </div>
 
+                <!-- PROTEÇÃO CONTRA FRAUDES -->
                 <div class="atividade">
-                    <div>
+
+                    <div class="atividade-informacoes">
                         <p>Proteção contra fraudes</p>
+
                         <span>
-                            Preferência para receber avisos sobre possíveis fraudes.
+                            Receba avisos sobre possíveis fraudes e
+                            atividades suspeitas.
                         </span>
                     </div>
 
-                    <label>
+                    <label for="alertas-fraude">
                         <input
                             type="checkbox"
                             id="alertas-fraude"
                             name="alertasFraude"
+                            aria-label="Ativar alertas de fraude"
                         >
-                        Ativar alertas
+                        <span>Ativar alertas</span>
                     </label>
+
                 </div>
 
-                <div class="atividade">
-                    <div>
+                <!-- PERMISSÕES DE USUÁRIOS -->
+                <div class="atividade atividade-permissoes">
+
+                    <div class="atividade-informacoes">
                         <p>Permissões de usuários</p>
+
                         <span>
-                            Gerenciamento de acessos e permissões.
+                            Gerencie os acessos, funções e permissões
+                            dos usuários da plataforma.
                         </span>
                     </div>
 
-                    <a href="usuarios.html">Acessar usuários</a>
+                    <a
+                        href="usuarios.html"
+                        aria-label="Acessar gerenciamento de usuários"
+                    >
+                        <i data-lucide="users" aria-hidden="true"></i>
+                        <span>Acessar usuários</span>
+                    </a>
+
                 </div>
 
-                <button type="submit" class="bnt-login">
-                    SALVAR PREFERÊNCIAS
-                </button>
+                <!-- AÇÕES -->
+                <div class="acoes-configuracoes">
 
+                    <button
+                        type="submit"
+                        class="bnt-login"
+                        id="botao-salvar-configuracoes"
+                    >
+                        <i data-lucide="save" aria-hidden="true"></i>
+                        <span>SALVAR PREFERÊNCIAS</span>
+                    </button>
+
+                </div>
+
+                <!-- MENSAGEM DE RETORNO -->
                 <p
                     id="mensagem-configuracoes"
                     role="status"
-                    aria-live="polite">
-                </p>
+                    aria-live="polite"
+                    hidden
+                ></p>
 
             </form>
-
         </section>
 
     </main>
 
-    <!-- Inicialização dos ícones -->
+    <!-- INICIALIZAÇÃO DOS ÍCONES -->
     <script>
-        if (window.lucide) {
-            window.lucide.createIcons();
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        });
     </script>
 
 </body>
-
 </html>

@@ -1,0 +1,502 @@
+
+/* =========================================================
+   SAFEMARKET — MONITORAMENTO
+   Arquivo: css/monitoramento.css
+
+   RESPONSABILIDADES:
+   - Espaçamento do conteúdo principal
+   - Indicadores de segurança
+   - Ícones padronizados
+   - Histórico de atividades
+   - Mensagens e estados
+   - Responsividade
+========================================================= */
+
+
+/* =========================================================
+   1. CONTEÚDO PRINCIPAL
+========================================================= */
+
+.conteudo {
+    width: 100%;
+    min-width: 0;
+
+    padding: 32px;
+
+    box-sizing: border-box;
+}
+
+.conteudo > header {
+    margin-bottom: 28px;
+}
+
+.conteudo h1 {
+    margin: 0 0 8px;
+
+    color: var(--sm-azul-marinho, #111B3A);
+
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.conteudo > header p {
+    margin: 0;
+
+    color: var(--sm-secundario, #718096);
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   2. ÁREA DOS INDICADORES
+========================================================= */
+
+.cartoes {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 20px;
+
+    width: 100%;
+    margin-bottom: 28px;
+}
+
+
+/* =========================================================
+   3. CARDS
+========================================================= */
+
+.cartao {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    min-width: 0;
+    min-height: 118px;
+
+    padding: 20px;
+
+    overflow: hidden;
+
+    background: var(--sm-branco, #FFFFFF);
+
+    border: 1px solid var(--sm-borda, #DCE3EB);
+    border-radius: var(--sm-raio-medio, 14px);
+
+    box-shadow:
+        var(--sm-sombra-card, 0 5px 18px rgba(17, 27, 58, 0.07));
+
+    transition:
+        transform var(--sm-transicao, 0.2s ease),
+        box-shadow var(--sm-transicao, 0.2s ease),
+        border-color var(--sm-transicao, 0.2s ease);
+}
+
+.cartao:hover {
+    transform: translateY(-2px);
+
+    border-color: var(--sm-azul-borda, #BCEAF2);
+
+    box-shadow:
+        var(--sm-sombra-destaque, 0 5px 15px rgba(0, 184, 217, 0.12));
+}
+
+
+/* =========================================================
+   4. ÍCONES DOS INDICADORES
+========================================================= */
+
+.icone-cartao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 44px;
+
+    width: 44px;
+    height: 44px;
+
+    color: var(--sm-azul-botao, #007F99);
+
+    background: var(--sm-azul-claro, #E5F8FC);
+
+    border-radius: 11px;
+}
+
+.icone-cartao i,
+.icone-cartao svg {
+    display: block;
+
+    width: 20px;
+    height: 20px;
+
+    stroke-width: 1.9;
+}
+
+
+/* =========================================================
+   5. INFORMAÇÕES DOS INDICADORES
+========================================================= */
+
+.cartao > div:last-child {
+    min-width: 0;
+}
+
+.cartao h2 {
+    margin: 0 0 7px;
+
+    color: var(--sm-secundario, #718096);
+
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.cartao p {
+    margin: 0;
+
+    color: var(--sm-azul-marinho, #111B3A);
+
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   6. ÁREA DE ATIVIDADES
+========================================================= */
+
+.atividades {
+    width: 100%;
+    min-width: 0;
+
+    padding: 24px;
+
+    background: var(--sm-branco, #FFFFFF);
+
+    border: 1px solid var(--sm-borda, #DCE3EB);
+    border-radius: var(--sm-raio-medio, 14px);
+
+    box-shadow:
+        var(--sm-sombra-card, 0 5px 18px rgba(17, 27, 58, 0.07));
+}
+
+
+/* =========================================================
+   7. CABEÇALHO DAS ATIVIDADES
+========================================================= */
+
+.icone-titulo {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    margin-bottom: 20px;
+}
+
+.icone-titulo i,
+.icone-titulo svg {
+    width: 20px;
+    height: 20px;
+
+    color: var(--sm-azul-botao, #007F99);
+
+    stroke-width: 1.9;
+}
+
+.icone-titulo h2 {
+    margin: 0;
+
+    color: var(--sm-azul-marinho, #111B3A);
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   8. LISTA DE ATIVIDADES
+========================================================= */
+
+#lista-atividades {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0;
+
+    min-width: 0;
+}
+
+.atividade {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 0;
+
+    padding: 16px 4px;
+
+    border-bottom: 1px solid var(--sm-divisor, #E8EDF3);
+}
+
+.atividade:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   9. ÍCONES DAS ATIVIDADES
+========================================================= */
+
+.icone-atividade {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 36px;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+}
+
+.icone-atividade svg,
+.icone-atividade i {
+    width: 18px;
+    height: 18px;
+
+    stroke-width: 1.9;
+}
+
+
+/* Atividade normal */
+
+.icone-atividade.normal {
+    color: var(--sm-sucesso, #16834C);
+
+    background: var(--sm-sucesso-fundo, #E5F5EC);
+}
+
+
+/* Atividade suspeita */
+
+.icone-atividade.suspeita {
+    color: var(--sm-erro, #C83D3D);
+
+    background: var(--sm-erro-fundo, #FCEAEA);
+}
+
+
+/* =========================================================
+   10. DESCRIÇÃO DAS ATIVIDADES
+========================================================= */
+
+.atividade p {
+    flex: 1;
+
+    min-width: 0;
+
+    margin: 0;
+
+    color: var(--sm-texto, #263548);
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* Data */
+
+.atividade span {
+    flex-shrink: 0;
+
+    color: var(--sm-secundario, #718096);
+
+    font-size: 12px;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   11. MENSAGENS E ESTADOS
+========================================================= */
+
+#mensagem-monitoramento {
+    margin-top: 18px;
+
+    padding: 12px 16px;
+
+    color: var(--sm-erro, #C83D3D);
+
+    background: var(--sm-erro-fundo, #FCEAEA);
+
+    border: 1px solid var(--sm-erro-borda, #F1C4C4);
+
+    border-radius: var(--sm-raio-pequeno, 6px);
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   12. LISTA VAZIA
+========================================================= */
+
+#lista-atividades > p {
+    margin: 0;
+
+    padding: 24px 12px;
+
+    color: var(--sm-secundario, #718096);
+
+    background: var(--sm-superficie-secundaria, #F7F9FC);
+
+    border-radius: var(--sm-raio, 10px);
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   13. NOTEBOOK E TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .cartoes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   14. TELAS MENORES
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .conteudo {
+        padding: 24px 20px;
+    }
+
+    .conteudo > header {
+        margin-bottom: 22px;
+    }
+
+    .conteudo h1 {
+        font-size: 24px;
+    }
+
+    .cartoes {
+        gap: 14px;
+    }
+
+    .cartao {
+        min-height: 105px;
+
+        padding: 16px;
+
+        gap: 12px;
+    }
+
+    .icone-cartao {
+        flex-basis: 40px;
+
+        width: 40px;
+        height: 40px;
+    }
+
+    .icone-cartao svg {
+        width: 19px;
+        height: 19px;
+    }
+
+    .cartao p {
+        font-size: 24px;
+    }
+
+    .atividades {
+        padding: 18px;
+    }
+
+}
+
+
+/* =========================================================
+   15. CELULAR
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .conteudo {
+        padding: 20px 15px;
+    }
+
+    .cartoes {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .cartao {
+        min-height: 92px;
+    }
+
+    .atividade {
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+    .atividade span {
+        max-width: 100px;
+
+        font-size: 11px;
+    }
+
+    .atividades {
+        padding: 15px;
+    }
+
+    .icone-titulo h2 {
+        font-size: 16px;
+    }
+
+}
+
+
+/* =========================================================
+   16. ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .cartao {
+        transition: none;
+    }
+
+    .cartao:hover {
+        transform: none;
+    }
+
+}

@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Explore produtos, encontre oportunidades e negocie com mais segurança no Marketplace SafeMarket."
+    >
+
+    <meta name="theme-color" content="#111B3A">
+
+    <title>SafeMarket | Marketplace</title>
+
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/marketplace.css">
+</head>
+
+<body class="pagina-marketplace">
+
+    <div class="marketplace-layout">
+
+        <!-- CABEÇALHO -->
+        <header class="market-header">
+
+            <!-- LOGOTIPO -->
+            <a
+                href="marketplace.html"
+                class="market-logo"
+                aria-label="SafeMarket - Página inicial"
+            >
+                <img
+                    src="../imagem/logo.png"
+                    alt="Logo SafeMarket"
+                >
+
+                <span>SafeMarket</span>
+            </a>
+
+            <!-- NAVEGAÇÃO PRINCIPAL -->
+            <nav
+                class="market-nav"
+                aria-label="Navegação principal"
+            >
+                <a
+                    href="marketplace.html"
+                    class="nav-ativo"
+                    aria-current="page"
+                >
+                    Marketplace
+                </a>
+
+                <a href="#categorias">
+                    Categorias
+                </a>
+
+                <a href="#anuncios">
+                    Explorar produtos
+                </a>
+
+                <!-- VISÍVEL SOMENTE QUANDO O USUÁRIO ESTIVER AUTENTICADO -->
+                <a
+                    href="meus-anuncios.html"
+                    id="link-meus-anuncios"
+                    hidden
+                >
+                    Meus anúncios
+                </a>
+            </nav>
+
+            <!-- AÇÕES PRINCIPAIS -->
+            <div class="market-acoes">
+
+                <!-- CARRINHO DO CABEÇALHO -->
+                <details
+                    class="carrinho-menu"
+                    id="menu-carrinho"
+                >
+
+                    <summary
+                        class="botao-carrinho"
+                        aria-label="Abrir prévia do carrinho"
+                    >
+
+                        <span
+                            class="carrinho-icone"
+                            aria-hidden="true"
+                        >
+                            🛒
+                        </span>
+
+                        <span class="carrinho-texto">
+                            Carrinho
+                        </span>
+
+                        <span
+                            class="carrinho-contador"
+                            id="contador-carrinho"
+                            aria-label="0 produtos no carrinho"
+                            aria-live="polite"
+                        >
+                            0
+                        </span>
+
+                    </summary>
+
+                    <!-- PRÉVIA DO CARRINHO -->
+                    <div
+                        class="carrinho-dropdown"
+                        id="dropdown-carrinho"
+                    >
+
+                        <div class="carrinho-dropdown-cabecalho">
+
+                            <div>
+                                <h2>Meu carrinho</h2>
+
+                                <p>
+                                    Produtos adicionados
+                                </p>
+                            </div>
+
+                            <span
+                                class="carrinho-total-itens"
+                                id="total-itens-carrinho"
+                            >
+                                0 itens
+                            </span>
+
+                        </div>
+
+                        <!-- LISTA DINÂMICA DO CARRINHO -->
+                        <div
+                            class="carrinho-dropdown-lista"
+                            id="lista-previa-carrinho"
+                            aria-live="polite"
+                        >
+
+                            <!-- ESTADO INICIAL -->
+                            <div
+                                class="carrinho-vazio"
+                                id="carrinho-vazio"
+                            >
+
+                                <span
+                                    class="carrinho-vazio-icone"
+                                    aria-hidden="true"
+                                >
+                                    🛒
+                                </span>
+
+                                <strong>
+                                    Seu carrinho está vazio
+                                </strong>
+
+                                <p>
+                                    Adicione produtos para visualizá-los aqui.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <!-- RESUMO -->
+                        <div class="carrinho-dropdown-resumo">
+
+                            <div class="carrinho-subtotal">
+
+                                <span>Subtotal</span>
+
+                                <strong id="subtotal-carrinho">
+                                    R$ 0,00
+                                </strong>
+
+                            </div>
+
+                            <a
+                                href="carrinho.html"
+                                class="carrinho-ver-completo"
+                            >
+                                Ver meu carrinho
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+                <!-- PUBLICAR ANÚNCIO -->
+                <a
+                    href="publicar.html"
+                    class="botao-publicar"
+                >
+                    + Publicar anúncio
+                </a>
+
+            </div>
+
+        </header>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="market-main">
+
+            <!-- APRESENTAÇÃO -->
+            <section
+                class="market-hero"
+                aria-labelledby="titulo-marketplace"
+            >
+
+                <div class="hero-conteudo">
+
+                    <span class="hero-etiqueta">
+                        NEGOCIE COM MAIS CONFIANÇA
+                    </span>
+
+                    <h1 id="titulo-marketplace">
+                        Encontre o que você procura.
+                        <span>Negocie com segurança.</span>
+                    </h1>
+
+                    <p>
+                        Descubra produtos, encontre oportunidades
+                        e negocie em um ambiente desenvolvido
+                        para proporcionar mais segurança.
+                    </p>
+
+                </div>
+
+                <div class="hero-selo">
+
+                    <div
+                        class="selo-icone"
+                        aria-hidden="true"
+                    >
+                        ✓
+                    </div>
+
+                    <div>
+                        <strong>SafeMarket</strong>
+
+                        <span>
+                            Mais segurança nas negociações
+                        </span>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- PESQUISA DE PRODUTOS -->
+            <section
+                class="market-pesquisa"
+                aria-label="Pesquisa de produtos"
+            >
+
+                <form id="form-pesquisa">
+
+                    <label for="pesquisa-produto">
+                        Pesquisar produtos
+                    </label>
+
+                    <div class="pesquisa-campo">
+
+                        <input
+                            type="search"
+                            id="pesquisa-produto"
+                            name="pesquisa"
+                            placeholder="O que você está procurando?"
+                            autocomplete="off"
+                            aria-label="Digite o nome ou descrição do produto"
+                        >
+
+                        <button type="submit">
+                            Pesquisar
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+            <!-- CATEGORIAS -->
+            <section
+                class="market-categorias"
+                id="categorias"
+                aria-labelledby="titulo-categorias"
+            >
+
+                <div class="secao-cabecalho">
+
+                    <div>
+                        <h2 id="titulo-categorias">
+                            Categorias
+                        </h2>
+
+                        <p>
+                            Explore produtos por categoria.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="categorias-lista">
+
+                    <button
+                        type="button"
+                        class="categoria-item ativo"
+                        data-categoria="todos"
+                        aria-pressed="true"
+                    >
+                        <span aria-hidden="true">▦</span>
+                        Todos
+                    </button>
+
+                    <button
+                        type="button"
+                        class="categoria-item"
+                        data-categoria="eletronicos"
+                        aria-pressed="false"
+                    >
+                        <span aria-hidden="true">▣</span>
+                        Eletrônicos
+                    </button>
+
+                    <button
+                        type="button"
+                        class="categoria-item"
+                        data-categoria="informatica"
+                        aria-pressed="false"
+                    >
+                        <span aria-hidden="true">⌨</span>
+                        Informática
+                    </button>
+
+                    <button
+                        type="button"
+                        class="categoria-item"
+                        data-categoria="celulares"
+                        aria-pressed="false"
+                    >
+                        <span aria-hidden="true">▯</span>
+                        Celulares
+                    </button>
+
+                    <button
+                        type="button"
+                        class="categoria-item"
+                        data-categoria="moveis"
+                        aria-pressed="false"
+                    >
+                        <span aria-hidden="true">▤</span>
+                        Móveis
+                    </button>
+
+                    <button
+                        type="button"
+                        class="categoria-item"
+                        data-categoria="roupas"
+                        aria-pressed="false"
+                    >
+                        <span aria-hidden="true">◇</span>
+                        Roupas
+                    </button>
+
+                    <button
+                        type="button"
+                        class="categoria-item"
+                        data-categoria="outros"
+                        aria-pressed="false"
+                    >
+                        <span aria-hidden="true">＋</span>
+                        Outros
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- PRODUTOS E ANÚNCIOS -->
+            <section
+                class="market-anuncios"
+                id="anuncios"
+                aria-labelledby="titulo-anuncios"
+            >
+
+                <div class="secao-cabecalho">
+
+                    <div>
+
+                        <h2 id="titulo-anuncios">
+                            Produtos disponíveis
+                        </h2>
+
+                        <p
+                            id="texto-resultados"
+                            aria-live="polite"
+                        >
+                            Confira os anúncios publicados.
+                        </p>
+
+                    </div>
+
+                    <!-- ORDENAÇÃO -->
+                    <div class="ordenacao-container">
+
+                        <label for="ordenacao">
+                            Ordenar por
+                        </label>
+
+                        <select
+                            id="ordenacao"
+                            aria-label="Ordenar produtos"
+                        >
+                            <option value="recentes">
+                                Mais recentes
+                            </option>
+
+                            <option value="menor-preco">
+                                Menor preço
+                            </option>
+
+                            <option value="maior-preco">
+                                Maior preço
+                            </option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- CARREGAMENTO -->
+                <div
+                    class="market-loading"
+                    id="carregando"
+                    role="status"
+                    aria-live="polite"
+                    hidden
+                >
+                    Carregando anúncios...
+                </div>
+
+                <!-- MENSAGEM DE ERRO -->
+                <div
+                    class="market-mensagem-erro"
+                    id="mensagem-erro"
+                    role="alert"
+                    aria-live="assertive"
+                    hidden
+                >
+                </div>
+
+                <!-- LISTA DINÂMICA DE PRODUTOS -->
+                <div
+                    class="produtos-grid"
+                    id="lista-produtos"
+                >
+                </div>
+
+                <!-- ESTADO VAZIO -->
+                <div
+                    class="estado-vazio"
+                    id="estado-vazio"
+                >
+
+                    <div
+                        class="vazio-icone"
+                        aria-hidden="true"
+                    >
+                        ⌕
+                    </div>
+
+                    <h3>
+                        Nenhum anúncio disponível ainda
+                    </h3>
+
+                    <p>
+                        Seja o primeiro a publicar um produto
+                        no Marketplace do SafeMarket.
+                    </p>
+
+                    <a href="publicar.html">
+                        Publicar meu primeiro anúncio
+                    </a>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- RODAPÉ -->
+        <footer class="market-footer">
+
+            <div>
+
+                <strong>SafeMarket</strong>
+
+                <p>
+                    Um ambiente desenvolvido para negociações
+                    mais seguras.
+                </p>
+
+            </div>
+
+            <span>
+                © 2026 SafeMarket. Todos os direitos reservados.
+            </span>
+
+        </footer>
+
+    </div>
+
+    <!-- SCRIPTS -->
+    <!-- api.js deve ser carregado antes de marketplace.js -->
+    <script src="../js/api.js" defer></script>
+    <script src="../js/marketplace.js" defer></script>
+
+</body>
+</html>

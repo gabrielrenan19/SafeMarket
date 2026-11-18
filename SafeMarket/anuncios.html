@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Gerenciamento e acompanhamento dos anúncios publicados na plataforma SafeMarket.">
+
+    <meta name="theme-color" content="#111B3A">
+
+    <title>SafeMarket | Gerenciamento de Anúncios</title>
+
+    <!-- ESTILIZAÇÃO -->
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/anuncios.css">
+
+    <!-- ÍCONES -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <!-- JAVASCRIPT -->
+    <script src="../js/api.js" defer></script>
+    <script src="../js/menu.js" defer></script>
+    <script src="../js/anuncios-admin.js" defer></script>
+</head>
+
+<body>
+
+    <!-- MENU LATERAL -->
+    <aside class="menu-lateral" id="menu-lateral">
+
+        <div class="menu-topo">
+            <h2 class="logo-menu">SafeMarket</h2>
+
+            <button
+                type="button"
+                class="botao-menu"
+                id="alternar-menu"
+                aria-label="Recolher menu"
+                aria-expanded="true"
+                aria-controls="menu-navegacao">
+
+                <i data-lucide="panel-left-close"></i>
+            </button>
+        </div>
+
+        <nav id="menu-navegacao" aria-label="Menu principal">
+
+            <a href="dashboard.html">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="usuarios.html">
+                <i data-lucide="users"></i>
+                <span>Usuários</span>
+            </a>
+
+            <a href="anuncios.html" class="ativo" aria-current="page">
+                <i data-lucide="package"></i>
+                <span>Gerenciamento de anúncios</span>
+            </a>
+
+            <a href="auditoria.html">
+                <i data-lucide="clipboard-list"></i>
+                <span>Auditoria e Logs</span>
+            </a>
+
+            <a href="monitoramento.html">
+                <i data-lucide="activity"></i>
+                <span>Monitoramento</span>
+            </a>
+
+            <a href="alertas.html">
+                <i data-lucide="shield-alert"></i>
+                <span>Alertas</span>
+            </a>
+
+            <a href="pericia.html">
+                <i data-lucide="search"></i>
+                <span>Perícia Digital</span>
+            </a>
+
+            <a href="configuracoes.html">
+                <i data-lucide="settings"></i>
+                <span>Configurações</span>
+            </a>
+
+        </nav>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="conteudo anuncios-pagina">
+
+        <!-- CABEÇALHO -->
+        <header class="cabecalho-pagina">
+
+            <div class="titulo-pagina">
+
+                <span class="subtitulo-pagina">
+                    ADMINISTRAÇÃO / ANÚNCIOS
+                </span>
+
+                <h1>Gerenciamento de anúncios</h1>
+
+                <p>
+                    Consulte os produtos publicados, acompanhe os status
+                    de moderação e gerencie os anúncios da plataforma.
+                    Consulte também o histórico dos anúncios excluídos.
+                </p>
+
+            </div>
+
+        </header>
+
+        <!-- INDICADORES -->
+        <section
+            class="indicadores-anuncios"
+            aria-label="Resumo dos anúncios">
+
+            <!-- TOTAL -->
+            <article class="card-indicador">
+
+                <div class="indicador-icone azul">
+                    <i data-lucide="package"></i>
+                </div>
+
+                <div class="indicador-conteudo">
+                    <span>Total de anúncios</span>
+                    <strong id="total-anuncios">—</strong>
+                    <small>Todos os registros cadastrados</small>
+                </div>
+
+            </article>
+
+            <!-- ATIVOS -->
+            <article class="card-indicador">
+
+                <div class="indicador-icone verde">
+                    <i data-lucide="package-check"></i>
+                </div>
+
+                <div class="indicador-conteudo">
+                    <span>Anúncios ativos</span>
+                    <strong id="total-anuncios-ativos">—</strong>
+                    <small>Disponíveis na plataforma</small>
+                </div>
+
+            </article>
+
+            <!-- PENDENTES -->
+            <article class="card-indicador">
+
+                <div class="indicador-icone laranja">
+                    <i data-lucide="clock"></i>
+                </div>
+
+                <div class="indicador-conteudo">
+                    <span>Anúncios pendentes</span>
+                    <strong id="total-anuncios-pendentes">—</strong>
+                    <small>Aguardando moderação</small>
+                </div>
+
+            </article>
+
+            <!-- EXCLUÍDOS -->
+            <article class="card-indicador">
+
+                <div class="indicador-icone vermelho">
+                    <i data-lucide="package-x"></i>
+                </div>
+
+                <div class="indicador-conteudo">
+                    <span>Anúncios excluídos</span>
+                    <strong id="total-anuncios-excluidos">—</strong>
+                    <small>Registros preservados para auditoria</small>
+                </div>
+
+            </article>
+
+        </section>
+
+        <!-- GERENCIAMENTO -->
+        <section
+            class="secao-anuncios"
+            aria-labelledby="titulo-lista-anuncios">
+
+            <!-- TÍTULO DA SEÇÃO -->
+            <div class="secao-anuncios-topo">
+
+                <div>
+                    <h2 id="titulo-lista-anuncios">
+                        Gerenciamento de anúncios
+                    </h2>
+
+                    <p>
+                        Consulte os anúncios disponíveis e o histórico
+                        de exclusões realizadas na plataforma.
+                    </p>
+                </div>
+
+                <span class="indicador-anuncios">
+                    <i data-lucide="shield-check"></i>
+                    Controle administrativo
+                </span>
+
+            </div>
+
+            <!-- ABAS -->
+            <div
+                class="abas-anuncios"
+                role="tablist"
+                aria-label="Categorias de anúncios">
+
+                <button
+                    type="button"
+                    class="aba-anuncios ativa"
+                    id="aba-ativos"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="painel-ativos"
+                    data-aba-anuncios="ativos">
+
+                    <i data-lucide="package-check"></i>
+
+                    <span>Ativos</span>
+
+                    <span
+                        class="contador-aba"
+                        id="contador-aba-ativos">
+                        —
+                    </span>
+
+                </button>
+
+                <button
+                    type="button"
+                    class="aba-anuncios"
+                    id="aba-excluidos"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="painel-excluidos"
+                    data-aba-anuncios="excluidos"
+                    tabindex="-1">
+
+                    <i data-lucide="archive"></i>
+
+                    <span>Excluídos</span>
+
+                    <span
+                        class="contador-aba"
+                        id="contador-aba-excluidos">
+                        —
+                    </span>
+
+                </button>
+
+            </div>
+
+            <!-- PAINEL DE ANÚNCIOS ATIVOS -->
+            <div
+                id="painel-ativos"
+                class="painel-aba-anuncios ativo"
+                role="tabpanel"
+                aria-labelledby="aba-ativos">
+
+                <!-- PESQUISA E FILTROS -->
+                <div class="filtros-anuncios">
+
+                    <div class="campo-busca">
+                        <i data-lucide="search"></i>
+
+                        <input
+                            type="search"
+                            id="buscar-anuncio"
+                            placeholder="Buscar por produto ou publicador..."
+                            aria-label="Buscar anúncio por produto ou publicador"
+                            autocomplete="off">
+                    </div>
+
+                    <div class="campo-filtro">
+                        <i data-lucide="filter"></i>
+
+                        <select
+                            id="filtro-status-anuncio"
+                            aria-label="Filtrar anúncios por status">
+
+                            <option value="todos">Todos os anúncios</option>
+                            <option value="ATIVO">Ativos</option>
+                            <option value="PENDENTE">Pendentes</option>
+
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- LISTAGEM DE ATIVOS -->
+                <div class="lista-anuncios-container">
+
+                    <div class="lista-anuncios-cabecalho">
+
+                        <div>
+                            <h3>Lista de anúncios ativos</h3>
+
+                            <p>
+                                Produtos disponíveis para consulta e gerenciamento.
+                            </p>
+                        </div>
+
+                        <span id="quantidade-anuncios">
+                            — anúncios
+                        </span>
+
+                    </div>
+
+                    <div
+                        id="lista-anuncios"
+                        class="lista-anuncios"
+                        aria-live="polite"
+                        aria-busy="true">
+
+                        <div class="estado-vazio">
+                            <i data-lucide="loader-circle"></i>
+                            <p>Carregando anúncios...</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- PAINEL DE ANÚNCIOS EXCLUÍDOS -->
+            <div
+                id="painel-excluidos"
+                class="painel-aba-anuncios"
+                role="tabpanel"
+                aria-labelledby="aba-excluidos"
+                hidden>
+
+                <!-- AVISO DE PRESERVAÇÃO -->
+                <div class="aviso-historico-anuncios">
+
+                    <i data-lucide="shield-check"></i>
+
+                    <div>
+                        <strong>Histórico preservado para auditoria</strong>
+
+                        <p>
+                            Os anúncios excluídos permanecem registrados
+                            no sistema. As informações de exclusão permitem
+                            identificar quem realizou a operação e quando ela
+                            aconteceu. Esses registros não são removidos
+                            desta consulta administrativa.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- PESQUISA DE EXCLUÍDOS -->
+                <div class="filtros-anuncios filtros-excluidos">
+
+                    <div class="campo-busca">
+                        <i data-lucide="search"></i>
+
+                        <input
+                            type="search"
+                            id="buscar-anuncio-excluido"
+                            placeholder="Buscar por produto ou responsável..."
+                            aria-label="Buscar anúncio excluído por produto ou responsável"
+                            autocomplete="off">
+                    </div>
+
+                </div>
+
+                <!-- LISTAGEM DE EXCLUÍDOS -->
+                <div class="lista-anuncios-container">
+
+                    <div class="lista-anuncios-cabecalho">
+
+                        <div>
+                            <h3>Histórico de anúncios excluídos</h3>
+
+                            <p>
+                                Consulte os dados do anúncio e as informações
+                                de quem realizou a exclusão.
+                            </p>
+                        </div>
+
+                        <span id="quantidade-anuncios-excluidos">
+                            — anúncios
+                        </span>
+
+                    </div>
+
+                    <div
+                        id="lista-anuncios-excluidos"
+                        class="lista-anuncios lista-anuncios-excluidos"
+                        aria-live="polite"
+                        aria-busy="false">
+
+                        <div class="estado-vazio">
+                            <i data-lucide="archive"></i>
+                            <p>Carregando histórico de exclusões...</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- MENSAGENS -->
+        <p
+            id="mensagem-anuncios"
+            class="mensagem-anuncios"
+            role="status"
+            aria-live="polite">
+        </p>
+
+    </main>
+
+</body>
+</html>

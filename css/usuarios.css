@@ -1,0 +1,541 @@
+
+/* =========================================================
+   SAFEMARKET — GERENCIAMENTO DE USUÁRIOS
+   Arquivo: css/usuarios.css
+========================================================= */
+
+
+/* =========================================================
+   1. ESTRUTURA PRINCIPAL
+========================================================= */
+
+.usuarios-pagina {
+    display: block;
+    min-width: 0;
+    min-height: 100vh;
+
+    padding: 32px;
+
+    background: var(--sm-fundo, #F3F6FA);
+    color: var(--sm-texto, #263548);
+}
+
+
+/* =========================================================
+   2. CABEÇALHO
+========================================================= */
+
+.cabecalho-pagina {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-bottom: 28px;
+}
+
+.titulo-pagina {
+    min-width: 0;
+}
+
+.subtitulo-pagina {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--sm-info, #007F99);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+}
+
+.titulo-pagina h1 {
+    margin: 0 0 9px;
+
+    color: var(--sm-azul-marinho, #111B3A);
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.titulo-pagina p {
+    max-width: 650px;
+    margin: 0;
+
+    color: var(--sm-secundario, #718096);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   3. INDICADORES
+========================================================= */
+
+.indicadores-usuarios {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+
+    margin-bottom: 26px;
+}
+
+.card-indicador {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    min-width: 0;
+    min-height: 112px;
+    padding: 21px;
+
+    border: 1px solid var(--sm-borda, #DCE3EB);
+    border-radius: var(--sm-raio-medio, 14px);
+
+    background: var(--sm-superficie, #FFFFFF);
+    box-shadow: var(--sm-sombra-leve, 0 2px 8px rgba(17, 27, 58, .05));
+
+    transition:
+        transform var(--sm-transicao, .2s ease),
+        box-shadow var(--sm-transicao, .2s ease);
+}
+
+.card-indicador:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sm-sombra-card, 0 5px 18px rgba(17, 27, 58, .07));
+}
+
+.indicador-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+
+    border-radius: 12px;
+}
+
+.indicador-icone i {
+    width: 22px;
+    height: 22px;
+}
+
+.indicador-icone.azul {
+    background: var(--sm-info-fundo, #E5F8FC);
+    color: var(--sm-info, #007F99);
+}
+
+.indicador-icone.verde {
+    background: var(--sm-sucesso-fundo, #E5F5EC);
+    color: var(--sm-sucesso, #16834C);
+}
+
+.indicador-icone.laranja {
+    background: #FFF0E5;
+    color: #E87524;
+}
+
+.indicador-conteudo {
+    min-width: 0;
+}
+
+.card-indicador span,
+.card-indicador strong,
+.card-indicador small {
+    display: block;
+}
+
+.card-indicador span {
+    margin-bottom: 5px;
+
+    color: var(--sm-secundario, #718096);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.card-indicador strong {
+    margin-bottom: 4px;
+
+    color: var(--sm-azul-marinho, #111B3A);
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.card-indicador small {
+    color: var(--sm-texto-claro, #8A98A9);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   4. SEÇÃO DE GERENCIAMENTO
+========================================================= */
+
+.secao-usuarios {
+    min-width: 0;
+    padding: 25px;
+
+    border: 1px solid var(--sm-borda, #DCE3EB);
+    border-radius: var(--sm-raio-medio, 14px);
+
+    background: var(--sm-superficie, #FFFFFF);
+    box-shadow: var(--sm-sombra-leve, 0 2px 8px rgba(17, 27, 58, .05));
+}
+
+.secao-usuarios-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+
+    margin-bottom: 23px;
+}
+
+.secao-usuarios-topo h2 {
+    margin: 0 0 7px;
+
+    color: var(--sm-azul-marinho, #111B3A);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.secao-usuarios-topo p {
+    margin: 0;
+
+    color: var(--sm-secundario, #718096);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.indicador-usuarios {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 9px 13px;
+
+    border: 1px solid var(--sm-info-borda, #BCEAF2);
+    border-radius: 20px;
+
+    background: var(--sm-info-fundo, #E5F8FC);
+    color: var(--sm-info, #007F99);
+
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.indicador-usuarios i {
+    width: 15px;
+    height: 15px;
+}
+
+
+/* =========================================================
+   5. PESQUISA E FILTROS
+========================================================= */
+
+.filtros-usuarios {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 225px;
+    gap: 13px;
+
+    margin-bottom: 23px;
+}
+
+.campo-busca,
+.campo-filtro {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    min-width: 0;
+    height: 45px;
+    padding: 0 13px;
+
+    border: 1px solid var(--sm-borda, #DCE3EB);
+    border-radius: var(--sm-raio-pequeno, 6px);
+
+    background: var(--sm-branco, #FFFFFF);
+    color: var(--sm-secundario, #718096);
+
+    transition:
+        border-color var(--sm-transicao-rapida, .15s ease),
+        box-shadow var(--sm-transicao-rapida, .15s ease);
+}
+
+.campo-busca:focus-within,
+.campo-filtro:focus-within {
+    border-color: var(--sm-azul-ciano, #00B8D9);
+    box-shadow: 0 0 0 3px rgba(0, 184, 217, .10);
+}
+
+.campo-busca i,
+.campo-filtro i {
+    flex: 0 0 17px;
+    width: 17px;
+    height: 17px;
+}
+
+.campo-busca input,
+.campo-filtro select {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+
+    padding: 0;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+    color: var(--sm-texto, #263548);
+
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.campo-busca input::placeholder {
+    color: var(--sm-texto-claro, #8A98A9);
+}
+
+.campo-filtro select {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   6. CONTAINER DA LISTAGEM
+========================================================= */
+
+.lista-usuarios-container {
+    min-width: 0;
+    overflow: hidden;
+
+    border: 1px solid var(--sm-borda, #DCE3EB);
+    border-radius: var(--sm-raio, 10px);
+
+    background: var(--sm-branco, #FFFFFF);
+}
+
+.lista-usuarios-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 16px 19px;
+
+    border-bottom: 1px solid var(--sm-divisor, #E8EDF3);
+    background: var(--sm-superficie-secundaria, #F7F9FC);
+}
+
+.lista-usuarios-cabecalho h3 {
+    margin: 0 0 5px;
+
+    color: var(--sm-texto-principal, #263548);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.lista-usuarios-cabecalho p {
+    margin: 0;
+
+    color: var(--sm-secundario, #718096);
+    font-size: 11px;
+}
+
+.lista-usuarios {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 130px;
+}
+
+
+/* =========================================================
+   7. REGISTROS GERADOS PELO JAVASCRIPT
+========================================================= */
+
+.lista-usuarios .atividade {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    min-width: 0;
+    padding: 16px 19px;
+
+    border-bottom: 1px solid var(--sm-divisor, #E8EDF3);
+    background: var(--sm-branco, #FFFFFF);
+
+    transition: background var(--sm-transicao-rapida, .15s ease);
+}
+
+.lista-usuarios .atividade:hover {
+    background: var(--sm-superficie-secundaria, #F7F9FC);
+}
+
+.lista-usuarios .atividade:last-child {
+    border-bottom: 0;
+}
+
+.lista-usuarios .atividade p {
+    min-width: 0;
+    margin: 0;
+
+    color: var(--sm-texto, #263548);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.lista-usuarios .atividade span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    padding: 6px 11px;
+
+    border-radius: 20px;
+
+    background: var(--sm-sucesso-fundo, #E5F5EC);
+    color: var(--sm-sucesso, #16834C);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   8. ESTADO DE CARREGAMENTO E LISTA VAZIA
+========================================================= */
+
+.estado-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    min-height: 155px;
+    padding: 25px;
+
+    color: var(--sm-secundario, #718096);
+    text-align: center;
+}
+
+.estado-vazio i {
+    width: 25px;
+    height: 25px;
+}
+
+.estado-vazio p {
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   9. MENSAGENS DO SISTEMA
+========================================================= */
+
+.mensagem-usuarios {
+    min-height: 20px;
+    margin: 14px 0 0;
+
+    color: var(--sm-info, #007F99);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   10. RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .indicadores-usuarios {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .indicadores-usuarios .card-indicador:last-child {
+        grid-column: 1 / -1;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .usuarios-pagina {
+        padding: 22px 16px;
+    }
+
+    .cabecalho-pagina {
+        margin-bottom: 22px;
+    }
+
+    .titulo-pagina h1 {
+        font-size: 22px;
+    }
+
+    .indicadores-usuarios {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .indicadores-usuarios .card-indicador:last-child {
+        grid-column: auto;
+    }
+
+    .card-indicador {
+        min-height: 100px;
+        padding: 17px;
+    }
+
+    .secao-usuarios {
+        padding: 17px;
+    }
+
+    .secao-usuarios-topo {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .filtros-usuarios {
+        grid-template-columns: 1fr;
+    }
+
+    .lista-usuarios .atividade {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+}
+
+@media (max-width: 420px) {
+
+    .usuarios-pagina {
+        padding: 18px 12px;
+    }
+
+    .titulo-pagina h1 {
+        font-size: 20px;
+    }
+
+    .secao-usuarios {
+        padding: 14px;
+    }
+
+    .indicador-usuarios {
+        white-space: normal;
+    }
+
+}
